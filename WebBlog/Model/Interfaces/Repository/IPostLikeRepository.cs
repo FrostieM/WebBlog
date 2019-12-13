@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace WebBlog.Model.Interfaces.Database
+namespace WebBlog.Model.Interfaces.Repository
 {
     public interface IPostLikeRepository
     {

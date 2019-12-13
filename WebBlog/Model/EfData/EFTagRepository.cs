@@ -3,26 +3,26 @@ using WebBlog.Model.Interfaces.Repository;
 
 namespace WebBlog.Model.EfData
 {
-    public class EFBlogRepository : IBlogRepository
+    public class EFTagRepository : ITagRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public EFBlogRepository(ApplicationDbContext context)
+        public EFTagRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IQueryable<Blog> Blogs => _context.Blogs;
+        public IQueryable<Tag> Tags => _context.Tags;
         
-        public void SaveBlog(Blog blog)
+        public void SaveTag(Tag tag)
         {
-            _context.Blogs.Add(blog);
+            _context.Tags.Add(tag);
             _context.SaveChanges();
         }
 
-        public void DeleteBlog(Blog blog)
+        public void DeleteTag(Tag tag)
         {
-            _context.Blogs.Remove(blog);
+            _context.Tags.Remove(tag);
             _context.SaveChanges();
         }
     }

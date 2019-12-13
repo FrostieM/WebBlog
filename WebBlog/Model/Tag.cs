@@ -6,9 +6,7 @@ namespace WebBlog.Model
     public class Tag
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Name { get; set; }
     }
 }

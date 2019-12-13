@@ -3,26 +3,26 @@ using WebBlog.Model.Interfaces.Repository;
 
 namespace WebBlog.Model.EfData
 {
-    public class EFBlogRepository : IBlogRepository
+    public class EFUserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public EFBlogRepository(ApplicationDbContext context)
+        public EFUserRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        public IQueryable<Blog> Blogs => _context.Blogs;
         
-        public void SaveBlog(Blog blog)
+        public IQueryable<User> Users => _context.Users;
+        
+        public void SaveUser(User user)
         {
-            _context.Blogs.Add(blog);
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
 
-        public void DeleteBlog(Blog blog)
+        public void DeleteUser(User user)
         {
-            _context.Blogs.Remove(blog);
+            _context.Users.Remove(user);
             _context.SaveChanges();
         }
     }
