@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace WebBlog.Model.Interfaces.Repository
+namespace WebBlog.Model.Interfaces.Database
 {
     public interface ICommentRepository
     {
