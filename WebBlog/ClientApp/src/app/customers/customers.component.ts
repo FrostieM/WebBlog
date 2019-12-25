@@ -12,7 +12,7 @@ export class CustomersComponent implements OnInit  {
   constructor(private http: HttpClient, @Inject("BASE_URL") private baseUrl: string) { }
 
   ngOnInit() {
-    let token = localStorage.getItem("Token");
+
     this.http.get(this.baseUrl + "api/customers", {
       headers: new HttpHeaders({
         "Content-Type": "application/json"

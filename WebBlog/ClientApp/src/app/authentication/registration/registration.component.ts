@@ -4,17 +4,20 @@ import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html'
+  selector: 'auth-registration-component',
+  host: {
+    class: "row col-12 m-0 p-0"
+  },
+  templateUrl: './registration.component.html'
 })
-export class LoginComponent {
-  invalidLogin: boolean;
+export class RegistrationComponent {
+  invalidAuth: boolean = false;
 
   constructor(private router: Router,
               private http: HttpClient,
               @Inject("BASE_URL") private baseUrl: string) { }
 
-  public login = (form: NgForm) => {
+  public registration(form: NgForm){
     let credentials = JSON.stringify(form.value);
     this.http.post<any>(this.baseUrl + "api/auth/login", credentials, {
       headers: new HttpHeaders({
@@ -22,10 +25,11 @@ export class LoginComponent {
       })
     }).subscribe(response => {
       localStorage.setItem("Token", response.token);
-      this.invalidLogin = false;
+      this.invalidAuth = false;
       this.router.navigate(["/"]).then(() => {});
-    }, err => {
-      this.invalidLogin = true;
+    }, () => {
+      this.invalidAuth = true;
     });
   }
+
 }

@@ -1,0 +1,36 @@
+﻿<form class="col-12" #registrationForm="ngForm" (ngSubmit)="registration(registrationForm)">
+  <div *ngIf="invalidAuth" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
+  <br/>
+
+  <p>
+    <label for="username" class="sr-only">username</label>
+    <input type="text" id="username" name="username" ngModel class="col-10 mt-2 shadow-lg" placeholder="username" required autofocus>
+  </p>
+
+  <p>
+    <label for="password" class="sr-only">password</label>
+    <input type="password" id="password" name="password" ngModel class="col-10 mt-2 shadow-lg" placeholder="password" required>
+  </p>
+
+  <p>
+    <label for="rePassword" class="sr-only">repeat password</label>
+    <input type="password" id="rePassword" name="rePassword" ngModel class="col-10 mt-2 shadow-lg" placeholder="repeat password" required>
+  </p>
+
+  <p>
+    <label for="firstName" class="sr-only">first name</label>
+    <input type="text" id="firstName" name="firstName" ngModel class="col-10 mt-2 shadow-lg" placeholder="first name" required>
+  </p>
+
+  <p>
+    <label for="lastName" class="sr-only">last name</label>
+    <input type="text" id="lastName" name="lastName" ngModel class="col-10 mt-2 shadow-lg" placeholder="last name" required>
+  </p>
+
+  <p>
+    <label for="email" class="sr-only">email</label>
+    <input type="text" id="email" name="email" ngModel class="col-10 mt-2 shadow-lg" placeholder="email" required>
+  </p>
+
+  <input type="submit" value="submit" class="col-auto mt-2 btn btn-dark rounded-0">
+</form>

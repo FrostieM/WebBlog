@@ -1,0 +1,37 @@
+@import "fonts.css";
+@import "siderbar.css";
+@import "buttons.css";
+
+*{
+    font-family: 'MyriadPro bold', sans-serif;
+    color: #7e7d7e;
+}
+
+.about p{
+    font-size: 12pt;
+}
+
+.about p, .about h1{
+    font-family: 'MyriadPro regular', sans-serif; !important;
+}
+
+.about h1{
+    font-size: 26pt;
+}
+
+#content{
+    background-color: #ededed;
+    border-top: 6px solid #6bb7d3;
+}
+
+.feedback a{
+    background-color: white;
+}
+
+nav, .icon-text{
+    font-size: 20pt;
+}
+
+.card .card-header{
+    cursor: pointer;
+}

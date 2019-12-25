@@ -15,6 +15,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0-preview1.19508.20" />
+        <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
@@ -23,13 +24,44 @@
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
+        <Content Include="ClientApp\src\app\authentication\login\login.component.css" />
         <Content Include="ClientApp\src\app\customers\customers.component.html" />
+        <Content Include="ClientApp\src\app\login\login.component.css" />
         <Content Include="ClientApp\src\app\login\login.component.html" />
+        <Content Include="ClientApp\src\assets\favicon.ico">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Include="ClientApp\src\app\authentication\app.component.html" />
+        <None Include="ClientApp\src\app\authentication\app.component.ts" />
+        <None Include="ClientApp\src\app\authentication\app.module.ts" />
+        <None Include="ClientApp\src\app\authentication\login.component.css" />
+        <None Include="ClientApp\src\app\authentication\login\login.component.html" />
+        <None Include="ClientApp\src\app\authentication\login\login.component.ts" />
+        <None Include="ClientApp\src\app\authentication\registration\login.component.html" />
+        <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
+        <None Include="ClientApp\src\assets\css\blog.css" />
+        <None Include="ClientApp\src\assets\img\logo.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Don't publish the SPA source files, but do show them in the project files list -->
+        <Content Remove="$(SpaRoot)**" />
+        <None Remove="$(SpaRoot)**" /> <!-- This has been added -->
+        <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\blog.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\buttons.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\siderbar.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\logo.png" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,0 +1,16 @@
+﻿<form class="col-12" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <div *ngIf="invalidAuth" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
+  <br/>
+
+  <p>
+    <label for="username" class="sr-only">username</label>
+    <input type="text" id="username" name="username" ngModel class="col-10 mt-2 shadow-lg" placeholder="username" required autofocus>
+  </p>
+
+  <p>
+    <label for="password" class="sr-only">password</label>
+    <input type="password" id="password" name="password" ngModel class="col-10 mt-2 shadow-lg" placeholder="password" required>
+  </p>
+
+  <input type="submit" value="submit" class="col-auto mt-2 btn btn-dark rounded-0">
+</form>

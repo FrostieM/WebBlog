@@ -1,0 +1,8 @@
+﻿.active{
+  border-bottom: 2px solid deeppink;
+}
+
+button:focus {
+  outline:none;
+  box-shadow: none;
+}

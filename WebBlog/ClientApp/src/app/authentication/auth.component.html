@@ -1,0 +1,26 @@
+<div class="row mt-2 align-content-center justify-content-center">
+  <div class="row col-sm-8 col-md-6 col-lg-4 m-0 p-0 text-center text-light border border-secondary rounded-top bg-info shadow-lg">
+
+    <figure class="logo col-12 figure mt-3">
+      <img src="assets/img/logo.png" class="figure-img img-fluid rounded" alt="cup_logo.png">
+      <figcaption class="figure-caption text-light"><h1 class="text-dark"><span style="color: hotpink">GA</span>LLARIA</h1></figcaption>
+    </figure>
+
+    <button class="col-6 btn text-center text-light"
+            [ngClass]="isLoginForm==true ? 'active' : 'none' "
+            (click)="isLoginForm = true"
+            [routerLink]="['/auth']">
+      Login
+    </button>
+    <button class="col-6 btn text-center text-light"
+            [ngClass]="isLoginForm==false ? 'active' : 'none' "
+            (click)="isLoginForm=false"
+            [routerLink]="['signUp']">
+      Registration
+    </button>
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
+
