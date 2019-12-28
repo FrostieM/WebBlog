@@ -10,6 +10,7 @@ namespace WebBlog.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public Blog Blog { get; set; }
         
         public string Type { get; set; }
         public string Title { get; set; }

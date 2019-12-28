@@ -12,13 +12,15 @@ import {CustomersComponent} from "./customers/customers.component";
 
 import {AuthGuard} from "./shared/services/guards/auth-guard.service";
 import {AuthModule} from "./authentication/auth.module";
+import {PostsComponent} from "./posts/posts.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CustomersComponent
+    CustomersComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,7 +29,7 @@ import {AuthModule} from "./authentication/auth.module";
     AuthModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+      { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
     ]),
     JwtModule.forRoot({
       config: {

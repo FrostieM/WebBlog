@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 
-namespace WebBlog.Model.Interfaces.Database
+namespace WebBlog.Model.Interfaces.Repositories
 {
     public interface ICommentLikeRepository
     {
         IQueryable<CommentLike> CommentLikes { get; }
 
-        void SaveCommentLike(User user, Comment comment);
+        void SaveCommentLike(CommentLike commentLike);
         void DeleteCommentLike(CommentLike commentLike);
     }
 }

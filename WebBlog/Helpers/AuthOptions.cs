@@ -8,7 +8,7 @@ namespace WebBlog.Helpers
         public const string Issuer = "MyAuthServer";
         public const string Audience = "https://localhost:5001/";
         private const string Key = "mysupersecret_secretkey!123"; 
-        public const int Lifetime = 1; 
+        public const int Lifetime = 10; //minutes
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));

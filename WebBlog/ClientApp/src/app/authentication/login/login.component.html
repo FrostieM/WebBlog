@@ -1,5 +1,5 @@
 ﻿<form class="col-12" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-  <div *ngIf="invalidAuth" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
+  <div *ngIf="invalidLogin" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
   <br/>
 
   <p>

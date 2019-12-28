@@ -24,11 +24,7 @@ import {RegistrationComponent} from "./registration/registration.component";
           ]},
     ])
   ],
-  exports: [
-    AuthComponent,
-    LoginComponent,
-    RegistrationComponent
-  ]
+  exports: []
 })
 export class AuthModule { }
 

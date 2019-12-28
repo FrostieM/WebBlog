@@ -13,12 +13,15 @@ export class CustomersComponent implements OnInit  {
 
   ngOnInit() {
 
-    this.http.get(this.baseUrl + "api/customers", {
+    this.http.get(this.baseUrl + "api/posts", {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
-      })
+      }),
+      params: {
+        username: "admin"
+      }
     }).subscribe(response => {
-      this.customers = response;
+      console.log(response);
     }, err => {
       console.log(err)
     });

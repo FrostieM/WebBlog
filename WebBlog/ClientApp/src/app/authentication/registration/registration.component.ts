@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent {
-  invalidAuth: boolean = false;
+  invalidSignUp: boolean = false;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -19,17 +19,16 @@ export class RegistrationComponent {
 
   public registration(form: NgForm){
     let credentials = JSON.stringify(form.value);
-    this.http.post<any>(this.baseUrl + "api/auth/login", credentials, {
+    this.http.post<any>(this.baseUrl + "api/auth/signUp", credentials, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
       localStorage.setItem("Token", response.token);
-      this.invalidAuth = false;
+      this.invalidSignUp = false;
       this.router.navigate(["/"]).then(() => {});
     }, () => {
-      this.invalidAuth = true;
+      this.invalidSignUp = true;
     });
   }
-
 }

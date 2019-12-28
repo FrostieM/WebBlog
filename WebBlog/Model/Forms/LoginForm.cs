@@ -1,6 +1,6 @@
-﻿namespace WebBlog.Model.ViewData
+﻿namespace WebBlog.Model.Forms
 {
-    public class TestLoginViewData
+    public class LoginForm
     {
         public string UserName { get; set; }
         public string Password { get; set; }

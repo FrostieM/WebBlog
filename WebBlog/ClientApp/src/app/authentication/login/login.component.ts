@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  invalidAuth: boolean = false;
+  invalidLogin: boolean = false;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -25,10 +25,10 @@ export class LoginComponent {
       })
     }).subscribe(response => {
       localStorage.setItem("Token", response.token);
-      this.invalidAuth = false;
+      this.invalidLogin = false;
       this.router.navigate(["/"]).then(() => {});
     }, () => {
-      this.invalidAuth = true;
+      this.invalidLogin = true;
     });
   }
 
