@@ -10,6 +10,8 @@ namespace WebBlog.Model
         public int Id { get; set; }
         
         public User User { get; set; }
+        
+        [Required]
         public string CreatedDate { get; set; }
     }
 }

@@ -11,11 +11,11 @@ namespace WebBlog.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(maxLength: 20, nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace WebBlog.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<string>(nullable: true)
+                    CreatedDate = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,10 +48,10 @@ namespace WebBlog.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogId = table.Column<int>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    BlogId = table.Column<int>(nullable: false),
+                    Type = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     FileUrl = table.Column<string>(nullable: true),
                     Created = table.Column<string>(nullable: true)
                 },
@@ -63,7 +63,7 @@ namespace WebBlog.Migrations
                         column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +132,7 @@ namespace WebBlog.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     PostId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -221,6 +221,12 @@ namespace WebBlog.Migrations
                 name: "IX_Tags_PostId",
                 table: "Tags",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

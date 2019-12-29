@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebBlog.Model;
 using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
@@ -18,8 +19,8 @@ namespace WebBlog.Controllers
         private readonly IPostRepository _postRepository;
         private readonly IPostLikeRepository _postLikeRepository;
         private readonly IUserRepository _userRepository;
-        
-        private static readonly int ItemsPerPage = 8;
+
+        public int ItemsPerPage { get; set; } = 8;
 
         public PostsController(
             IPostRepository postRepository,
@@ -32,7 +33,7 @@ namespace WebBlog.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpGet, Route("{username}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(string username, int currentPage = 1)
@@ -46,8 +47,8 @@ namespace WebBlog.Controllers
                 .Select(p => new PostViewData
                 {
                     Post = p,
-                    Likes = _postLikeRepository.PostLikes.Count(l => l.Post.Equals(p)),
-                    IsLiked = _postLikeRepository.PostLikes.Any(l => l.User.UserName.Equals(User.Identity.Name))
+                    Likes = _postLikeRepository.getLikes(p),
+                    IsLiked = _postLikeRepository.isLiked(User.Identity.Name)
                 });
 
             var totalItems = userPosts.Count();
@@ -87,9 +88,7 @@ namespace WebBlog.Controllers
             };
             _postRepository.SavePost(post, User.Identity.Name);
             
-
             return Ok(Get(User.Identity.Name));
         }
-
     }
 }

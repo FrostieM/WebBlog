@@ -6,7 +6,14 @@ namespace WebBlog.Model
     {
         public ApplicationDbContext(DbContextOptions options) 
             : base(options) {}
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();
+        }
+
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }

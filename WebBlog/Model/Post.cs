@@ -10,13 +10,23 @@ namespace WebBlog.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        
+        [Required]
         public Blog Blog { get; set; }
         
+        [Required]
         public string Type { get; set; }
+        
+        [Required]
         public string Title { get; set; }
+        
+        [Required]
         public string Description { get; set; }
         public string FileUrl { get; set; }
+        
         public string Created { get; set; }
+        
+        
         public ICollection<Tag> Tags { get; set; }
     }
 }

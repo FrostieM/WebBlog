@@ -30,8 +30,7 @@ namespace WebBlog.Controllers
         public IActionResult Post([FromBody]LoginForm userForm)
         {
             var user = _repository.Users.FirstOrDefault(u => 
-                u.UserName == userForm.UserName && 
-                u.Password == userForm.Password);
+                u.UserName == userForm.UserName);
             
             if (user == null) 
                 return NotFound("User not found");
@@ -44,9 +43,7 @@ namespace WebBlog.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Post([FromBody] SignUpForm userForm)
         {
-            var userExist = _repository.Users.Any(u =>
-                u.UserName == userForm.UserName &&
-                u.Password == userForm.Password);
+            var userExist = _repository.Users.Any(u => u.UserName == userForm.UserName);
 
             if (userExist) return BadRequest("User already exist");
             

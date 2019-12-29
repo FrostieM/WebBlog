@@ -10,13 +10,10 @@ export class PostsComponent  {
   constructor(private http: HttpClient, @Inject("BASE_URL") private baseUrl: string) { }
 
   getPosts() {
-    this.http.get(this.baseUrl + "api/posts", {
+    this.http.get(this.baseUrl + "api/posts/admin", {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
-      }),
-      params: {
-        username: "admin"
-      }
+      })
     }).subscribe(response => {
       console.log(response);
     }, err => {
