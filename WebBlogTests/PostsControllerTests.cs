@@ -6,7 +6,8 @@ using WebBlog.Model;
 using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
 using WebBlog.Model.ViewData;
-using WebBlogTests.Helpers;
+using WebBlogTests.FakeData;
+
 using Xunit;
 
 namespace WebBlogTests
@@ -19,10 +20,10 @@ namespace WebBlogTests
         
         public PostsControllerTests()
         {
-            var users = FakeData.FakeUsers.ToList();
-            var blogs = FakeData.GetFakeBlogs(users).ToList();
-            var posts = FakeData.GetFakePosts(blogs).ToList();
-            var postsLikes = FakeData.GetFakePostLikes(posts, users);
+            var users = FakeRepositories.FakeUsers.ToList();
+            var blogs = FakeRepositories.GetFakeBlogs(users).ToList();
+            var posts = FakeRepositories.GetFakePosts(blogs).ToList();
+            var postsLikes = FakeRepositories.GetFakePostLikes(posts, users);
             
             var usersMock = new Mock<IUserRepository>();
             usersMock.Setup(c => c.Users).Returns(users.AsQueryable);
@@ -48,7 +49,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get("test0") as ObjectResult;
+            var result = controller.Get("testType", "test0") as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -68,7 +69,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get("test1") as ObjectResult;
+            var result = controller.Get("testType", "test1") as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
@@ -77,7 +78,7 @@ namespace WebBlogTests
 
             var posts = result.Value as UserPostsViewData;
             Assert.IsType<UserPostsViewData>(posts);
-            Assert.Equal(4, posts.Posts.Count());
+            Assert.Equal(3, posts.Posts.Count());
         }
 
         [Fact]
@@ -92,13 +93,13 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
 
-            var result = controller.Get("test1") as OkObjectResult;
+            var result = controller.Get("testType", "test1") as OkObjectResult;
             Assert.NotNull(result);
 
             var posts = result.Value as UserPostsViewData;
             Assert.NotNull(posts);
             Assert.Equal(1, posts.PagingInfo.CurrentPage);
-            Assert.Equal(4, posts.PagingInfo.TotalItems);
+            Assert.Equal(3, posts.PagingInfo.TotalItems);
             Assert.Equal(2, posts.PagingInfo.ItemsPerPage);
             Assert.Equal(2, posts.PagingInfo.TotalPages);
 

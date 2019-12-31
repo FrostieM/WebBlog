@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebBlogTests.Helpers
+namespace WebBlogTests.FakeData
 {
     public static class FakeController
     {

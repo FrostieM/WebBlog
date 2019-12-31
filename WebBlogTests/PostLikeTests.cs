@@ -5,7 +5,8 @@ using WebBlog.Controllers;
 using WebBlog.Model;
 using WebBlog.Model.Interfaces.Repositories;
 using WebBlog.Model.ViewData;
-using WebBlogTests.Helpers;
+using WebBlogTests.FakeData;
+
 using Xunit;
 
 namespace WebBlogTests
@@ -18,10 +19,10 @@ namespace WebBlogTests
         
         public PostLikeTests()
         {
-            var users = FakeData.FakeUsers.ToList();
-            var blogs = FakeData.GetFakeBlogs(users).ToList();
-            var posts = FakeData.GetFakePosts(blogs).ToList();
-            var postsLikes = FakeData.GetFakePostLikes(posts, users);
+            var users = FakeRepositories.FakeUsers.ToList();
+            var blogs = FakeRepositories.GetFakeBlogs(users).ToList();
+            var posts = FakeRepositories.GetFakePosts(blogs).ToList();
+            var postsLikes = FakeRepositories.GetFakePostLikes(posts, users);
             
             var usersMock = new Mock<IUserRepository>();
             usersMock.Setup(c => c.Users).Returns(users.AsQueryable);

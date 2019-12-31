@@ -5,7 +5,7 @@ using WebBlog.Controllers;
 using WebBlog.Model;
 using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
-using WebBlogTests.Helpers;
+using WebBlogTests.FakeData;
 using Xunit;
 
 namespace WebBlogTests
@@ -17,7 +17,7 @@ namespace WebBlogTests
         
         public AuthControllerTests()
         {
-            var users = FakeData.FakeUsers;
+            var users = FakeRepositories.FakeUsers;
             
             var mock = new Mock<IUserRepository>();
             mock.Setup(c => c.Users).Returns(users.AsQueryable);

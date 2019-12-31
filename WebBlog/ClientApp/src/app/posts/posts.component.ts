@@ -1,4 +1,4 @@
-﻿import {Component, Inject, OnInit} from '@angular/core';
+﻿import {Component, Inject} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -10,7 +10,7 @@ export class PostsComponent  {
   constructor(private http: HttpClient, @Inject("BASE_URL") private baseUrl: string) { }
 
   getPosts() {
-    this.http.get(this.baseUrl + "api/posts/admin", {
+    this.http.get(this.baseUrl + "api/posts/test/admin", {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
@@ -23,7 +23,7 @@ export class PostsComponent  {
 
   setPosts() {
     let object = JSON.stringify({
-      type: "test type",
+      type: "test",
       title: "test title",
       description: "test description",
       fileUrl: "testUrl"

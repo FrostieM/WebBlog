@@ -1,7 +1,7 @@
 ﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Component, Inject} from '@angular/core';
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'auth-login-component',
@@ -12,24 +12,35 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent {
   invalidLogin: boolean = false;
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl("", [
+      Validators.required, Validators.minLength(4), Validators.maxLength(20)
+    ]),
+
+    password: new FormControl("", [
+      Validators.required, Validators.minLength(6), Validators.maxLength(20)
+    ])
+  });
 
   constructor(private router: Router,
               private http: HttpClient,
               @Inject("BASE_URL") private baseUrl: string) { }
 
-  public login(form: NgForm){
-    let credentials = JSON.stringify(form.value);
+  public login(){
+    let credentials = JSON.stringify(this.loginForm.value);
     this.http.post<any>(this.baseUrl + "api/auth/login", credentials, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
-      localStorage.setItem("Token", response.token);
+      localStorage.setItem("user", JSON.stringify(response));
       this.invalidLogin = false;
-      this.router.navigate(["/"]).then(() => {});
+      this.router.navigate(["/" + response.username]).then(() => {});
     }, () => {
       this.invalidLogin = true;
     });
   }
-
+  public invalidForm(form: FormGroup){
+    return form.invalid && form.touched;
+  }
 }

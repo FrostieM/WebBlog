@@ -1,36 +1,82 @@
-﻿<form class="col-12" #registrationForm="ngForm" (ngSubmit)="registration(registrationForm)">
-  <div *ngIf="invalidSignUp" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
-  <br/>
+﻿<form class="col" [formGroup]="signUpForm" (ngSubmit)="registration()" (change)="invalidSignUp=false">
+  <div *ngIf="invalidSignUp || invalidForm(signUpForm)" class="mt-1">
+    <div *ngIf="invalidSignUp"
+         class="p-0 mt-1 alert alert-danger">
+      <p>Cannot sign up, user already exist</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['username'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['username'].errors?.required">Username is required</p>
+      <p *ngIf="signUpForm.controls['username'].errors?.minlength">Login is too small</p>
+      <p *ngIf="signUpForm.controls['username'].errors?.maxlength">Login is too big</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['password'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['password'].errors?.required">Password is required</p>
+      <p *ngIf="signUpForm.controls['password'].errors?.minlength">Password is too small</p>
+      <p *ngIf="signUpForm.controls['password'].errors?.maxlength">Password is too big</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['rePassword'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['rePassword'].errors?.required">Repeat password</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['firstName'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['firstName'].errors?.required">First name is required</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['lastName'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['lastName'].errors?.required">Last name is required</p>
+    </div>
+
+    <div *ngIf="signUpForm.controls['email'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.controls['email'].errors?.required">Email is required</p>
+      <p *ngIf="signUpForm.controls['email'].errors?.email">Wrong e-mail</p>
+    </div>
+
+    <div *ngIf="signUpForm.errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="signUpForm.errors?.notSame">Passwords not equel</p>
+    </div>
+  </div>
+
+
 
   <p>
     <label for="username" class="sr-only">username</label>
-    <input type="text" id="username" name="username" ngModel class="col-10 mt-2 shadow-lg" placeholder="username" required autofocus>
+    <input type="text" id="username" name="username" formControlName="username" class="col-10 mt-2 shadow-lg" placeholder="username">
   </p>
 
   <p>
     <label for="password" class="sr-only">password</label>
-    <input type="password" id="password" name="password" ngModel class="col-10 mt-2 shadow-lg" placeholder="password" required>
+    <input type="password" id="password" name="password" formControlName="password" class="col-10 mt-2 shadow-lg" placeholder="password">
   </p>
 
   <p>
     <label for="rePassword" class="sr-only">repeat password</label>
-    <input type="password" id="rePassword" name="rePassword" ngModel class="col-10 mt-2 shadow-lg" placeholder="repeat password" required>
+    <input type="password" id="rePassword" name="rePassword" formControlName="rePassword" class="col-10 mt-2 shadow-lg" placeholder="repeat password">
   </p>
 
   <p>
     <label for="firstName" class="sr-only">first name</label>
-    <input type="text" id="firstName" name="firstName" ngModel class="col-10 mt-2 shadow-lg" placeholder="first name" required>
+    <input type="text" id="firstName" name="firstName" formControlName="firstName" class="col-10 mt-2 shadow-lg" placeholder="first name">
   </p>
 
   <p>
     <label for="lastName" class="sr-only">last name</label>
-    <input type="text" id="lastName" name="lastName" ngModel class="col-10 mt-2 shadow-lg" placeholder="last name" required>
+    <input type="text" id="lastName" name="lastName" formControlName="lastName" class="col-10 mt-2 shadow-lg" placeholder="last name">
   </p>
 
   <p>
     <label for="email" class="sr-only">email</label>
-    <input type="text" id="email" name="email" ngModel class="col-10 mt-2 shadow-lg" placeholder="email" required>
+    <input type="text" id="email" name="email" formControlName="email" class="col-10 mt-2 shadow-lg" placeholder="email" >
   </p>
 
-  <input type="submit" value="submit" class="col-auto mt-2 btn btn-dark rounded-0">
+  <input type="submit" value="submit" [disabled]="signUpForm.invalid" class="col-auto mt-2 btn btn-dark rounded-0">
 </form>

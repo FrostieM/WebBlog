@@ -1,16 +1,31 @@
-﻿<form class="col-12" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-  <div *ngIf="invalidLogin" class="ml-auto mt-5 alert alert-danger">Invalid username or password.</div>
-  <br/>
+﻿<form class="col" [formGroup]="loginForm" (ngSubmit)="login()" (change)="invalidLogin=false">
+  <div *ngIf="invalidLogin || invalidForm(loginForm)" class="mt-1">
+    <div *ngIf="invalidLogin"
+         class="p-0 mt-1 alert alert-danger">
+      <p>Cannot log in, invalid login or password</p>
+    </div>
+    <div *ngIf="loginForm.controls['username'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="loginForm.controls['username'].errors?.minlength">Login is too small</p>
+      <p *ngIf="loginForm.controls['username'].errors?.maxlength">Login is too big</p>
+    </div>
+    <div *ngIf="loginForm.controls['password'].errors"
+         class="p-0 mt-1 alert alert-danger">
+      <p *ngIf="loginForm.controls['password'].errors?.required">Password is required</p>
+      <p *ngIf="loginForm.controls['password'].errors?.minlength">Password is too small</p>
+      <p *ngIf="loginForm.controls['password'].errors?.maxlength">Password is too big</p>
+    </div>
+  </div>
 
-  <p>
+  <div>
     <label for="username" class="sr-only">username</label>
-    <input type="text" id="username" name="username" ngModel class="col-10 mt-2 shadow-lg" placeholder="username" required autofocus>
-  </p>
+    <input type="text" id="username" name="username" formControlName="username" class="col-10 mt-2 shadow-lg" placeholder="username">
+  </div>
 
-  <p>
+  <div>
     <label for="password" class="sr-only">password</label>
-    <input type="password" id="password" name="password" ngModel class="col-10 mt-2 shadow-lg" placeholder="password" required>
-  </p>
+    <input type="password" id="password" name="password" formControlName="password" class="col-10 mt-2 shadow-lg" placeholder="password">
+  </div>
 
-  <input type="submit" value="submit" class="col-auto mt-2 btn btn-dark rounded-0">
+  <input type="submit" value="submit" [disabled]="loginForm.invalid" class="col-auto mt-2 btn btn-dark rounded-0">
 </form>

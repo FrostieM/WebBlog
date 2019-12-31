@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using WebBlog.Model;
 
-namespace WebBlogTests.Helpers
+namespace WebBlogTests.FakeData
 {
-    public static class FakeData
+    public static class FakeRepositories
     {
         public static IEnumerable<User> FakeUsers => new[]
         {
@@ -32,12 +32,12 @@ namespace WebBlogTests.Helpers
         {
             return new[]
             {
-                new Post{Id = 1, Blog = blogs[0], Title = "title1", Description = "description1", Type = "type1"},
-                new Post{Id = 2, Blog = blogs[1], Title = "title2", Description = "description2", Type = "type2"},
-                new Post{Id = 3, Blog = blogs[1], Title = "title3", Description = "description3", Type = "type3"},
-                new Post{Id = 4, Blog = blogs[0], Title = "title4", Description = "description4", Type = "type4"},
-                new Post{Id = 5, Blog = blogs[0], Title = "title5", Description = "description5", Type = "type5"},
-                new Post{Id = 6, Blog = blogs[0], Title = "title6", Description = "description6", Type = "type6"}
+                new Post{Id = 1, Blog = blogs[0], Title = "title1", Description = "description1", Type = "testType"},
+                new Post{Id = 2, Blog = blogs[1], Title = "title2", Description = "description2", Type = "testType"},
+                new Post{Id = 3, Blog = blogs[1], Title = "title3", Description = "description3", Type = "testType"},
+                new Post{Id = 4, Blog = blogs[0], Title = "title4", Description = "description4", Type = "testType"},
+                new Post{Id = 5, Blog = blogs[0], Title = "title5", Description = "description5", Type = "testType"},
+                new Post{Id = 6, Blog = blogs[0], Title = "title6", Description = "description6", Type = "testType2"}
             };
         }
 

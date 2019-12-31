@@ -8,18 +8,18 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import {CustomersComponent} from "./customers/customers.component";
 
-import {AuthGuard} from "./shared/services/guards/auth-guard.service";
+
 import {AuthModule} from "./authentication/auth.module";
 import {PostsComponent} from "./posts/posts.component";
+import {AuthGuard} from "./shared/services/guards/auth-guard.service";
+import {RoleGuard} from "./shared/services/guards/role-guard.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CustomersComponent,
     PostsComponent
   ],
   imports: [
@@ -28,7 +28,8 @@ import {PostsComponent} from "./posts/posts.component";
     FormsModule,
     AuthModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, canActivate: [AuthGuard],  },
+      { path: ':username', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
     ]),
     JwtModule.forRoot({

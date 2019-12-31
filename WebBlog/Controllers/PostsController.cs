@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebBlog.Model;
 using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
@@ -33,17 +32,19 @@ namespace WebBlog.Controllers
         }
 
         [Authorize]
-        [HttpGet, Route("{username}")]
+        [HttpGet, Route("{type}/{username}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(string username, int currentPage = 1)
+        public IActionResult Get(string type, string username, int currentPage = 1)
         {
             var userExist = _userRepository.Users.Any(u => u.UserName == username);
             if (!userExist) 
                 return NotFound("User not found");
             
             var userPosts = _postRepository.Posts
-                .Where(p => p.Blog.User.UserName == username)
+                .Where(p => 
+                    p.Blog.User.UserName == username && 
+                    p.Type == type)
                 .Select(p => new PostViewData
                 {
                     Post = p,
@@ -53,13 +54,12 @@ namespace WebBlog.Controllers
 
             var totalItems = userPosts.Count();
             
-            userPosts = userPosts
-                .Skip((currentPage - 1) * ItemsPerPage)
-                .Take(ItemsPerPage);
-
             return Ok(new UserPostsViewData
             {
-                Posts = userPosts.ToArray(),
+                Posts = userPosts
+                    .Skip((currentPage - 1) * ItemsPerPage)
+                    .Take(ItemsPerPage),
+                
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = currentPage,
@@ -88,7 +88,7 @@ namespace WebBlog.Controllers
             };
             _postRepository.SavePost(post, User.Identity.Name);
             
-            return Ok(Get(User.Identity.Name));
+            return Ok(Get(postForm.Type, User.Identity.Name));
         }
     }
 }
