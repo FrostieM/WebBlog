@@ -35,7 +35,7 @@ namespace WebBlog.Controllers
             if (user == null) 
                 return NotFound("User not found");
 
-            return Ok(new { token = GenerateToken(user.UserName), username = userForm.UserName  });
+            return Ok(new { token = GenerateToken(user.UserName) });
         }
 
         [HttpPost, Route("signUp")]
@@ -56,7 +56,7 @@ namespace WebBlog.Controllers
                 LastName = userForm.LastName
             });
             
-            return Ok(new { token = GenerateToken(userForm.UserName), username = userForm.UserName });
+            return Ok(new { token = GenerateToken(userForm.UserName) });
         }
         
         private static string GenerateToken(string username)

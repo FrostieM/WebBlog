@@ -43,10 +43,12 @@
         <None Include="ClientApp\src\app\authentication\login\login.component.ts" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.html" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
+        <None Include="ClientApp\src\app\blog\auth.module.ts" />
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\post\customers.component.html" />
         <None Include="ClientApp\src\app\shared\forms\login.form.ts" />
+        <None Include="ClientApp\src\app\shared\helpers\token.helpers.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\role-guard.service.ts" />

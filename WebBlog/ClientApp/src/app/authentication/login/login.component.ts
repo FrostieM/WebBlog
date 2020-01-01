@@ -2,6 +2,7 @@
 import {Component, Inject} from '@angular/core';
 import { Router } from "@angular/router";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TokenHelpers} from "../../shared/helpers/token.helpers";
 
 @Component({
   selector: 'auth-login-component',
@@ -24,7 +25,7 @@ export class LoginComponent {
 
   constructor(private router: Router,
               private http: HttpClient,
-              @Inject("BASE_URL") private baseUrl: string) { }
+              @Inject("BASE_URL") private baseUrl: string) {}
 
   public login(){
     let credentials = JSON.stringify(this.loginForm.value);
@@ -33,9 +34,9 @@ export class LoginComponent {
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
-      localStorage.setItem("user", JSON.stringify(response));
+      TokenHelpers.TOKEN = response.token;
       this.invalidLogin = false;
-      this.router.navigate(["/" + response.username]).then(() => {});
+      this.router.navigate(["/" + TokenHelpers.TOKEN_USERNAME]).then(() => {});
     }, () => {
       this.invalidLogin = true;
     });

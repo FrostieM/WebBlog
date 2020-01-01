@@ -2,6 +2,7 @@
 import {Component, Inject} from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {TokenHelpers} from "../../shared/helpers/token.helpers";
 
 @Component({
   selector: 'auth-registration-component',
@@ -53,9 +54,9 @@ export class RegistrationComponent {
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
-      localStorage.setItem("user", response);
+      TokenHelpers.TOKEN = response.token;
       this.invalidSignUp = false;
-      this.router.navigate(["/" + response.username]).then(() => {});
+      this.router.navigate(["/" + TokenHelpers.TOKEN_USERNAME]).then(() => {});
     }, () => {
       this.invalidSignUp = true;
     });
