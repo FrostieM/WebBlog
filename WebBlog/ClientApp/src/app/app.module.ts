@@ -12,8 +12,8 @@ import {BlogModule} from "./blog/blog.module";
 
 import {PostsComponent} from "./posts/posts.component";
 import {JwtModule} from "@auth0/angular-jwt";
+import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
 
-import {TokenHelpers} from "./shared/helpers/token.helpers";
 
 @NgModule({
   declarations: [

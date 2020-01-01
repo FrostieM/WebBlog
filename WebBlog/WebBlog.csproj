@@ -33,6 +33,23 @@
           <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
           <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </Content>
+        <Content Include="ClientApp\src\assets\img\article.svg" />
+        <Content Include="ClientApp\src\assets\img\cols_view.svg" />
+        <Content Include="ClientApp\src\assets\img\facebook.svg" />
+        <Content Include="ClientApp\src\assets\img\google.svg" />
+        <Content Include="ClientApp\src\assets\img\history.svg" />
+        <Content Include="ClientApp\src\assets\img\house.svg" />
+        <Content Include="ClientApp\src\assets\img\image.svg" />
+        <Content Include="ClientApp\src\assets\img\like.svg" />
+        <Content Include="ClientApp\src\assets\img\p.svg" />
+        <Content Include="ClientApp\src\assets\img\rows_view.svg" />
+        <Content Include="ClientApp\src\assets\img\tag.svg" />
+        <Content Include="ClientApp\src\assets\img\tape.svg" />
+        <Content Include="ClientApp\src\assets\img\twitter.svg" />
+        <Content Include="ClientApp\src\assets\img\video_bg_1.png" />
+        <Content Include="ClientApp\src\assets\img\video_bg_2.png" />
+        <Content Include="ClientApp\src\assets\img\video_icon.png" />
+        <Content Include="ClientApp\src\assets\img\video_play_icon.png" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
         <None Include="ClientApp\src\app\authentication\app.component.html" />
@@ -44,6 +61,7 @@
         <None Include="ClientApp\src\app\authentication\registration\login.component.html" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
         <None Include="ClientApp\src\app\blog\auth.module.ts" />
+        <None Include="ClientApp\src\app\blog\menu-button\login.component.html" />
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\post\customers.component.html" />
@@ -52,6 +70,7 @@
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\role-guard.service.ts" />
+        <None Include="ClientApp\src\app\shared\services\helpers\token.helpers.ts" />
         <None Include="ClientApp\src\assets\css\blog.css" />
         <None Include="ClientApp\src\assets\img\logo.png" />
     </ItemGroup>

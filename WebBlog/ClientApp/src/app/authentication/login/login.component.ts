@@ -2,7 +2,7 @@
 import {Component, Inject} from '@angular/core';
 import { Router } from "@angular/router";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {TokenHelpers} from "../../shared/helpers/token.helpers";
+import {TokenHelpers} from "../../shared/services/helpers/token-helper.service";
 
 @Component({
   selector: 'auth-login-component',

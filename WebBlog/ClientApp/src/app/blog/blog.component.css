@@ -1,7 +1,11 @@
-﻿
-*{
+﻿@import url('../../assets/css/fonts.css');
+@import url('../../assets/css/buttons.css');
+@import url('../../assets/css/siderbar.css');
+
+
+body{
   font-family: 'MyriadPro bold', sans-serif;
-  color: #7e7d7e;
+  background-color: #7e7d7e;
 }
 
 .logo span{

@@ -5,7 +5,10 @@ import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-auth-component',
   templateUrl: './auth.component.html',
-  styleUrls: ['auth.component.css']
+  styleUrls: ['auth.component.css'],
+  host: {
+    class: 'container'
+  }
 })
 export class AuthComponent {
   isLoginForm: boolean = true;

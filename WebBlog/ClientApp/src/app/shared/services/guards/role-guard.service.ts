@@ -2,7 +2,7 @@
 
 import { CanActivate, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {TokenHelpers} from "../../helpers/token.helpers";
+import {TokenHelpers} from "../helpers/token-helper.service";
 
 @Injectable()
 export class RoleGuard implements CanActivate {

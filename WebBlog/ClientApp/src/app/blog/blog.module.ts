@@ -5,10 +5,12 @@ import {CommonModule} from "@angular/common";
 import {BlogComponent} from "./blog.component";
 
 import {AuthGuard} from "../shared/services/guards/auth-guard.service";
+import {MenuButtonComponent} from "./menu-button/menu-button.component";
 
 @NgModule({
   declarations: [
-    BlogComponent
+    BlogComponent,
+    MenuButtonComponent
   ],
     imports: [
       CommonModule,

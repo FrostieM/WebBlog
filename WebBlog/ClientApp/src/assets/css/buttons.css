@@ -10,12 +10,12 @@
 }
 
 .current, .tags .btn.active{
-    background-color: #6dbad6; !important;
+    background-color: #6dbad6;
     fill: #6dbad6;
 }
 
 .current .icon-text, .tags .btn.active span{
-    color: white; !important;
+    color: white;
 }
 
 .current .icon-bg{
