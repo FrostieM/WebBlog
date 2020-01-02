@@ -1,4 +1,4 @@
-﻿import {Component, Inject} from '@angular/core';
+﻿import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
@@ -10,14 +10,16 @@ import {HttpClient} from "@angular/common/http";
     class: 'container'
   }
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit{
+
   isLoginForm: boolean = true;
 
   constructor(private router: Router,
               private http: HttpClient,
-              @Inject("BASE_URL") private baseUrl: string) {
+              @Inject("BASE_URL") private baseUrl: string) {}
 
+  ngOnInit(): void {
     //if page was update when was signUp
-    if (this.router.url.split("/").pop() == "signUp") this.isLoginForm = false;
+    this.isLoginForm = this.router.url.split("/").pop() != "signUp";
   }
 }

@@ -9,7 +9,7 @@ import {TokenHelpers} from "../shared/services/helpers/token-helper.service";
   templateUrl: './blog.component.html',
   styleUrls: ['blog.component.css'],
   host: {
-    class: "container-fluid d-flex"
+    class: "container-fluid d-flex p-0 m-0"
   },
   encapsulation: ViewEncapsulation.None
 })

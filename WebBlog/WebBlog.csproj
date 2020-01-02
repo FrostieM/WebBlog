@@ -41,6 +41,7 @@
         <Content Include="ClientApp\src\assets\img\house.svg" />
         <Content Include="ClientApp\src\assets\img\image.svg" />
         <Content Include="ClientApp\src\assets\img\like.svg" />
+        <Content Include="ClientApp\src\assets\img\logo.svg" />
         <Content Include="ClientApp\src\assets\img\p.svg" />
         <Content Include="ClientApp\src\assets\img\rows_view.svg" />
         <Content Include="ClientApp\src\assets\img\tag.svg" />

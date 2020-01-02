@@ -2,22 +2,12 @@
 @import url('../../assets/css/buttons.css');
 @import url('../../assets/css/siderbar.css');
 
-
-body{
+*{
   font-family: 'MyriadPro bold', sans-serif;
-  background-color: #7e7d7e;
-}
-
-.logo span{
-  color: #d66cb7;
-}
-
-.logo{
-  font-size: 38pt;
 }
 
 .about p{
-  font-size: 12pt;
+  font-size: 16pt;
 }
 
 .about p, .about h1{
@@ -29,8 +19,7 @@ body{
 }
 
 #content{
-  background-color: #ededed;
-  border-top: 6px solid #6bb7d3;
+  border-top: 4px solid darkorange;
 }
 
 .feedback a{
