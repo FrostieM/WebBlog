@@ -33,9 +33,11 @@
           <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
           <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </Content>
+        <Content Include="ClientApp\src\assets\img\abstrakciya_chernyy_raznocvetnyy_krivaya_483_1920x1080.jpg" />
         <Content Include="ClientApp\src\assets\img\article.svg" />
         <Content Include="ClientApp\src\assets\img\cols_view.svg" />
         <Content Include="ClientApp\src\assets\img\facebook.svg" />
+        <Content Include="ClientApp\src\assets\img\fox.png" />
         <Content Include="ClientApp\src\assets\img\google.svg" />
         <Content Include="ClientApp\src\assets\img\history.svg" />
         <Content Include="ClientApp\src\assets\img\house.svg" />
@@ -62,12 +64,19 @@
         <None Include="ClientApp\src\app\authentication\registration\login.component.html" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
         <None Include="ClientApp\src\app\blog\auth.module.ts" />
+        <None Include="ClientApp\src\app\blog\content\menu-button.component.html" />
         <None Include="ClientApp\src\app\blog\menu-button\login.component.html" />
+        <None Include="ClientApp\src\app\blog\post-card\post-info.component.html" />
+        <None Include="ClientApp\src\app\blog\post-info\content.component.html" />
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\post\customers.component.html" />
         <None Include="ClientApp\src\app\shared\forms\login.form.ts" />
         <None Include="ClientApp\src\app\shared\helpers\token.helpers.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\pagingInfo.interface.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\post.interface.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\postViewData.interface.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\userPostsViewData.interface.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\role-guard.service.ts" />

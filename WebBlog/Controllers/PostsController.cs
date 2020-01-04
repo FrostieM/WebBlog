@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +44,7 @@ namespace WebBlog.Controllers
                 .Where(p => 
                     p.Blog.User.UserName == username && 
                     p.Type == type)
+                .OrderByDescending(p => p.Created)
                 .Select(p => new PostViewData
                 {
                     Post = p,
@@ -59,6 +59,8 @@ namespace WebBlog.Controllers
                 Posts = userPosts
                     .Skip((currentPage - 1) * ItemsPerPage)
                     .Take(ItemsPerPage),
+                
+                isCreator = username == User.Identity.Name,
                 
                 PagingInfo = new PagingInfo
                 {
@@ -84,11 +86,30 @@ namespace WebBlog.Controllers
                 Title = postForm.Title,
                 Type = postForm.Type,
                 FileUrl = postForm.FileUrl,
-                Created = DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                Created = DateTime.Now,
             };
             _postRepository.SavePost(post, User.Identity.Name);
             
-            return Ok(Get(postForm.Type, User.Identity.Name));
+            return Ok("saved");
+        }
+
+        [Authorize]
+        [HttpGet, Route("deletePost")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeletePost(int id)
+        {
+            if (!_userRepository.Users.Any(u => u.UserName == User.Identity.Name)) 
+                return NotFound("User not found");
+
+            var post = _postRepository.Posts.FirstOrDefault(p => 
+                p.Id == id && 
+                p.Blog.User.UserName == User.Identity.Name);
+            
+            if (post == null) return NotFound("Post not found");
+            
+            _postRepository.DeletePost(post);
+            return Ok("deleted");
         }
     }
 }

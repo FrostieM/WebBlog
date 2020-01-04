@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -29,18 +28,17 @@ namespace WebBlog.Model
             var blog = new Blog
             {
                 User = user,
-                CreatedDate = DateTime.Now.ToString(CultureInfo.CurrentCulture)
+                CreatedDate = DateTime.Now
             };
             context.Blogs.Add(blog);
             
             var post = new Post
             {
                 Blog = blog,
-                Created = DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                Created = DateTime.Now,
                 Description = "test post's description",
                 Title = "test post's title",
-                Type = "test",
-                FileUrl = "testUrl"
+                Type = "article"
             };
            
             context.Posts.Add(post);

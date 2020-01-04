@@ -1,8 +1,13 @@
-﻿<button type="button" class="icon btn w-100 mt-3 text-uppercase text-left">
-  <span class="icon-bg float-left text-center bg-light">
-    <svg class="icon-img mt-2" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 11 16">
-      <path class="cls-1" [attr.d]="d" [attr.transform]="transform" fill="darkorange"/>
+﻿<button type="button" class="icon btn w-100 mt-3 text-uppercase text-left rounded-0"
+  [ngClass]="isButtonActive() ? 'btn-light' : 'btn-dark'"
+  (click)="sendMessageToParent(buttonType)">
+  <span class="icon-bg float-left text-center bg-light" [ngClass]="isButtonActive() ? 'bg-dark' : 'bg-light'">
+    <svg class="icon-img mt-2" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 11 19">
+      <path class="cls-1" [attr.d]="d" [attr.transform]="transform" [attr.fill]="isButtonActive() ? 'white' : 'dark'"/>
     </svg>
   </span>
-  <span class="icon-text col text-light">{{name}}</span>
+  <span class="icon-text col"
+    [ngClass]="isButtonActive() ? 'text-dark' : 'text-light'">
+    {{buttonType}}s
+  </span>
 </button>

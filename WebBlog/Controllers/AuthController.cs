@@ -30,7 +30,8 @@ namespace WebBlog.Controllers
         public IActionResult Post([FromBody]LoginForm userForm)
         {
             var user = _repository.Users.FirstOrDefault(u => 
-                u.UserName == userForm.UserName);
+                u.UserName == userForm.UserName &&
+                u.Password == userForm.Password);
             
             if (user == null) 
                 return NotFound("User not found");

@@ -1,0 +1,40 @@
+﻿<!-- post card-->
+<div class="{{ postViewData.post.type }} card flex-row flex-wrap p-0 mt-5 bg-dark text-light">
+  <div *ngIf="postViewData.post.type=='image' || postViewData.post.type=='video'" class="col-auto card-header border-0 p-0 m-0"
+       onclick="">
+
+    <img *ngIf="postViewData.post.type=='image'" src="assets/img/test.jpg" class="img-fluid" alt="image name">
+
+    <div *ngIf="postViewData.post.type=='video'">
+      <img class="position-absolute" src="assets/img/video_icon.png" alt="" style="margin-top:25%;margin-left:-30px;">
+      <img class="position-absolute" src="assets/img/video_play_icon.png" alt="" style="margin-top: 30%;margin-left: 40%;">
+      <img class="w-100" src="assets/img/video_bg_1.png" alt="bg color">
+    </div>
+  </div>
+
+  <!-- block card content-->
+  <div class="col card-block">
+    <div class="card-title">
+      <h2 class="title">{{postViewData.post.title}}</h2>
+    </div>
+
+    <div class="m-0 p-0" style="border-bottom: 2px solid darkorange;">
+      <blog-post-info-component
+        [isCreator]="isCreator"
+        [postViewData]="postViewData"
+        (messageToUpdate)="updatePosts()">
+      </blog-post-info-component>
+    </div>
+
+    <div class="card-text card-text mt-1">
+      <p class="description">{{SubDescription}}<span *ngIf="SubDescription.length < postViewData.post.description.length">...</span></p>
+    </div>
+
+    <span class="url d-none">{{postViewData.post.fileUrl}}</span>
+
+  </div>
+  <!-- block card content ends-->
+
+  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary" style="cursor: pointer">Show</button>
+</div>
+<!-- post card ends-->

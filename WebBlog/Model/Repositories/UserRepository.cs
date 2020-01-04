@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using WebBlog.Model.Interfaces.Repositories;
 
@@ -22,7 +21,7 @@ namespace WebBlog.Model.Repositories
             _context.Blogs.Add(new Blog
             {
                 User = user,
-                CreatedDate = DateTime.Now.ToString(CultureInfo.CurrentCulture)
+                CreatedDate = DateTime.Now
             });
             _context.SaveChanges();
         }

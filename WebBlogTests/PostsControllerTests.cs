@@ -160,6 +160,73 @@ namespace WebBlogTests
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
+            Assert.Equal("saved", result.Value);
+        }
+
+        [Fact]
+        public void CannotDeletePost_UserNotFound()
+        {
+            var controller = new PostsController(
+                _postRepository.Object, 
+                _postLikeRepository.Object,
+                _userRepository.Object)
+            {
+                ControllerContext = FakeController.GetContextWithIdentity("test0", "User")
+            };
+
+            var result = controller.DeletePost(1) as ObjectResult;
+            
+            _postRepository.Verify(m =>
+                m.DeletePost(It.IsAny<Post>()), Times.Never);
+            Assert.NotNull(result);
+            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, result.StatusCode);
+            Assert.NotNull(result.Value);
+            Assert.Equal("User not found", result.Value);
+        }
+        
+        [Fact]
+        public void CannotDeletePost_PostNotFound()
+        {
+            var controller = new PostsController(
+                _postRepository.Object, 
+                _postLikeRepository.Object,
+                _userRepository.Object)
+            {
+                ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
+            };
+
+            var result = controller.DeletePost(0) as ObjectResult;
+            
+            _postRepository.Verify(m =>
+                m.DeletePost(It.IsAny<Post>()), Times.Never);
+            Assert.NotNull(result);
+            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, result.StatusCode);
+            Assert.NotNull(result.Value);
+            Assert.Equal("Post not found", result.Value);
+        }
+        
+        [Fact]
+        public void CanDeletePost()
+        {
+            var controller = new PostsController(
+                _postRepository.Object, 
+                _postLikeRepository.Object,
+                _userRepository.Object)
+            {
+                ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
+            };
+
+            var result = controller.DeletePost(1) as ObjectResult;
+            
+            _postRepository.Verify(m =>
+                m.DeletePost(It.IsAny<Post>()), Times.Once);
+            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.NotNull(result.Value);
+            Assert.Equal("deleted", result.Value);
         }
     }
 }

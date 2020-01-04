@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebBlog.Model
@@ -12,6 +13,6 @@ namespace WebBlog.Model
         public User User { get; set; }
         
         [Required]
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

@@ -1,0 +1,84 @@
+﻿<div *ngIf="!isForm" >
+  <div *ngIf="mainPost" id="main-content">
+
+    <div class="col-auto m-0 p-0">
+      <h2 class="title text-uppercase">{{mainPost.post.title}}</h2>
+    </div>
+
+    <div class="row w-100 mx-0 mt-2 p-0 border bg-dark text-light">
+
+      <div class="col-auto">
+        <p class="description">{{mainPost.post.description}}</p>
+      </div>
+      <blog-post-info-component
+        [postViewData]="mainPost"
+        [isCreator]="userPosts.isCreator"
+        (messageToUpdate)="getPosts()">
+      </blog-post-info-component>
+
+    </div>
+  </div>
+
+  <div class="row mt-1">
+    <button *ngIf="userPosts.isCreator" class="col-auto btn btn-dark ml-3" (click)="isForm=true">Add post</button>
+
+    <div class="col-auto ml-auto">
+      <span>Change view: </span>
+      <button class="btn btn-dark rounded-0" (click)="isViewRow=true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17.94" height="17.969" viewBox="0 0 17.94 17.969">
+          <path [attr.fill]="isViewRow ? 'darkorange' : 'white'"
+                class="cls-1" d="M1035.38,535.982v-1.09h10.56v1.09h-10.56Zm0-4.262h10.56v1.09h-10.56v-1.09Zm0-3.173h10.56v1.091h-10.56v-1.091Zm0-3.172h10.56v1.091h-10.56v-1.091Zm0-3.172h10.56v1.09h-10.56V522.2Zm0-3.172h10.56v1.09h-10.56v-1.09Zm-6.33,12.689h4.22v4.295h-4.22V531.72Zm0-6.345h4.22v4.3h-4.22v-4.3Zm0-6.344h4.22v4.3h-4.22v-4.3Z" transform="translate(-1029.06 -519.031)"/>
+        </svg>
+      </button>
+
+      <button class="btn btn-dark rounded-0" (click)="isViewRow=false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="19.56" height="19.687" viewBox="0 0 19.56 19.687">
+          <path [attr.fill]="isViewRow ? 'white' : 'darkorange'"
+                class="cls-1" d="M1068.45,518.323h7.69v7.689h-7.69v-7.689Zm9.89,0h7.7v7.689h-7.7v-7.689Zm-9.89,10.006h7.69v7.689h-7.69v-7.689Zm9.89,0h7.7v7.689h-7.7v-7.689Z" transform="translate(-1068.44 -518.313)"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+
+  <div *ngIf="userPosts">
+    <div class="row"  *ngFor="let post of userPosts.posts">
+      <div class="offset-1" [ngClass]="isViewRow ? 'col-10' : 'col-4'">
+        <blog-post-card-component
+          [postViewData]="post"
+          [isCreator]="userPosts.isCreator"
+          (messageToUpdate)="getPosts()">
+        </blog-post-card-component>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<form *ngIf="isForm" #postForm="ngForm" class="row col col-lg-8 col-10 offset-lg-2 offset-1 bg-dark mt-4 text-light"
+      (ngSubmit)="setPosts(postForm)">
+  <h1 class="col-auto offset-sm-4 offset-1">Add post</h1>
+
+  <div class="d-none">
+    <label for="type" class="sr-only">type</label>
+    <input [ngModel]="type"  type="text" id="type" name="type">
+  </div>
+
+  <div class="col-12 row offset-2 mt-2">
+    <label for="title" class="sr-only">Title</label>
+    <input ngModel type="text" id="title" name="title" placeholder="Title" class="col col-8 rounded-lg">
+  </div>
+
+  <div class="col-12 row offset-1 mt-2 mb-4">
+    <label for="description" class="sr-only">Description</label>
+    <textarea ngModel name="description" id="description" cols="30" rows="10" placeholder="Description" class="col col-10 rounded-lg"></textarea>
+  </div>
+
+  <button type="submit" class="col-4 offset-1 btn rounded-0 text-dark" style="background-color: crimson"
+          (click)="isForm=false">Cancel</button>
+  <button type="submit" class="col-4 offset-1 btn rounded-0 text-dark" style="background-color: darkorange">Submit</button>
+
+
+</form>

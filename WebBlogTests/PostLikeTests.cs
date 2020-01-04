@@ -43,13 +43,12 @@ namespace WebBlogTests
             var controller = new PostLikeController(
                 _userRepository.Object,
                 _postRepository.Object,
-                _postLikeRepository.Object);
-            
-            var result = controller.Post(new PostViewData
+                _postLikeRepository.Object)
             {
-                Post = new Post{Id = 1},
-                Likes = 22
-            }, "test0") as ObjectResult;
+                ControllerContext = FakeController.GetContextWithIdentity("test0", "User")
+            };
+            
+            var result = controller.Post(1) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -64,19 +63,18 @@ namespace WebBlogTests
             var controller = new PostLikeController(
                 _userRepository.Object,
                 _postRepository.Object,
-                _postLikeRepository.Object);
-            
-            var result = controller.Post(new PostViewData
+                _postLikeRepository.Object)
             {
-                Post = new Post{Id = 0},
-                Likes = 22
-            }, "test1") as ObjectResult;
+                ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
+            };
+            
+            var result = controller.Post(0) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
             Assert.Equal(404, result.StatusCode);
             Assert.NotNull(result.Value);
-            Assert.Equal("User's post not found", result.Value);
+            Assert.Equal("Post not found", result.Value);
         }
         
         [Fact]
@@ -90,10 +88,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Post(new PostViewData
-            {
-                Post = new Post{Id = 1}
-            }, "test1") as ObjectResult;
+            var result = controller.Post(1) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
@@ -118,10 +113,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test2", "User")
             };
             
-            var result = controller.Post(new PostViewData
-            {
-                Post = new Post{Id = 3}
-            }, "test2") as ObjectResult;
+            var result = controller.Post(3) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebBlog.Migrations
 {
@@ -29,7 +30,7 @@ namespace WebBlog.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<string>(nullable: false)
+                    CreatedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +54,7 @@ namespace WebBlog.Migrations
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     FileUrl = table.Column<string>(nullable: true),
-                    Created = table.Column<string>(nullable: true)
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

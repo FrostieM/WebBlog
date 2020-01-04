@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,7 +25,7 @@ namespace WebBlog.Model
         public string Description { get; set; }
         public string FileUrl { get; set; }
         
-        public string Created { get; set; }
+        public DateTime Created { get; set; }
         
         
         public ICollection<Tag> Tags { get; set; }

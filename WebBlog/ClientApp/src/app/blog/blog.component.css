@@ -1,6 +1,5 @@
 ﻿@import url('../../assets/css/fonts.css');
 @import url('../../assets/css/buttons.css');
-@import url('../../assets/css/siderbar.css');
 
 *{
   font-family: 'MyriadPro bold', sans-serif;
@@ -33,3 +32,4 @@ nav, .icon-text{
 .card .card-header{
   cursor: pointer;
 }
+
