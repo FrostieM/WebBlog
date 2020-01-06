@@ -17,12 +17,7 @@ namespace WebBlog.Model
                 .HasOne(u => u.Blog)
                 .WithOne(b => b.User)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Likes)
-                .WithOne(l => l.User)
-                .OnDelete(DeleteBehavior.Cascade);
-
+            
             modelBuilder.Entity<Blog>()
                 .HasMany(b => b.Posts)
                 .WithOne(p => p.Blog)
@@ -32,7 +27,17 @@ namespace WebBlog.Model
                 .HasMany(p => p.Likes)
                 .WithOne(l => l.Post)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.PostTags)
+                .WithOne(p => p.Post)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<Tag>()
+                .HasMany(t => t.PostTags)
+                .WithOne(p => p.Tag)
+                .OnDelete(DeleteBehavior.Cascade);
+            
         }
 
         public DbSet<Blog> Blogs { get; set; }
@@ -41,6 +46,7 @@ namespace WebBlog.Model
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<PostTags> PostTags { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

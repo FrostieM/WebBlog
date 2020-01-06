@@ -101,7 +101,7 @@ namespace WebBlog.Controllers
                 FileUrl = fileUrl,
                 Created = DateTime.Now,
             };
-            _postRepository.SavePost(post);
+            _postRepository.SavePost(post, postForm.Tags.Split(" "));
             
             return Ok("saved");
         }

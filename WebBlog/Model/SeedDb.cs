@@ -40,9 +40,11 @@ namespace WebBlog.Model
                 Title = "test post's title",
                 Type = "article"
             };
-           
             context.Posts.Add(post);
-                
+            
+            var postTags = new PostTags{Post = post, Tag = new Tag{Name = "test"}};
+            context.PostTags.Add(postTags);
+            
             context.SaveChanges();
         }
     }

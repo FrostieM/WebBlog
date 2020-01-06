@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
 namespace WebBlog.Model.Forms
@@ -8,7 +8,7 @@ namespace WebBlog.Model.Forms
         public string Type { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Tags { get; set; }
         public IFormFile File { get; set; }
-        public Array Tags { get; set; }
     }
 }

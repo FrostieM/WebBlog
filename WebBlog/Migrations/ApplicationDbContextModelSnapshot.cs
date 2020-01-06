@@ -150,6 +150,28 @@ namespace WebBlog.Migrations
                     b.ToTable("PostLikes");
                 });
 
+            modelBuilder.Entity("WebBlog.Model.PostTags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("PostTags");
+                });
+
             modelBuilder.Entity("WebBlog.Model.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -161,12 +183,7 @@ namespace WebBlog.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Tags");
                 });
@@ -264,11 +281,17 @@ namespace WebBlog.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebBlog.Model.Tag", b =>
+            modelBuilder.Entity("WebBlog.Model.PostTags", b =>
                 {
                     b.HasOne("WebBlog.Model.Post", "Post")
-                        .WithMany("Tags")
-                        .HasForeignKey("PostId");
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WebBlog.Model.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -17,11 +17,18 @@
       <blog-menu-button-component (messageToEmit)="setType($event)" [currentType]="currentType" [buttonType]="'article'" [d]="'M223.769,349H233v11h-9.231V349Zm1.846,9h5.539v-1h-5.539v1Zm0-2h5.539v-1h-5.539v1Zm0-2h5.539v-1h-5.539v1Zm0-2h5.539v-1h-5.539v1Zm-2.769,5H221V346h9.231v2h-7.385v9Z'" [transform]="'translate(-221 -346)'"></blog-menu-button-component>
     </div>
 
-
-      <div class="about col-10 offset-1 mt-5 text-white">
-        <h1>About me</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate distinctio dolores eaque ex illo impedit maxime quasi. Atque, explicabo!</p>
+    <div class="col-10 offset-1 mt-5 text-light">
+      <img class="float-left" src="assets/img/tag.svg" alt="tag picture">
+      <h1 class="ml-5">Tags</h1>
+      <div class="tags">
+        <button type="button" class="tag btn mt-2 ml-1 shadow-none text-center" style="background-color: darkorange"><span>tag</span><span class="badge badge-dark ml-2">2</span></button>
       </div>
+    </div>
+
+    <div class="about col-10 offset-1 mt-5 text-white">
+      <h1>About me</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </div>
 
     </nav>
 
@@ -34,7 +41,6 @@
         [username]="username">
       </blog-content-component>
     </main>
-
   </div>
 
 

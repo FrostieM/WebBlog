@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebBlog.Model
 {
@@ -33,6 +34,7 @@ namespace WebBlog.Model
         [StringLength(40)]
         public string Email { get; set; }
         
+        [JsonIgnore]
         public ICollection<PostLike> Likes { get; set; }
         
     }

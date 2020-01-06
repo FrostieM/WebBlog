@@ -44,35 +44,4 @@
 
 </div>
 
-
-<form *ngIf="isForm" #postForm="ngForm" class="row col col-lg-8 col-10 offset-lg-2 offset-1 bg-dark mt-4 text-light"
-      [attr.enctype]="type=='image' || type=='video' ? 'multipart/form-data': null"
-      (ngSubmit)="setPosts(postForm)">
-  <h1 class="col-auto offset-sm-4 offset-1">Add post</h1>
-
-  <div class="d-none">
-    <label for="type" class="sr-only">type</label>
-    <input [ngModel]="type"  type="text" id="type" name="type">
-  </div>
-
-  <div class="col-12 row offset-2 mt-2">
-    <label for="title" class="sr-only">Title</label>
-    <input ngModel type="text" id="title" name="title" placeholder="Title" class="col col-8 rounded-lg">
-  </div>
-
-  <div class="col-12 row offset-1 mt-2 mb-4">
-    <label for="description" class="sr-only">Description</label>
-    <textarea ngModel name="description" id="description" cols="30" rows="10" placeholder="Description" class="col col-10 rounded-lg"></textarea>
-  </div>
-
-  <div *ngIf="type=='image' || type=='video'" class="col-12 row offset-1 mt-2 mb-4">
-    <label for="{{type}}" class="sr-only">{{type}}</label>
-    <input #file type="file" id="{{type}}" name="file" (change)="changeFile(file.files[0])" >
-  </div>
-
-  <button type="submit" class="col-4 offset-1 btn rounded-0 text-dark" style="background-color: crimson"
-          (click)="isForm=false">Cancel</button>
-  <button type="submit" class="col-4 offset-1 btn rounded-0 text-dark" style="background-color: darkorange">Submit</button>
-
-
-</form>
+<blog-post-form-component *ngIf="isForm" [type]="type" (messageToUpdate)="getPosts()"></blog-post-form-component>

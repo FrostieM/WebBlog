@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebBlog.Model.Interfaces.Repositories
 {
@@ -6,7 +8,7 @@ namespace WebBlog.Model.Interfaces.Repositories
     {
         IQueryable<Post> Posts { get; }
 
-        void SavePost(Post post);
+        void SavePost(Post post, IEnumerable<string> rowTags);
         void DeletePost(Post post);
     }
 }

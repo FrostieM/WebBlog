@@ -63,6 +63,7 @@
         <None Include="ClientApp\src\app\authentication\login\login.component.ts" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.html" />
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
+        <None Include="ClientApp\src\app\blog\add-post-form\content.component.html" />
         <None Include="ClientApp\src\app\blog\auth.module.ts" />
         <None Include="ClientApp\src\app\blog\content\menu-button.component.html" />
         <None Include="ClientApp\src\app\blog\main-post\post-card.component.ts" />

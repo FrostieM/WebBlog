@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WebBlog.Controllers;
@@ -153,7 +154,7 @@ namespace WebBlogTests
             }) as ObjectResult;
             
             _postRepository.Verify(m =>
-                m.SavePost(It.IsAny<Post>()), Times.Once);
+                m.SavePost(It.IsAny<Post>(), It.IsAny<IEnumerable<string>>()), Times.Once);
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, result.StatusCode);
