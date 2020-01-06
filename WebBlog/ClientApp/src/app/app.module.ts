@@ -10,15 +10,13 @@ import {AuthModule} from "./authentication/auth.module";
 
 import {BlogModule} from "./blog/blog.module";
 
-import {PostsComponent} from "./posts/posts.component";
 import {JwtModule} from "@auth0/angular-jwt";
 import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PostsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,9 +24,7 @@ import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
     FormsModule,
     AuthModule,
     BlogModule,
-    RouterModule.forRoot([
-      {path: ":username/posts", component: PostsComponent}
-    ]),
+    RouterModule.forRoot([]),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

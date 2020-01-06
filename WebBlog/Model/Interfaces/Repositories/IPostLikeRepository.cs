@@ -9,7 +9,7 @@ namespace WebBlog.Model.Interfaces.Repositories
         void SavePostLikes(PostLike postLike);
         void DeletePostLikes(PostLike postLike);
         
-        int getLikes(Post post);
-        bool isLiked(string username);
+        int GetLikes(int postId);
+        bool IsLiked(string username, int postId);
     }
 }

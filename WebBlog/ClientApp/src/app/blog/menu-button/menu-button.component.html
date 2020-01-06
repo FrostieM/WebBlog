@@ -7,7 +7,6 @@
     </svg>
   </span>
   <span class="icon-text col"
-    [ngClass]="isButtonActive() ? 'text-dark' : 'text-light'">
-    {{buttonType}}s
+    [ngClass]="isButtonActive() ? 'text-dark' : 'text-light'">{{buttonType}}<span *ngIf="buttonType!='home'">s</span>
   </span>
 </button>

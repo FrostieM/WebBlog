@@ -12,6 +12,27 @@ namespace WebBlog.Model
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserName)
                 .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Blog)
+                .WithOne(b => b.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Likes)
+                .WithOne(l => l.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Blog>()
+                .HasMany(b => b.Posts)
+                .WithOne(p => p.Blog)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Likes)
+                .WithOne(l => l.Post)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
         public DbSet<Blog> Blogs { get; set; }

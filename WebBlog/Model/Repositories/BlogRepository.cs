@@ -25,5 +25,6 @@ namespace WebBlog.Model.Repositories
             _context.Users.Remove(blog.User);
             _context.SaveChanges();
         }
+        
     }
 }

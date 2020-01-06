@@ -21,6 +21,8 @@ export class ContentComponent{
   public userPosts: UserPostsViewDataInterface;
   public mainPost: PostViewDataInterface;
 
+  public file;
+
   private type: string;
   @Input()  public set Type(type: string){
     this.type = type;
@@ -40,22 +42,24 @@ export class ContentComponent{
       }),
       params: postsParams
     }).toPromise().then(response => {
-      console.log(response);
      this.userPosts = response;
      this.mainPost = this.userPosts.posts.shift();
-      console.log(this.userPosts);
     }, err => {
       console.log(err)
     });
   }
 
   setPosts(ngForm: NgForm) {
-    let post = JSON.stringify(ngForm.value);
-    this.http.post<any>(this.baseUrl + "api/posts/savePost", post, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-      responseType: 'text' as 'json'
+    let formData = new FormData();
+
+    for(let key of Object.keys(ngForm.value)){
+      formData.append(key, ngForm.value[key]);
+    }
+
+    formData.append("file", this.file);
+
+    this.http.post<any>(this.baseUrl + "api/posts/savePost", formData, {
+      responseType: "text" as "json"
     }).subscribe(() => {
       this.getPosts(1);
       this.isForm=false;
@@ -63,4 +67,10 @@ export class ContentComponent{
       console.log(err)
     });
   }
+
+  changeFile(file){
+    this.file = file;
+  }
+
+
 }

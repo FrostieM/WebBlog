@@ -24,14 +24,14 @@
       <p *ngIf="signUpForm.controls['rePassword'].errors?.required">Repeat password</p>
     </div>
 
-    <div *ngIf="signUpForm.controls['firstName'].errors"
+    <div *ngIf="signUpForm.controls['firstname'].errors"
          class="p-0 mt-1 alert alert-warning">
-      <p *ngIf="signUpForm.controls['firstName'].errors?.required">First name is required</p>
+      <p *ngIf="signUpForm.controls['firstname'].errors?.required">First name is required</p>
     </div>
 
-    <div *ngIf="signUpForm.controls['lastName'].errors"
+    <div *ngIf="signUpForm.controls['lastname'].errors"
          class="p-0 mt-1 alert alert-warning">
-      <p *ngIf="signUpForm.controls['lastName'].errors?.required">Last name is required</p>
+      <p *ngIf="signUpForm.controls['lastname'].errors?.required">Last name is required</p>
     </div>
 
     <div *ngIf="signUpForm.controls['email'].errors"
@@ -62,13 +62,13 @@
   </p>
 
   <p>
-    <label for="firstName" class="sr-only">first name</label>
-    <input type="text" id="firstName" name="firstName" formControlName="firstName" class="col-8 mt-2" placeholder="first name">
+    <label for="firstname" class="sr-only">first name</label>
+    <input type="text" id="firstname" name="firstname" formControlName="firstname" class="col-8 mt-2" placeholder="first name">
   </p>
 
   <p>
-    <label for="lastName" class="sr-only">last name</label>
-    <input type="text" id="lastName" name="lastName" formControlName="lastName" class="col-8 mt-2" placeholder="last name">
+    <label for="lastname" class="sr-only">last name</label>
+    <input type="text" id="lastname" name="lastname" formControlName="lastname" class="col-8 mt-2" placeholder="last name">
   </p>
 
   <p>

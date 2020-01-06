@@ -37,4 +37,28 @@ export class PostInfoComponent {
       console.log(err)
     });
   }
+
+  public likePost(id: number){
+    let params = new HttpParams().set("postId", id.toString());
+    this.http.get<PostViewDataInterface>(this.baseUrl + "api/postLike", {
+      params: params
+    }).subscribe(response => {
+      this.postViewData.isLiked = response.isLiked;
+      this.postViewData.likes = response.likes;
+    }, error =>
+      console.log(error));
+  }
+
+  getDatePost(){
+    let postDate = Date.parse(this.postViewData.post.created);
+    let today = Date.now();
+
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    let daysLeft = Math.round(Math.abs((postDate - today) / oneDay));
+
+    if (daysLeft == 0) return "today";
+    if (daysLeft == 1) return "yesterday";
+    return daysLeft + " days ago";
+  }
 }

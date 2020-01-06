@@ -17,7 +17,6 @@ namespace WebBlog.Model.Repositories
         
         public void SaveUser(User user)
         {
-            _context.Users.Add(user);
             _context.Blogs.Add(new Blog
             {
                 User = user,

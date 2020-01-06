@@ -65,6 +65,7 @@
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
         <None Include="ClientApp\src\app\blog\auth.module.ts" />
         <None Include="ClientApp\src\app\blog\content\menu-button.component.html" />
+        <None Include="ClientApp\src\app\blog\main-post\post-card.component.ts" />
         <None Include="ClientApp\src\app\blog\menu-button\login.component.html" />
         <None Include="ClientApp\src\app\blog\post-card\post-info.component.html" />
         <None Include="ClientApp\src\app\blog\post-info\content.component.html" />
@@ -98,6 +99,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\fonts.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\siderbar.css" />
       <_ContentIncludedByDefault Remove="wwwroot\img\logo.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Images" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

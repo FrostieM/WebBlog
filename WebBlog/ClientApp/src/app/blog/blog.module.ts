@@ -10,6 +10,7 @@ import {PostInfoComponent} from "./post-info/post-info.component";
 import {ContentComponent} from "./content/content.component";
 import {FormsModule} from "@angular/forms";
 import {PostCardComponent} from "./post-card/post-card.component";
+import {MainPostComponent} from "./main-post/main-post.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {PostCardComponent} from "./post-card/post-card.component";
     MenuButtonComponent,
     PostInfoComponent,
     ContentComponent,
+    MainPostComponent,
     PostCardComponent
   ],
   imports: [

@@ -16,7 +16,7 @@ namespace WebBlogTests
     {
         private readonly Mock<IPostRepository> _postRepository;
         private readonly Mock<IPostLikeRepository> _postLikeRepository;
-        private readonly Mock<IUserRepository> _userRepository;
+        private readonly Mock<IBlogRepository> _blogRepository;
         
         public PostsControllerTests()
         {
@@ -25,9 +25,9 @@ namespace WebBlogTests
             var posts = FakeRepositories.GetFakePosts(blogs).ToList();
             var postsLikes = FakeRepositories.GetFakePostLikes(posts, users);
             
-            var usersMock = new Mock<IUserRepository>();
-            usersMock.Setup(c => c.Users).Returns(users.AsQueryable);
-            _userRepository = usersMock;
+            var blogsMock = new Mock<IBlogRepository>();
+            blogsMock.Setup(c => c.Blogs).Returns(blogs.AsQueryable);
+            _blogRepository = blogsMock;
             
             var postsMock = new Mock<IPostRepository>();
             postsMock.Setup(c => c.Posts).Returns(posts.AsQueryable);
@@ -44,7 +44,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object,
                 _postLikeRepository.Object, 
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -64,7 +64,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object,
                 _postLikeRepository.Object, 
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -87,7 +87,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object,
                 _postLikeRepository.Object, 
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ItemsPerPage = 2,
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
@@ -115,7 +115,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object,
                 _postLikeRepository.Object, 
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("testNotFound", "User")
             };
@@ -124,8 +124,7 @@ namespace WebBlogTests
             {
                 Description = "test description",
                 Title = "test title",
-                Type = "test type",
-                FileUrl = "test url"
+                Type = "test type"
             }) as ObjectResult;
             
             Assert.NotNull(result);
@@ -141,7 +140,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object,
                 _postLikeRepository.Object, 
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -150,12 +149,11 @@ namespace WebBlogTests
             {
                 Description = "test description",
                 Title = "test title",
-                Type = "test type",
-                FileUrl = "test url"
+                Type = "test type"
             }) as ObjectResult;
             
             _postRepository.Verify(m =>
-                m.SavePost(It.IsAny<Post>(), It.IsAny<string>()), Times.Once);
+                m.SavePost(It.IsAny<Post>()), Times.Once);
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, result.StatusCode);
@@ -169,7 +167,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object, 
                 _postLikeRepository.Object,
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test0", "User")
             };
@@ -191,7 +189,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object, 
                 _postLikeRepository.Object,
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -213,7 +211,7 @@ namespace WebBlogTests
             var controller = new PostsController(
                 _postRepository.Object, 
                 _postLikeRepository.Object,
-                _userRepository.Object)
+                _blogRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };

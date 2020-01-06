@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace WebBlog.Model.Forms
+﻿namespace WebBlog.Model.Forms
 {
     public class SignUpForm : LoginForm
     {
-        public string RePassword;
-        public string FirstName;
-        public string LastName;
-        public string Email;
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
     }
 }

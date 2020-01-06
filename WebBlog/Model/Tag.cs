@@ -9,6 +9,8 @@ namespace WebBlog.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         
+        public Post Post { get; set; }
+        
         [Required]
         public string Name { get; set; }
     }

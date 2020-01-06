@@ -31,11 +31,11 @@ export class RegistrationComponent {
 
       rePassword: new FormControl("", ),
 
-      firstName: new FormControl("", [
+      firstname: new FormControl("", [
         Validators.required,
       ]),
 
-      lastName: new FormControl("", [
+      lastname: new FormControl("", [
         Validators.required,
       ]),
 

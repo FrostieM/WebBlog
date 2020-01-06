@@ -67,9 +67,8 @@ namespace WebBlogTests
             {
                 UserName = "test1",
                 Password = "testPassword1",
-                RePassword = "testPassword1",
-                FirstName = "testName",
-                LastName = "testLastName",
+                Firstname = "testName",
+                Lastname = "testLastName",
                 Email = "test email"
             }) as ObjectResult;
             
@@ -88,9 +87,8 @@ namespace WebBlogTests
             {
                 UserName = "testOK",
                 Password = "testPasswordOK",
-                RePassword = "testPasswordOK",
-                FirstName = "testName1",
-                LastName = "testLastName2",
+                Firstname = "testName1",
+                Lastname = "testLastName2",
                 Email = "test emailOK"
             }) as ObjectResult;
             

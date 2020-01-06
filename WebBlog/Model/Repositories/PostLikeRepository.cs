@@ -26,14 +26,16 @@ namespace WebBlog.Model.Repositories
             _context.SaveChanges();
         }
 
-        public int getLikes(Post post)
+        public int GetLikes(int postId)
         {
-            return PostLikes.Count(l => l.Post.Equals(post));
+            return PostLikes.Count(l => l.Post.Id == postId);
         }
 
-        public bool isLiked(string username)
+        public bool IsLiked(string username, int postId)
         {
-            return PostLikes.Any(l => l.User.UserName.Equals(username));
+            return PostLikes.Any(l => 
+                l.User.UserName.Equals(username) && 
+                l.Post.Id == postId);
         }
     }
 }

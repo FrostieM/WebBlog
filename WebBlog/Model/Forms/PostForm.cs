@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace WebBlog.Model.Forms
 {
@@ -7,7 +8,7 @@ namespace WebBlog.Model.Forms
         public string Type { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string FileUrl { get; set; }
-        public Array tags { get; set; }
+        public IFormFile File { get; set; }
+        public Array Tags { get; set; }
     }
 }

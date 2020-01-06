@@ -4,22 +4,19 @@ import { Router } from "@angular/router";
 import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interface";
 
 @Component({
-  selector: 'blog-post-card-component',
+  selector: 'blog-main-post-component',
   host: {
     class: ""
   },
-  templateUrl: './post-card.component.html'
+  templateUrl: './main-post.component.html'
 })
-export class PostCardComponent {
+export class MainPostComponent {
 
-  @Input() public postViewData: PostViewDataInterface;
-  @Input() public isCreator: boolean;
+  @Input() mainPost: PostViewDataInterface;
+  @Input() isCreator: boolean;
 
   @Output() public messageToUpdate = new EventEmitter();
 
-  public get SubDescription(){
-    return this.postViewData.post.description.substring(0, 100);
-  }
   constructor(private router: Router,
               private http: HttpClient,
               @Inject("BASE_URL") private baseUrl: string) {
@@ -28,5 +25,9 @@ export class PostCardComponent {
 
   public updatePosts(){
     this.messageToUpdate.emit();
+  }
+
+  createFullSrc(fileUrl){
+    return "https://localhost:5001/" + fileUrl;
   }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebBlog.Model;
 using WebBlog.Model.Interfaces.Repositories;
 using WebBlog.Model.ViewData;
@@ -25,24 +27,25 @@ namespace WebBlog.Controllers
             _postLikeRepository = postLikeRepository;
         }
 
-        [HttpPost, Route("{username}")]
+        [Authorize]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Post(int postId)
+        public IActionResult Get(int postId)
         {
-            var user = _userRepository.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-            if (user == null) return NotFound("User not found");
+            var currentUser = _userRepository.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            if (currentUser == null) return NotFound("User not found");
 
-            var userPost = _postRepository.Posts.FirstOrDefault(p => 
-                p.Id == postId);
+            var userPost = _postRepository.Posts
+                .Include(u => u.Likes)
+                .FirstOrDefault(p => 
+                    p.Id == postId);
             
             if (userPost == null) return NotFound("Post not found");
 
-            var postLike = _postLikeRepository.PostLikes
-                .FirstOrDefault(l => 
-                    l.User.UserName == User.Identity.Name && 
-                    l.Post == userPost);
-
+            var postLike = userPost.Likes
+                .FirstOrDefault(l => l.User.Equals(currentUser));
+            
             if (postLike == null) //like is not exist
             {
                 _postLikeRepository.SavePostLikes(new PostLike 
@@ -58,9 +61,8 @@ namespace WebBlog.Controllers
 
             return Ok(new PostViewData
             {
-                Post = userPost,
-                Likes = _postLikeRepository.getLikes(userPost),
-                IsLiked = _postLikeRepository.isLiked(User.Identity.Name)
+                Likes = _postLikeRepository.GetLikes(postId),
+                IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, postId)
             });
         }
     }

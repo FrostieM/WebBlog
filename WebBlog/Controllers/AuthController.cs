@@ -53,8 +53,8 @@ namespace WebBlog.Controllers
                 UserName = userForm.UserName,
                 Password = userForm.Password,
                 Email = userForm.Email,
-                FirstName = userForm.FirstName,
-                LastName = userForm.LastName
+                FirstName = userForm.Firstname,
+                LastName = userForm.Lastname
             });
             
             return Ok(new { token = GenerateToken(userForm.UserName) });

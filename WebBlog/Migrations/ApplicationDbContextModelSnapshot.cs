@@ -34,7 +34,9 @@ namespace WebBlog.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Blogs");
                 });
@@ -98,7 +100,7 @@ namespace WebBlog.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogId")
+                    b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
@@ -177,19 +179,23 @@ namespace WebBlog.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -207,8 +213,9 @@ namespace WebBlog.Migrations
             modelBuilder.Entity("WebBlog.Model.Blog", b =>
                 {
                     b.HasOne("WebBlog.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithOne("Blog")
+                        .HasForeignKey("WebBlog.Model.Blog", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebBlog.Model.Comment", b =>
@@ -240,26 +247,26 @@ namespace WebBlog.Migrations
             modelBuilder.Entity("WebBlog.Model.Post", b =>
                 {
                     b.HasOne("WebBlog.Model.Blog", "Blog")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebBlog.Model.PostLike", b =>
                 {
                     b.HasOne("WebBlog.Model.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId");
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebBlog.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WebBlog.Model.Tag", b =>
                 {
-                    b.HasOne("WebBlog.Model.Post", null)
+                    b.HasOne("WebBlog.Model.Post", "Post")
                         .WithMany("Tags")
                         .HasForeignKey("PostId");
                 });

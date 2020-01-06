@@ -14,10 +14,8 @@ namespace WebBlog.Model.Repositories
 
         public IQueryable<Post> Posts => _context.Posts;
         
-        public void SavePost(Post post, string username)
+        public void SavePost(Post post)
         {
-            var blog = _context.Blogs.First(b => b.User.UserName == username );
-            post.Blog = blog;
             _context.Posts.Add(post);
             _context.SaveChanges();
         }

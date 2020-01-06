@@ -6,7 +6,7 @@ namespace WebBlog.Model.Interfaces.Repositories
     {
         IQueryable<Post> Posts { get; }
 
-        void SavePost(Post post, string username);
+        void SavePost(Post post);
         void DeletePost(Post post);
     }
 }

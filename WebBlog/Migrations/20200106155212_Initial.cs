@@ -13,10 +13,10 @@ namespace WebBlog.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 20, nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(maxLength: 20, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 40, nullable: false),
+                    LastName = table.Column<string>(maxLength: 40, nullable: false),
+                    Email = table.Column<string>(maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace WebBlog.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,7 +49,7 @@ namespace WebBlog.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogId = table.Column<int>(nullable: false),
+                    BlogId = table.Column<int>(nullable: true),
                     Type = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
@@ -118,7 +118,7 @@ namespace WebBlog.Migrations
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PostLikes_Users_UserId",
                         column: x => x.UserId,
@@ -133,8 +133,8 @@ namespace WebBlog.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    PostId = table.Column<int>(nullable: true)
+                    PostId = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,7 +176,9 @@ namespace WebBlog.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Blogs_UserId",
                 table: "Blogs",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentLikes_CommentId",
