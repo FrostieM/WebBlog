@@ -1,13 +1,14 @@
 ﻿<div *ngIf="!isForm" >
-  <div *ngIf="mainPost" id="main-content">
-    <blog-main-post-component [mainPost]="mainPost"
-                              [isCreator]="userPosts.isCreator"
+  <div *ngIf="userPosts" id="main-content">
+    <blog-main-post-component *ngIf="mainPost"
+                              [mainPost]="mainPost"
+                              [isCreator]="isCreator"
                               (messageToUpdate)="getPosts()">
     </blog-main-post-component>
   </div>
 
   <div class="row mt-1">
-    <button *ngIf="userPosts.isCreator" class="col-auto btn btn-dark ml-3" (click)="isForm=true">Add post</button>
+    <button *ngIf="isCreator" class="col-auto btn btn-dark ml-3" (click)="isForm=true">Add post</button>
 
     <div class="col-auto ml-auto">
       <span>Change view: </span>
@@ -28,14 +29,13 @@
     </div>
   </div>
 
-
   <div *ngIf="userPosts" class="row">
       <div class="offset-1" [ngClass]="isViewRow ? 'col-10' : 'col-4'"
            *ngFor="let post of userPosts.posts">
 
         <blog-post-card-component
           [postViewData]="post"
-          [isCreator]="userPosts.isCreator"
+          [isCreator]="isCreator"
           (messageToUpdate)="getPosts()">
         </blog-post-card-component>
 

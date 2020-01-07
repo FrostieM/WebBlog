@@ -29,4 +29,8 @@ export class PostCardComponent {
   public updatePosts(){
     this.messageToUpdate.emit();
   }
+
+  createFullSrc(fileUrl){
+    return "https://localhost:5001/" + fileUrl;
+  }
 }

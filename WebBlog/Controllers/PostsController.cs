@@ -34,19 +34,22 @@ namespace WebBlog.Controllers
         }
 
         [Authorize]
-        [HttpGet, Route("{type}/{username}")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(string type, string username, int currentPage = 1)
+        public IActionResult Post([FromBody] PostsInfo postsInfo)
         {
             var blog = _blogRepository.Blogs
-                .FirstOrDefault(b => b.User.UserName == username);
+                .FirstOrDefault(b => b.User.UserName == postsInfo.Username);
             
             if (blog == null) 
                 return NotFound("User not found");
-            
-            var posts = _postRepository.Posts
-                .Where(p => p.Type == type)
+
+            var tagsIsNotExist = postsInfo.Tags == null || !postsInfo.Tags.Any();
+            var posts = _postRepository.Posts.Include(p => p.PostTags)
+                .Where(p => p.Type == postsInfo.Type && 
+                            (tagsIsNotExist ||
+                             p.PostTags.Any(t => postsInfo.Tags.Contains(t.Tag.Name))))
                 .OrderByDescending(p => p.Created)
                 .Select(p => new PostViewData
                 {
@@ -60,14 +63,12 @@ namespace WebBlog.Controllers
             return Ok(new UserPostsViewData
             {
                 Posts = posts
-                    .Skip((currentPage - 1) * ItemsPerPage)
+                    .Skip((postsInfo.CurrentPage - 1) * ItemsPerPage)
                     .Take(ItemsPerPage),
-                
-                isCreator = username == User.Identity.Name,
                 
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = currentPage,
+                    CurrentPage = postsInfo.CurrentPage,
                     TotalItems = totalItems,
                     ItemsPerPage = ItemsPerPage
                 }

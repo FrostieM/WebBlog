@@ -21,7 +21,12 @@
       <img class="float-left" src="assets/img/tag.svg" alt="tag picture">
       <h1 class="ml-5">Tags</h1>
       <div class="tags">
-        <button type="button" class="tag btn mt-2 ml-1 shadow-none text-center" style="background-color: darkorange"><span>tag</span><span class="badge badge-dark ml-2">2</span></button>
+        <button *ngFor="let tag of tags" type="button" class="tag btn mt-2 ml-1 shadow-none text-center"
+                [ngClass]="tag.active ? 'btn-orange' : 'btn-light'"
+                (click)="tagIt(tag)">
+          <span>{{tag.name}}</span>
+          <span class="badge badge-dark ml-2">{{tag.count}}</span>
+        </button>
       </div>
     </div>
 
@@ -37,8 +42,10 @@
   <div class="col-9 bg-light" id="content">
     <main>
       <blog-content-component
+        [isCreator]="isCreator"
         [Type]="currentType"
-        [username]="username">
+        [username]="username"
+        [Tags]="activeTags">
       </blog-content-component>
     </main>
   </div>

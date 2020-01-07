@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using WebBlog.Model.ViewData;
 
 namespace WebBlog.Model.Interfaces.Repositories
 {
@@ -8,5 +10,7 @@ namespace WebBlog.Model.Interfaces.Repositories
 
         void SaveTag(Tag tag);
         void DeleteTag(Tag tag);
+
+        IEnumerable<TagViewData> GetBlogTags(Blog blog, string type);
     }
 }

@@ -28,6 +28,6 @@ export class MenuButtonComponent {
   }
 
   public sendMessageToParent(message: string) {
-    this.messageToEmit.emit(message);
+    if (message != this.currentType) this.messageToEmit.emit(message);
   }
 }
