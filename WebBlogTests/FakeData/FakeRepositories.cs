@@ -21,9 +21,6 @@ namespace WebBlogTests.FakeData
 
         public static IEnumerable<Blog> GetFakeBlogs(IList<User> users)
         {
-            
-            
-            
             return new[]
             {
                 new Blog{Id = 1, User = users[0], Posts = new []

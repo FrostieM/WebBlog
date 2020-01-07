@@ -44,4 +44,7 @@
 
 </div>
 
-<blog-post-form-component *ngIf="isForm" [type]="type" (messageToUpdate)="getPosts()"></blog-post-form-component>
+<blog-post-form-component *ngIf="isForm" [type]="type"
+                          (messageToUpdate)="getPosts()"
+                          (messageToClose)="this.isForm = false">
+</blog-post-form-component>

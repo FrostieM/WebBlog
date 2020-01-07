@@ -15,6 +15,7 @@ export class PostFormComponent{
   @Input() public type: string;
 
   @Output() public messageToUpdate = new EventEmitter();
+  @Output() public messageToClose = new EventEmitter();
 
   public file;
 
@@ -41,8 +42,12 @@ export class PostFormComponent{
     });
   }
 
-  changeFile(file){
+  public changeFile(file){
     this.file = file;
+  }
+
+  public closeForm(){
+    this.messageToClose.emit();
   }
 
 

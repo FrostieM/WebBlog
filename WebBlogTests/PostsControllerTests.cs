@@ -50,7 +50,12 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get("testType", "test0") as ObjectResult;
+            var result = controller.Post(new PostsInfo
+            {
+                Type = "testType",
+                Username = "test0",
+                CurrentPage = 1,
+            }) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -70,7 +75,12 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get("testType", "test1") as ObjectResult;
+            var result = controller.Post(new PostsInfo
+            {
+                Type = "testType",
+                Username = "test1",
+                CurrentPage = 1,
+            }) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
@@ -94,7 +104,13 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
 
-            var result = controller.Get("testType", "test1") as OkObjectResult;
+            var result = controller.Post(new PostsInfo
+            {
+                Type = "testType",
+                Username = "test1",
+                CurrentPage = 1,
+            }) as OkObjectResult;
+            
             Assert.NotNull(result);
 
             var posts = result.Value as UserPostsViewData;
@@ -150,7 +166,8 @@ namespace WebBlogTests
             {
                 Description = "test description",
                 Title = "test title",
-                Type = "test type"
+                Type = "test type",
+                Tags = "test1 test2"
             }) as ObjectResult;
             
             _postRepository.Verify(m =>

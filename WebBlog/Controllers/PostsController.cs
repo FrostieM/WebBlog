@@ -21,7 +21,7 @@ namespace WebBlog.Controllers
         private readonly IPostLikeRepository _postLikeRepository;
         private readonly IBlogRepository _blogRepository;
 
-        public int ItemsPerPage { get; set; } = 8;
+        public int ItemsPerPage { get; set; } = 9;
 
         public PostsController(
             IPostRepository postRepository,
@@ -47,16 +47,9 @@ namespace WebBlog.Controllers
 
             var tagsIsNotExist = postsInfo.Tags == null || !postsInfo.Tags.Any();
             var posts = _postRepository.Posts.Include(p => p.PostTags)
-                .Where(p => p.Type == postsInfo.Type && 
-                            (tagsIsNotExist ||
-                             p.PostTags.Any(t => postsInfo.Tags.Contains(t.Tag.Name))))
-                .OrderByDescending(p => p.Created)
-                .Select(p => new PostViewData
-                {
-                    Post = p,
-                    Likes = p.Likes.Count,
-                    IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, p.Id)
-                }).ToList();
+                .Where(p => p.Type == postsInfo.Type && p.Blog == blog && 
+                            (tagsIsNotExist || p.PostTags.Any(t => postsInfo.Tags.Contains(t.Tag.Name))))
+                .OrderByDescending(p => p.Created);
 
             var totalItems = posts.Count();
             
@@ -64,7 +57,13 @@ namespace WebBlog.Controllers
             {
                 Posts = posts
                     .Skip((postsInfo.CurrentPage - 1) * ItemsPerPage)
-                    .Take(ItemsPerPage),
+                    .Take(ItemsPerPage)
+                    .Select(p => new PostViewData
+                    {
+                        Post = p,
+                        Likes = p.Likes.Count,
+                        IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, p.Id)
+                    }),
                 
                 PagingInfo = new PagingInfo
                 {

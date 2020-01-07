@@ -25,6 +25,7 @@
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
+        <Content Include="ClientApp\src\app\app.component.css" />
         <Content Include="ClientApp\src\app\authentication\login\login.component.css" />
         <Content Include="ClientApp\src\app\customers\customers.component.html" />
         <Content Include="ClientApp\src\app\login\login.component.css" />

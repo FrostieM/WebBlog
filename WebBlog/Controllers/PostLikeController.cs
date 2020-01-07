@@ -43,8 +43,8 @@ namespace WebBlog.Controllers
             
             if (userPost == null) return NotFound("Post not found");
 
-            var postLike = userPost.Likes
-                .FirstOrDefault(l => l.User.Equals(currentUser));
+            var postLike = _postLikeRepository.PostLikes
+                .FirstOrDefault(l => l.User.Equals(currentUser) && l.Post.Equals(userPost));
             
             if (postLike == null) //like is not exist
             {
