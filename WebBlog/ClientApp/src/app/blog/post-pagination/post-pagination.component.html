@@ -1,0 +1,39 @@
+﻿<div *ngIf="pagingInfo.totalPages > 1" class="col-12">
+  <nav aria-label="Page navigation">
+    <ul class="pagination pagination-sm justify-content-center">
+
+      <li><button class="btn rounded-0"
+                  [ngClass]="isCurrentPage(pagingInfo.currentPage, 1) ? 'btn-outline-dark' : 'btn-dark btn-outline-light'"
+                  [disabled]="isCurrentPage(pagingInfo.currentPage, 1)"
+                  (click)="updatePosts(pagingInfo.currentPage - 1)">
+        &#8249; Previous
+      </button></li>
+
+      <li><button *ngIf="!isCurrentPage(1, pages[0])"
+                  class="btn btn-dark btn-outline-light rounded-0"
+                  (click)="updatePosts(1)"> 1 </button></li>
+
+      <li>{{dotsPageLeft(1, pages[0])}}</li>
+
+      <li><button *ngFor="let page of pages"
+                  class="btn rounded-0"
+                  [ngClass]="isCurrentPage(page, pagingInfo.currentPage) ? 'btn-orange' : 'btn-dark btn-outline-light'"
+                  (click)="updatePosts(page)" [disabled]="isCurrentPage(page, pagingInfo.currentPage)">
+        {{page}}
+      </button></li>
+
+      <li>{{dotsPageLeft(pagingInfo.totalPages, pages[pages.length-1])}}</li>
+
+      <li><button *ngIf="!isCurrentPage(pages[pages.length-1], pagingInfo.totalPages)"
+                  class="btn btn-dark btn-outline-light rounded-0"
+                  (click)="updatePosts(pagingInfo.totalPages)">{{pagingInfo.totalPages}}</button></li>
+
+      <li><button class="btn rounded-0"
+                  [ngClass]="isCurrentPage(pagingInfo.currentPage, pagingInfo.totalPages) ? 'btn-outline-dark' : 'btn-dark btn-outline-light'"
+                  [disabled]="isCurrentPage(pagingInfo.currentPage, pagingInfo.totalPages)"
+                  (click)="updatePosts(pagingInfo.currentPage + 1)">
+        Next &#8250;
+      </button></li>
+    </ul>
+  </nav>
+</div>

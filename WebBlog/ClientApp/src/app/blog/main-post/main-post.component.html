@@ -7,6 +7,11 @@
   <img *ngIf="mainPost.post.fileUrl && mainPost.post.type=='image'"
        class="img-fluid" src="{{createFullSrc(mainPost.post.fileUrl)}}" alt="">
 
+  <div *ngIf="mainPost.post.fileUrl && mainPost.post.type=='video'"
+       class="embed-responsive embed-responsive-16by9">
+    <video src="{{createFullSrc(mainPost.post.fileUrl)}}"></video>
+  </div>
+
   <div class="col-auto">
     <p class="description">{{mainPost.post.description}}</p>
   </div>

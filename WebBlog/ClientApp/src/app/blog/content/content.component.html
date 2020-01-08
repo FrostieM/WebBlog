@@ -34,6 +34,7 @@
            *ngFor="let post of userPosts.posts">
 
         <blog-post-card-component
+          [isViewRow]="isViewRow"
           [postViewData]="post"
           [isCreator]="isCreator"
           (messageToUpdate)="getPosts()">
@@ -42,46 +43,11 @@
       </div>
   </div>
 
-  <div *ngIf="userPosts" class="row mt-5">
-    <div *ngIf="userPosts.pagingInfo.totalPages > 2" class="col-12">
-      <nav aria-label="Page navigation">
-        <ul class="pagination pagination-sm justify-content-center">
-
-          <li><button class="btn rounded-0"
-                      [ngClass]="isCurrentPage(userPosts.pagingInfo.currentPage, 1) ? 'btn-outline-dark' : 'btn-dark btn-outline-light'"
-                      [disabled]="isCurrentPage(userPosts.pagingInfo.currentPage, 1)"
-                      (click)="getPosts(this.userPosts.pagingInfo.currentPage - 1)">
-            &#8249; Previous
-          </button></li>
-
-          <li><button *ngIf="!isCurrentPage(1, pages[0])"
-                      class="btn btn-dark btn-outline-light rounded-0"
-                      (click)="getPosts(1)"> 1 </button></li>
-
-          <li>{{dotsPageLeft(1, pages[0])}}</li>
-
-          <li><button *ngFor="let page of pages"
-                      class="btn rounded-0"
-                      [ngClass]="isCurrentPage(page, userPosts.pagingInfo.currentPage) ? 'btn-orange' : 'btn-dark btn-outline-light'"
-                      (click)="getPosts(page)" [disabled]="isCurrentPage(page, userPosts.pagingInfo.currentPage)">
-            {{page}}
-          </button></li>
-
-          <li>{{dotsPageLeft(userPosts.pagingInfo.totalPages, pages[pages.length-1])}}</li>
-
-          <li><button *ngIf="!isCurrentPage(pages[pages.length-1], userPosts.pagingInfo.totalPages)"
-                      class="btn btn-dark btn-outline-light rounded-0"
-                      (click)="getPosts(userPosts.pagingInfo.totalPages)">{{userPosts.pagingInfo.totalPages}}</button></li>
-
-          <li><button class="btn rounded-0"
-                      [ngClass]="isCurrentPage(userPosts.pagingInfo.currentPage, userPosts.pagingInfo.totalPages) ? 'btn-outline-dark' : 'btn-dark btn-outline-light'"
-                      [disabled]="isCurrentPage(userPosts.pagingInfo.currentPage, userPosts.pagingInfo.totalPages)"
-                      (click)="getPosts(this.userPosts.pagingInfo.currentPage + 1)">
-            Next &#8250;
-          </button></li>
-        </ul>
-      </nav>
-    </div>
+  <div *ngIf="userPosts" class="mt-5">
+    <blog-post-pagination-component
+      [PagingInfo]="userPosts.pagingInfo"
+      (messageToUpdate)="getPosts($event)">
+    </blog-post-pagination-component>
   </div>
 
 </div>

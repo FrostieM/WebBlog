@@ -21,9 +21,6 @@ export class ContentComponent{
   public userPosts: UserPostsViewDataInterface;
   public mainPost: PostViewDataInterface;
 
-  public pages: number[];
-
-  private pageRange: number = 2;
   private type: string;
   @Input()  public set Type(type: string){
     this.type = type;
@@ -54,25 +51,8 @@ export class ContentComponent{
     }).toPromise().then(response => {
      this.userPosts = response;
      this.mainPost = this.userPosts.posts.shift();
-     this.pages = this.range(this.userPosts.pagingInfo.currentPage - this.pageRange, this.userPosts.pagingInfo.currentPage + this.pageRange)
-       .filter(p => p > 0 && p <= this.userPosts.pagingInfo.totalPages);
     }, err => {
       console.log(err)
     });
-    console.log(this.pages);
   }
-
-  public isCurrentPage(currentPage: number, page: number){
-    return currentPage == page;
-  }
-
-  public range(start: number, end: number, length: number = end - start + 1){
-    return Array.from({length}, (_, i) => start + i);
-  }
-
-  public dotsPageLeft(itemPage: number, currentPage: number){
-    let dotsLength = Math.abs(itemPage - currentPage);
-    return ".".repeat(dotsLength < 5 ? dotsLength : 5);
-  }
-
 }

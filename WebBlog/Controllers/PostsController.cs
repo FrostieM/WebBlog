@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,10 +84,10 @@ namespace WebBlog.Controllers
             var blog = _blogRepository.Blogs.FirstOrDefault(b => b.User.UserName == User.Identity.Name);
             if (blog == null) return NotFound("User not found");
 
-            var fileUrl = "";
+            string fileUrl = null;
             if (postForm.Type == "image" || postForm.Type == "video")
             {
-                fileUrl = AddFile(postForm.File);
+                fileUrl = AddFile(postForm.File, User.Identity.Name);
                 if (fileUrl == null) return StatusCode(500, "File upload failed");
             }
             
@@ -127,16 +126,22 @@ namespace WebBlog.Controllers
             return Ok("deleted");
         }
 
-        private static string AddFile(IFormFile file)
+        private static string AddFile(IFormFile file, string username)
         {
-            var folderName = Path.Combine("Resources", "Images");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
             if (file.Length <= 0) return null;
             
-            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var fullPath = Path.Combine(pathToSave, fileName);
-            var dbPath = Path.Combine(folderName, fileName);
+            var fileType = file.ContentType.Split("/");
+            
+            var userDir = Path.Combine("Resources", username);
+            var fileTypeDir = Path.Combine(userDir, fileType[0]);
+            var dirPath = Path.Combine(Directory.GetCurrentDirectory(), fileTypeDir);
+            
+            if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+
+            var fileName = Guid.NewGuid().ToString() + "." + fileType[1];
+            
+            var fullPath = Path.Combine(dirPath, fileName);
+            var dbPath = Path.Combine(fileTypeDir, fileName);
 
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {

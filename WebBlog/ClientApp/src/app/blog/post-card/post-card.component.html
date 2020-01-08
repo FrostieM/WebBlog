@@ -1,14 +1,18 @@
 ﻿<!-- post card-->
-<div class="{{ postViewData.post.type }} card flex-row flex-wrap p-0 mt-5 bg-dark text-light">
+<div class="{{ postViewData.post.type }} card p-0 mt-5 bg-dark text-light">
   <div *ngIf="postViewData.post.type=='image' || postViewData.post.type=='video'" class="col-auto card-header border-0 p-0 m-0"
        onclick="">
 
     <img *ngIf="postViewData.post.type=='image'" src="{{createFullSrc(postViewData.post.fileUrl)}}" class="img-fluid" alt="image name">
 
-    <div *ngIf="postViewData.post.type=='video'">
-      <img class="position-absolute" src="assets/img/video_icon.png" alt="" style="margin-top:25%;margin-left:-30px;">
-      <img class="position-absolute" src="assets/img/video_play_icon.png" alt="" style="margin-top: 30%;margin-left: 40%;">
-      <img class="w-100" src="assets/img/video_bg_1.png" alt="bg color">
+    <div *ngIf="postViewData.post.type=='video'" class="col-auto m-0 p-0">
+      <img class="position-absolute video-icon" src="assets/img/video_icon.png" alt="video icon">
+      <img class="position-absolute" [ngClass]="isViewRow? 'video-play-row' : 'video-play-col'"
+           src="assets/img/video_play_icon.png" alt="video play">
+      <img class="w-100"
+           [ngClass]="isViewRow ? null : 'video-bg-col'"
+           [src]="'assets/img/video_bg/' + this.video_bg + '.jpg'"
+           alt="bg color">
     </div>
   </div>
 
@@ -35,6 +39,6 @@
   </div>
   <!-- block card content ends-->
 
-  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary">Show</button>
+  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary rounded-0">Show</button>
 </div>
 <!-- post card ends-->

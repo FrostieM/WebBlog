@@ -27,6 +27,7 @@
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\app.component.css" />
         <Content Include="ClientApp\src\app\authentication\login\login.component.css" />
+        <Content Include="ClientApp\src\app\blog\post-card\post-card.component.css" />
         <Content Include="ClientApp\src\app\customers\customers.component.html" />
         <Content Include="ClientApp\src\app\login\login.component.css" />
         <Content Include="ClientApp\src\app\login\login.component.html" />
@@ -36,23 +37,47 @@
         </Content>
         <Content Include="ClientApp\src\assets\img\abstrakciya_chernyy_raznocvetnyy_krivaya_483_1920x1080.jpg" />
         <Content Include="ClientApp\src\assets\img\article.svg" />
+        <Content Include="ClientApp\src\assets\img\article.svg" />
         <Content Include="ClientApp\src\assets\img\cols_view.svg" />
+        <Content Include="ClientApp\src\assets\img\cols_view.svg" />
+        <Content Include="ClientApp\src\assets\img\facebook.svg" />
         <Content Include="ClientApp\src\assets\img\facebook.svg" />
         <Content Include="ClientApp\src\assets\img\fox.png" />
         <Content Include="ClientApp\src\assets\img\google.svg" />
+        <Content Include="ClientApp\src\assets\img\google.svg" />
+        <Content Include="ClientApp\src\assets\img\history.svg" />
         <Content Include="ClientApp\src\assets\img\history.svg" />
         <Content Include="ClientApp\src\assets\img\house.svg" />
+        <Content Include="ClientApp\src\assets\img\house.svg" />
+        <Content Include="ClientApp\src\assets\img\image.svg" />
         <Content Include="ClientApp\src\assets\img\image.svg" />
         <Content Include="ClientApp\src\assets\img\like.svg" />
+        <Content Include="ClientApp\src\assets\img\like.svg" />
+        <Content Include="ClientApp\src\assets\img\logo.svg" />
         <Content Include="ClientApp\src\assets\img\logo.svg" />
         <Content Include="ClientApp\src\assets\img\p.svg" />
+        <Content Include="ClientApp\src\assets\img\p.svg" />
+        <Content Include="ClientApp\src\assets\img\photo-1557682224-5b8590cd9ec5.jpg" />
         <Content Include="ClientApp\src\assets\img\rows_view.svg" />
+        <Content Include="ClientApp\src\assets\img\rows_view.svg" />
+        <Content Include="ClientApp\src\assets\img\tag.svg" />
         <Content Include="ClientApp\src\assets\img\tag.svg" />
         <Content Include="ClientApp\src\assets\img\tape.svg" />
         <Content Include="ClientApp\src\assets\img\twitter.svg" />
+        <Content Include="ClientApp\src\assets\img\twitter.svg" />
+        <Content Include="ClientApp\src\assets\img\video.svg" />
+        <Content Include="ClientApp\src\assets\img\video_bg1.jpg" />
+        <Content Include="ClientApp\src\assets\img\video_bg\458169.jpg" />
+        <Content Include="ClientApp\src\assets\img\video_bg\Solid-Color-Wallpaper-HD-For-Desktop.jpg" />
+        <Content Include="ClientApp\src\assets\img\video_bg\Solid-color-wallpapers-04-1920x1200.jpg" />
+        <Content Include="ClientApp\src\assets\img\video_bg\video_bg1.jpg" />
+        <Content Include="ClientApp\src\assets\img\video_bg_1.png" />
         <Content Include="ClientApp\src\assets\img\video_bg_1.png" />
         <Content Include="ClientApp\src\assets\img\video_bg_2.png" />
+        <Content Include="ClientApp\src\assets\img\video_bg_2.png" />
         <Content Include="ClientApp\src\assets\img\video_icon.png" />
+        <Content Include="ClientApp\src\assets\img\video_icon.png" />
+        <Content Include="ClientApp\src\assets\img\video_play_icon.png" />
         <Content Include="ClientApp\src\assets\img\video_play_icon.png" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
@@ -71,6 +96,8 @@
         <None Include="ClientApp\src\app\blog\menu-button\login.component.html" />
         <None Include="ClientApp\src\app\blog\post-card\post-info.component.html" />
         <None Include="ClientApp\src\app\blog\post-info\content.component.html" />
+        <None Include="ClientApp\src\app\blog\post-pagination\content.component.html" />
+        <None Include="ClientApp\src\app\blog\post-pagination\content.component.ts" />
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\post\customers.component.html" />
@@ -106,7 +133,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resources\Images" />
+      <Folder Include="Resources" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
