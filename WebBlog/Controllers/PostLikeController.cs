@@ -37,9 +37,7 @@ namespace WebBlog.Controllers
             if (currentUser == null) return NotFound("User not found");
 
             var userPost = _postRepository.Posts
-                .Include(u => u.Likes)
-                .FirstOrDefault(p => 
-                    p.Id == postId);
+                .FirstOrDefault(p => p.Id == postId);
             
             if (userPost == null) return NotFound("Post not found");
 
@@ -51,7 +49,7 @@ namespace WebBlog.Controllers
                 _postLikeRepository.SavePostLikes(new PostLike 
                 {
                     Post = userPost, 
-                    User = _userRepository.Users.First(u => u.UserName == User.Identity.Name)
+                    User = currentUser
                 });
             }
             else //unlike post

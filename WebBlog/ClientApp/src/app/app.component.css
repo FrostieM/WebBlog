@@ -5,3 +5,7 @@
 ::ng-deep .btn-crimson{
   background-color: crimson;
 }
+
+::ng-deep .btn-orange:disabled{
+  opacity: 1;
+}
