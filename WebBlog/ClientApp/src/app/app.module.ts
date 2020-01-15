@@ -13,7 +13,6 @@ import {BlogModule} from "./blog/blog.module";
 import {JwtModule} from "@auth0/angular-jwt";
 import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
 
-
 @NgModule({
   declarations: [
     AppComponent

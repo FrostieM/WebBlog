@@ -1,8 +1,8 @@
 ﻿import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Component, Inject, Input} from '@angular/core';
 import { Router } from "@angular/router";
-import {UserPostsViewDataInterface} from "../../shared/interfaces/userPostsViewData.interface";
-import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interface";
+import {IUserPostsViewData} from "../../shared/interfaces/userPostsViewData.interface";
+import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 
 @Component({
   selector: 'blog-content-component',
@@ -18,8 +18,8 @@ export class ContentComponent{
 
   public isViewRow: boolean = false;
   public isForm: boolean;
-  public userPosts: UserPostsViewDataInterface;
-  public mainPost: PostViewDataInterface;
+  public userPosts: IUserPostsViewData;
+  public mainPost: IPostViewData;
 
   private type: string;
   @Input()  public set Type(type: string){
@@ -38,12 +38,12 @@ export class ContentComponent{
               @Inject("BASE_URL") private baseUrl: string) {
   }
 
-  getPosts(page: number = 1) {
+  public getPosts(page: number = 1) {
     this.isForm = false;
 
     let obj = JSON.stringify({type: this.type, username: this.username, tags: this.tags, currentPage: page});
 
-    this.http.post<UserPostsViewDataInterface>(this.baseUrl + "api/posts/", obj , {
+    this.http.post<IUserPostsViewData>(this.baseUrl + "api/posts/", obj , {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
@@ -54,5 +54,12 @@ export class ContentComponent{
     }, err => {
       console.log(err)
     });
+  }
+
+  public changePosts(postViewData: IPostViewData){
+    this.userPosts.posts = this.userPosts.posts.filter(p => p.post.id != postViewData.post.id);
+    this.userPosts.posts.unshift(Object.assign({}, this.mainPost));
+
+    this.mainPost = postViewData;
   }
 }

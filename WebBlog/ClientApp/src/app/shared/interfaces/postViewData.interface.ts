@@ -1,7 +1,7 @@
-﻿import {PostInterface} from "./post.interface";
+﻿import {IPost} from "./post.interface";
 
-export interface PostViewDataInterface {
-  post: PostInterface;
+export interface IPostViewData {
+  post: IPost;
   likes: number;
   isLiked: boolean;
 }

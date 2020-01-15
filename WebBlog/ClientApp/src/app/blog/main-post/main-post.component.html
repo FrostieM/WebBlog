@@ -9,7 +9,7 @@
 
   <div *ngIf="mainPost.post.fileUrl && mainPost.post.type=='video'"
        class="embed-responsive embed-responsive-16by9">
-    <video src="{{createFullSrc(mainPost.post.fileUrl)}}"></video>
+    <video src="{{createFullSrc(mainPost.post.fileUrl)}}" controls="controls"></video>
   </div>
 
   <div class="col-auto">

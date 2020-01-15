@@ -37,6 +37,7 @@
           [isViewRow]="isViewRow"
           [postViewData]="post"
           [isCreator]="isCreator"
+          (messageToChangePost)="changePosts($event)"
           (messageToUpdate)="getPosts()">
         </blog-post-card-component>
 

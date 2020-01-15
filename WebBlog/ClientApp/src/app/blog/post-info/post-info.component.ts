@@ -1,7 +1,7 @@
 ﻿import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interface";
+import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 
 @Component({
   selector: 'blog-post-info-component',
@@ -13,7 +13,7 @@ import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interf
 export class PostInfoComponent {
 
   @Input() public isCreator: boolean;
-  @Input() public postViewData: PostViewDataInterface;
+  @Input() public postViewData: IPostViewData;
   @Output() public messageToUpdate = new EventEmitter();
 
 
@@ -40,7 +40,7 @@ export class PostInfoComponent {
 
   public likePost(id: number){
     let params = new HttpParams().set("postId", id.toString());
-    this.http.get<PostViewDataInterface>(this.baseUrl + "api/postLike", {
+    this.http.get<IPostViewData>(this.baseUrl + "api/postLike", {
       params: params
     }).subscribe(response => {
       this.postViewData.isLiked = response.isLiked;

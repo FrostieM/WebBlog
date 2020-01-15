@@ -112,7 +112,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test2", "User")
             };
             
-            var result = controller.Get(1) as ObjectResult;
+            var result = controller.Get(3) as ObjectResult;
             
             _postLikeRepository.Verify(m => 
                 m.SavePostLikes(It.IsAny<PostLike>()), Times.Once);

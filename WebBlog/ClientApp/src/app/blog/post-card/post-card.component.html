@@ -3,9 +3,12 @@
   <div *ngIf="postViewData.post.type=='image' || postViewData.post.type=='video'" class="col-auto card-header border-0 p-0 m-0"
        onclick="">
 
-    <img *ngIf="postViewData.post.type=='image'" src="{{createFullSrc(postViewData.post.fileUrl)}}" class="img-fluid" alt="image name">
+    <img *ngIf="postViewData.post.type=='image'"
+         src="{{createFullSrc(postViewData.post.fileUrl)}}" class="img-fluid" alt="image name"
+         (click)="changePost()">
 
-    <div *ngIf="postViewData.post.type=='video'" class="col-auto m-0 p-0">
+    <div *ngIf="postViewData.post.type=='video'" class="col-auto m-0 p-0"
+         (click)="changePost()">
       <img class="position-absolute video-icon" src="assets/img/video_icon.png" alt="video icon">
       <img class="position-absolute" [ngClass]="isViewRow? 'video-play-row' : 'video-play-col'"
            src="assets/img/video_play_icon.png" alt="video play">
@@ -39,6 +42,7 @@
   </div>
   <!-- block card content ends-->
 
-  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary rounded-0">Show</button>
+  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary rounded-0"
+          (click)="changePost()">Show</button>
 </div>
 <!-- post card ends-->

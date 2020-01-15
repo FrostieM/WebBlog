@@ -1,4 +1,4 @@
-﻿export interface PagingInfoInterface {
+﻿export interface IPagingInfo {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;

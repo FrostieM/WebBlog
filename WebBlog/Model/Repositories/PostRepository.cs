@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using WebBlog.Model.Interfaces.Repositories;
 
@@ -30,6 +31,11 @@ namespace WebBlog.Model.Repositories
 
         public void DeletePost(Post post)
         {
+            if (post.FileUrl != null)
+            {
+                File.Delete(Path.Combine(Directory.GetCurrentDirectory(), post.FileUrl));
+            }
+            
             _context.Posts.Remove(post);
             _context.SaveChanges();
         }

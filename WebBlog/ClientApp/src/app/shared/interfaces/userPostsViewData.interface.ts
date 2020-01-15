@@ -1,7 +1,7 @@
-﻿import {PostViewDataInterface} from "./postViewData.interface";
-import {PagingInfoInterface} from "./pagingInfo.interface";
+﻿import {IPagingInfo} from "./pagingInfo.interface";
+import {IPostViewData} from "./postViewData.interface";
 
-export interface UserPostsViewDataInterface {
-  posts: Array<PostViewDataInterface>;
-  pagingInfo: PagingInfoInterface;
+export interface IUserPostsViewData {
+  posts: Array<IPostViewData>;
+  pagingInfo: IPagingInfo;
 }

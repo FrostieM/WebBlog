@@ -1,7 +1,7 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interface";
+import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 
 @Component({
   selector: 'blog-main-post-component',
@@ -12,7 +12,7 @@ import {PostViewDataInterface} from "../../shared/interfaces/postViewData.interf
 })
 export class MainPostComponent {
 
-  @Input() mainPost: PostViewDataInterface;
+  @Input() mainPost: IPostViewData;
   @Input() isCreator: boolean;
 
   @Output() public messageToUpdate = new EventEmitter();

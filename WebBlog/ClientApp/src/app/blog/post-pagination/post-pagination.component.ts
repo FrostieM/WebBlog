@@ -1,7 +1,7 @@
 ﻿import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {PagingInfoInterface} from "../../shared/interfaces/pagingInfo.interface";
+import {IPagingInfo} from "../../shared/interfaces/pagingInfo.interface";
 
 @Component({
   selector: 'blog-post-pagination-component',
@@ -17,8 +17,8 @@ export class PostPaginationComponent{
   public pages: number[];
   private pageRange: number = 2;
 
-  private pagingInfo: PagingInfoInterface;
-  @Input() set PagingInfo(pagingInfo: PagingInfoInterface){
+  private pagingInfo: IPagingInfo;
+  @Input() set PagingInfo(pagingInfo: IPagingInfo){
     this.pagingInfo = pagingInfo;
     this.pages = this.range(this.pagingInfo.currentPage - this.pageRange, this.pagingInfo.currentPage + this.pageRange)
       .filter(p => p > 0 && p <= this.pagingInfo.totalPages);
