@@ -8,7 +8,7 @@
   </div>
 
   <div class="row mt-1">
-    <button *ngIf="isCreator" class="col-auto btn btn-dark ml-3" (click)="isForm=true">Add post</button>
+    <button *ngIf="isCreator && type" class="col-auto btn btn-dark ml-3" (click)="isForm=true">Add post</button>
 
     <div class="col-auto ml-auto">
       <span>Change view: </span>
@@ -57,3 +57,4 @@
                           (messageToUpdate)="getPosts()"
                           (messageToClose)="this.isForm = false">
 </blog-post-form-component>
+

@@ -44,18 +44,24 @@ export class BlogComponent implements OnInit{
   }
 
   public getTags(){
-    let params = new HttpParams().set("type", this.currentType);
+    let params = new HttpParams();
+    if (this.currentType != "home")
+      params = params.set("type", this.currentType);
+
     this.http.get<TagViewData[]>(this.baseUrl + "api/postTags/" + this.username, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       }),
       params: params
-    }).subscribe(response => this.tags = response,
+    }).subscribe(response => {
+        this.tags = response;
+    },
         error => console.log(error));
   }
 
   public setType(type: string){
     this.currentType = type;
+
     this.getTags();
   }
 

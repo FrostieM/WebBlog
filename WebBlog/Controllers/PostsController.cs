@@ -46,7 +46,8 @@ namespace WebBlog.Controllers
 
             var tagsIsNotExist = postsInfo.Tags == null || !postsInfo.Tags.Any();
             var posts = _postRepository.Posts.Include(p => p.PostTags)
-                .Where(p => p.Type == postsInfo.Type && p.Blog == blog && 
+                .Where(p => (postsInfo.Type == null || p.Type == postsInfo.Type) &&
+                            p.Blog == blog && 
                             (tagsIsNotExist || p.PostTags.Any(t => postsInfo.Tags.Contains(t.Tag.Name))))
                 .OrderByDescending(p => p.Created);
 

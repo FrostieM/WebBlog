@@ -40,6 +40,7 @@ export class PostInfoComponent {
 
   public likePost(id: number){
     let params = new HttpParams().set("postId", id.toString());
+    this.postViewData.isLiked = !this.postViewData.isLiked;
     this.http.get<IPostViewData>(this.baseUrl + "api/postLike", {
       params: params
     }).subscribe(response => {

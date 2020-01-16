@@ -32,7 +32,7 @@ namespace WebBlog.Model.Repositories
         public IEnumerable<TagViewData> GetBlogTags(Blog blog, string type)
         {
             return _context.PostTags
-                .Where(p => p.Post.Blog == blog && p.Post.Type == type)
+                .Where(p => p.Post.Blog == blog && (type==null || p.Post.Type == type))
                 .GroupBy(p => p.Tag.Name)
                 .Select(t => new TagViewData{Name = t.Key, Count = t.Count()});
         }

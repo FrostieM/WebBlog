@@ -21,15 +21,17 @@ export class PostCardComponent implements OnInit{
   @Output() public messageToChangePost = new EventEmitter();
 
   private video_bg: string = "1";
+
   public get SubDescription(){
-    return this.postViewData.post.description.substring(0, 100);
+    return this.postViewData.post.description.substring(0, 270);
   }
+
   constructor(private router: Router,
               private http: HttpClient,
               @Inject("BASE_URL") private baseUrl: string) {}
 
   ngOnInit(): void {
-    this.video_bg = this.randomItem(['1', '2', '3', '4']);
+    this.video_bg = this.randomItem(['1', '2', '3', '4']); //random video background in assets/img/video_bg
   }
 
   public updatePosts(){

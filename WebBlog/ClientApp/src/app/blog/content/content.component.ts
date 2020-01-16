@@ -23,7 +23,8 @@ export class ContentComponent{
 
   private type: string;
   @Input()  public set Type(type: string){
-    this.type = type;
+    this.type = type == "home" ? null : type;
+    this.tags = null;
     this.getPosts(1);
   };
 
