@@ -1,7 +1,8 @@
-﻿import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+﻿import {HttpParams} from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
 import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
+import {ServerService} from "../../shared/services/server.service";
 
 @Component({
   selector: 'blog-post-info-component',
@@ -18,20 +19,15 @@ export class PostInfoComponent {
 
 
   constructor(private router: Router,
-              private http: HttpClient,
-              @Inject("BASE_URL") private baseUrl: string) {
+              @Inject("BASE_URL") private baseUrl: string,
+              private serverService: ServerService) {
 
   }
 
   public deletePost(id: number){
     let params = new HttpParams().set("id", id.toString());
-    this.http.get<any>(this.baseUrl + "api/posts/deletePost", {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-      params: params,
-      responseType: 'text' as 'json'
-    }).subscribe(() => {
+
+    this.serverService.deletePost(params).subscribe(() => {
       this.messageToUpdate.emit();
     }, err => {
       console.log(err)
@@ -41,9 +37,8 @@ export class PostInfoComponent {
   public likePost(id: number){
     let params = new HttpParams().set("postId", id.toString());
     this.postViewData.isLiked = !this.postViewData.isLiked;
-    this.http.get<IPostViewData>(this.baseUrl + "api/postLike", {
-      params: params
-    }).subscribe(response => {
+
+    this.serverService.getPost(params).subscribe(response => {
       this.postViewData.isLiked = response.isLiked;
       this.postViewData.likes = response.likes;
     }, error =>

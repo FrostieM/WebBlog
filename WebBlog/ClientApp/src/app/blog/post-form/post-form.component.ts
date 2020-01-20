@@ -1,7 +1,7 @@
-﻿import {HttpClient} from '@angular/common/http';
-import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
+﻿import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {ServerService} from "../../shared/services/server.service";
 
 @Component({
   selector: 'blog-post-form-component',
@@ -20,8 +20,8 @@ export class PostFormComponent{
   public file;
 
   constructor(private router: Router,
-              private http: HttpClient,
-              @Inject("BASE_URL") private baseUrl: string) {
+              @Inject("BASE_URL") private baseUrl: string,
+              private serverService: ServerService) {
   }
 
   setPosts(ngForm: NgForm) {
@@ -33,9 +33,7 @@ export class PostFormComponent{
 
     formData.append("file", this.file);
 
-    this.http.post<any>(this.baseUrl + "api/posts/savePost", formData, {
-      responseType: "text" as "json"
-    }).subscribe(() => {
+    this.serverService.savePost(formData).subscribe(() => {
       this.messageToUpdate.emit();
     }, err => {
       console.log(err)

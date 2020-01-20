@@ -8,6 +8,7 @@ import {LoginComponent} from "./login/login.component";
 import {RegistrationComponent} from "./registration/registration.component";
 
 import {RoleGuard} from "../shared/services/guards/role-guard.service";
+import {AuthService} from "../shared/services/auth.service";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {RoleGuard} from "../shared/services/guards/role-guard.service";
         },
       ])
     ],
-  providers: [RoleGuard],
+  providers: [RoleGuard, AuthService],
   exports: []
 })
 export class AuthModule { }

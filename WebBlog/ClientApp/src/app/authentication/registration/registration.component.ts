@@ -1,8 +1,9 @@
-﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Component, Inject} from '@angular/core';
+﻿import {Component, Inject} from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TokenHelpers} from "../../shared/services/helpers/token-helper.service";
+import {TokenService} from "../../shared/services/token.service";
+import {AuthService} from "../../shared/services/auth.service";
+
 
 @Component({
   selector: 'auth-registration-component',
@@ -16,9 +17,10 @@ export class RegistrationComponent {
   signUpForm: FormGroup;
 
   constructor(private router: Router,
-              private http: HttpClient,
               private fb: FormBuilder,
-              @Inject("BASE_URL") private baseUrl: string) {
+              @Inject("BASE_URL") private baseUrl: string,
+              private tokenService: TokenService,
+              private authService: AuthService) {
 
     this.signUpForm = fb.group({
       username: new FormControl("", [
@@ -49,14 +51,11 @@ export class RegistrationComponent {
 
   public registration(){
     let credentials = JSON.stringify(this.signUpForm.value);
-    this.http.post<any>(this.baseUrl + "api/auth/signUp", credentials, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    }).subscribe(response => {
-      TokenHelpers.TOKEN = response.token;
+
+    this.authService.registration(credentials).subscribe(response => {
+      this.tokenService.addToken(response.token);
       this.invalidSignUp = false;
-      this.router.navigate(["/" + TokenHelpers.TOKEN_USERNAME]).then(() => {});
+      this.router.navigate(["/" + this.tokenService.Username]).then(() => {});
     }, () => {
       this.invalidSignUp = true;
     });

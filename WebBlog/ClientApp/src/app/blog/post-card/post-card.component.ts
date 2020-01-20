@@ -14,11 +14,15 @@ import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 export class PostCardComponent implements OnInit{
 
   @Input() public postViewData: IPostViewData;
+  @Input() public mainPost: IPostViewData;
+
   @Input() public isCreator: boolean = false;
   @Input() public isViewRow: boolean = false;
 
   @Output() public messageToUpdate = new EventEmitter();
-  @Output() public messageToChangePost = new EventEmitter();
+
+  @Output() public postViewDataChange = new EventEmitter();
+  @Output() public mainPostChange = new EventEmitter();
 
   private video_bg: string = "1";
 
@@ -47,6 +51,8 @@ export class PostCardComponent implements OnInit{
   }
 
   public changePost(){
-    this.messageToChangePost.emit(this.postViewData);
+    [this.postViewData, this.mainPost] = [this.mainPost, this.postViewData];
+    this.postViewDataChange.emit(this.postViewData);
+    this.mainPostChange.emit(this.mainPost);
   }
 }

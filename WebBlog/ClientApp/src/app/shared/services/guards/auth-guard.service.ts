@@ -2,13 +2,16 @@
 
 import { CanActivate, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {TokenHelpers} from "../helpers/token-helper.service";
+import {TokenService} from "../token.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtHelper: JwtHelperService, private router: Router) {}
+  constructor(private jwtHelper: JwtHelperService,
+              private router: Router,
+              private tokenService: TokenService) {}
+
   canActivate() {
-    if (TokenHelpers.IS_TOKEN_CORRECT){
+    if (this.tokenService.IsTokenCorrect){
       return true;
     }
 

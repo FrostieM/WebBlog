@@ -109,10 +109,13 @@
         <None Include="ClientApp\src\app\shared\interfaces\postViewData.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\tagViewData.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\userPostsViewData.interface.ts" />
+        <None Include="ClientApp\src\app\shared\services\auth.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\auth-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\guards\role-guard.service.ts" />
         <None Include="ClientApp\src\app\shared\services\helpers\token.helpers.ts" />
+        <None Include="ClientApp\src\app\shared\services\server.service.ts" />
+        <None Include="ClientApp\src\app\shared\services\token-helper.service.ts" />
         <None Include="ClientApp\src\assets\css\blog.css" />
         <None Include="ClientApp\src\assets\img\logo.png" />
     </ItemGroup>

@@ -13,6 +13,7 @@ import {PostCardComponent} from "./post-card/post-card.component";
 import {MainPostComponent} from "./main-post/main-post.component";
 import {PostFormComponent} from "./post-form/post-form.component";
 import {PostPaginationComponent} from "./post-pagination/post-pagination.component";
+import {ServerService} from "../shared/services/server.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {PostPaginationComponent} from "./post-pagination/post-pagination.compone
     FormsModule
   ],
 
-  providers: [AuthGuard],
+  providers: [AuthGuard, ServerService],
   exports: []
 })
 export class BlogModule { }

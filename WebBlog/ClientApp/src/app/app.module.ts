@@ -10,8 +10,8 @@ import {AuthModule} from "./authentication/auth.module";
 
 import {BlogModule} from "./blog/blog.module";
 
-import {JwtModule} from "@auth0/angular-jwt";
-import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
+import {JwtHelperService, JwtModule} from "@auth0/angular-jwt";
+import {TokenService} from "./shared/services/token.service";
 
 @NgModule({
   declarations: [
@@ -32,11 +32,11 @@ import {TokenHelpers} from "./shared/services/helpers/token-helper.service";
       }
     })
   ],
-  providers: [],
+  providers: [TokenService, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
 export function tokenGetter() {
-  return TokenHelpers.TOKEN;
+  return new TokenService().Token;
 }

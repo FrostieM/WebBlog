@@ -1,9 +1,10 @@
 ﻿import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {TokenHelpers} from "../shared/services/helpers/token-helper.service";
 import {TagViewData} from "../shared/classes/tagViewData.class";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {TokenService} from "../shared/services/token.service";
+import {ServerService} from "../shared/services/server.service";
+import {HttpParams} from "@angular/common/http";
 
 
 @Component({
@@ -29,17 +30,18 @@ export class BlogComponent implements OnInit{
   constructor(private jwtHelper: JwtHelperService,
               private router: Router,
               private activateRoute: ActivatedRoute,
-              private http: HttpClient,
-              @Inject("BASE_URL") private baseUrl: string
+              @Inject("BASE_URL") private baseUrl: string,
+              private tokenService: TokenService,
+              private serverService: ServerService
               ) {}
 
   ngOnInit(): void {
     this.currentType = "article";
     this.username = this.activateRoute.snapshot.paramMap.get('username');
 
-    if (!this.username) this.router.navigateByUrl("" + TokenHelpers.TOKEN_USERNAME).then(() => {});//if url was blank use username in token and go to it
+    if (!this.username) this.router.navigateByUrl("" + this.tokenService.Username).then(() => {});//if url was blank use username in token and go to it
 
-    this.isCreator = this.username == TokenHelpers.TOKEN_USERNAME;
+    this.isCreator = this.username == this.tokenService.Username;
     this.getTags();
   }
 
@@ -48,15 +50,9 @@ export class BlogComponent implements OnInit{
     if (this.currentType != "home")
       params = params.set("type", this.currentType);
 
-    this.http.get<TagViewData[]>(this.baseUrl + "api/postTags/" + this.username, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      }),
-      params: params
-    }).subscribe(response => {
+    this.serverService.getTags(this.username, params).subscribe(response => {
         this.tags = response;
-    },
-        error => console.log(error));
+    }, error => console.log(error));
   }
 
   public setType(type: string){
@@ -66,7 +62,7 @@ export class BlogComponent implements OnInit{
   }
 
   public logOut() {
-    TokenHelpers.removeToken();
+    this.tokenService.removeToken();
     this.router.navigateByUrl("").then(() => {} );
   }
 
