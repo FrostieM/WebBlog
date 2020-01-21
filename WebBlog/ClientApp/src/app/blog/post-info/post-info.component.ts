@@ -45,16 +45,4 @@ export class PostInfoComponent {
       console.log(error));
   }
 
-  getDatePost(){
-    let postDate = Date.parse(this.postViewData.post.created);
-    let today = Date.now();
-
-    const oneDay = 24 * 60 * 60 * 1000;
-
-    let daysLeft = Math.round(Math.abs((postDate - today) / oneDay));
-
-    if (daysLeft == 0) return "today";
-    if (daysLeft == 1) return "yesterday";
-    return daysLeft + " days ago";
-  }
 }

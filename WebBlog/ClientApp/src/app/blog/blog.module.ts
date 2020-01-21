@@ -3,8 +3,6 @@ import { RouterModule } from '@angular/router';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
-import {AuthGuard} from "../shared/services/guards/auth-guard.service";
-
 import {BlogComponent} from "./blog.component";
 import {MenuButtonComponent} from "./menu-button/menu-button.component";
 import {PostInfoComponent} from "./post-info/post-info.component";
@@ -14,6 +12,8 @@ import {MainPostComponent} from "./main-post/main-post.component";
 import {PostFormComponent} from "./post-form/post-form.component";
 import {PostPaginationComponent} from "./post-pagination/post-pagination.component";
 import {ServerService} from "../shared/services/server.service";
+import {AuthGuard} from "../shared/guards/auth.guard";
+import {CreatedPipe} from "../shared/pipes/created.pipe";
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import {ServerService} from "../shared/services/server.service";
     MainPostComponent,
     PostCardComponent,
     PostFormComponent,
-    PostPaginationComponent
+    PostPaginationComponent,
+    CreatedPipe
   ],
   imports: [
     CommonModule,

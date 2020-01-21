@@ -7,8 +7,8 @@ import {AuthComponent} from "./auth.component";
 import {LoginComponent} from "./login/login.component";
 import {RegistrationComponent} from "./registration/registration.component";
 
-import {RoleGuard} from "../shared/services/guards/role-guard.service";
 import {AuthService} from "../shared/services/auth.service";
+import {RoleGuard} from "../shared/guards/role.guard";
 
 
 @NgModule({
