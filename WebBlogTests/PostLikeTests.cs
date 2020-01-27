@@ -48,7 +48,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test0", "User")
             };
             
-            var result = controller.Get(1) as ObjectResult;
+            var result = controller.PostLike(1) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -68,7 +68,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get(0) as ObjectResult;
+            var result = controller.PostLike(0) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -88,7 +88,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Get(1) as ObjectResult;
+            var result = controller.PostLike(1) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<OkObjectResult>(result);
@@ -112,7 +112,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test2", "User")
             };
             
-            var result = controller.Get(3) as ObjectResult;
+            var result = controller.PostLike(3) as ObjectResult;
             
             _postLikeRepository.Verify(m => 
                 m.SavePostLikes(It.IsAny<PostLike>()), Times.Once);

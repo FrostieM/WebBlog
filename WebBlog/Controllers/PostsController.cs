@@ -36,7 +36,7 @@ namespace WebBlog.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Post([FromBody] PostsInfo postsInfo)
+        public IActionResult GetPosts([FromBody] PostsInfo postsInfo)
         {
             var blog = _blogRepository.Blogs
                 .FirstOrDefault(b => b.User.UserName == postsInfo.Username);
@@ -80,7 +80,7 @@ namespace WebBlog.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Post([FromForm]PostForm postForm)
+        public IActionResult SavePost([FromForm]PostForm postForm)
         {
             var blog = _blogRepository.Blogs.FirstOrDefault(b => b.User.UserName == User.Identity.Name);
             if (blog == null) return NotFound("User not found");

@@ -29,7 +29,7 @@ namespace WebBlogTests
         public void CannotLogIn()
         {
             var controller = new AuthController(_repository.Object);
-            var result = controller.Post(new LoginForm
+            var result = controller.SignIn(new LoginForm
             {
                 UserName = "test0",
                 Password = "testPassword0"
@@ -46,7 +46,7 @@ namespace WebBlogTests
         public void CanLogIn()
         {
             var controller = new AuthController(_repository.Object);
-            var result = controller.Post(new LoginForm
+            var result = controller.SignIn(new LoginForm
             {
                 UserName = "test1",
                 Password = "testPassword1"
@@ -63,7 +63,7 @@ namespace WebBlogTests
         public void CannotSignUp()
         {
             var controller = new AuthController(_repository.Object);
-            var result = controller.Post(new SignUpForm
+            var result = controller.SignUp(new SignUpForm
             {
                 UserName = "test1",
                 Password = "testPassword1",
@@ -83,7 +83,7 @@ namespace WebBlogTests
         public void CanSignUp()
         {
             var controller = new AuthController(_repository.Object);
-            var result = controller.Post(new SignUpForm
+            var result = controller.SignUp(new SignUpForm
             {
                 UserName = "testOK",
                 Password = "testPasswordOK",

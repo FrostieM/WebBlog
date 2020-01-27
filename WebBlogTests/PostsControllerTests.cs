@@ -50,7 +50,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Post(new PostsInfo
+            var result = controller.GetPosts(new PostsInfo
             {
                 Type = "testType",
                 Username = "test0",
@@ -75,7 +75,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.Post(new PostsInfo
+            var result = controller.GetPosts(new PostsInfo
             {
                 Type = "testType",
                 Username = "test1",
@@ -104,7 +104,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
 
-            var result = controller.Post(new PostsInfo
+            var result = controller.GetPosts(new PostsInfo
             {
                 Type = "testType",
                 Username = "test1",
@@ -137,7 +137,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("testNotFound", "User")
             };
 
-            var result = controller.Post(new PostForm
+            var result = controller.SavePost(new PostForm
             {
                 Description = "test description",
                 Title = "test title",
@@ -162,7 +162,7 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
 
-            var result = controller.Post(new PostForm
+            var result = controller.SavePost(new PostForm
             {
                 Description = "test description",
                 Title = "test title",

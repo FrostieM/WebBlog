@@ -36,7 +36,7 @@ export class BlogComponent implements OnInit{
               ) {}
 
   ngOnInit(): void {
-    this.currentType = "article";
+    this.currentType = "home";
     this.username = this.activateRoute.snapshot.paramMap.get('username');
 
     if (!this.username) this.router.navigateByUrl("" + this.tokenService.Username).then(() => {});//if url was blank use username in token and go to it

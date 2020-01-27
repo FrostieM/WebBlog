@@ -27,7 +27,7 @@ namespace WebBlog.Controllers
         [HttpPost, Route("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Post([FromBody]LoginForm userForm)
+        public IActionResult SignIn([FromBody]LoginForm userForm)
         {
             var user = _repository.Users.FirstOrDefault(u => 
                 u.UserName == userForm.UserName &&
@@ -42,7 +42,7 @@ namespace WebBlog.Controllers
         [HttpPost, Route("signUp")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] SignUpForm userForm)
+        public IActionResult SignUp([FromBody] SignUpForm userForm)
         {
             var userExist = _repository.Users.Any(u => u.UserName == userForm.UserName);
 

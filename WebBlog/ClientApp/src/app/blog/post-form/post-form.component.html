@@ -1,6 +1,6 @@
 ﻿<form #postForm="ngForm" class="row col col-lg-8 col-10 offset-lg-2 offset-1 bg-dark mt-4 text-light"
       [attr.enctype]="type=='image' || type=='video' ? 'multipart/form-data': null"
-      (ngSubmit)="setPosts(postForm)">
+      (ngSubmit)="savePost(postForm)">
   <h1 class="col-auto offset-sm-4 offset-1">Add post</h1>
 
   <div class="d-none">

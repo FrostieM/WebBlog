@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebBlog.Model;
 using WebBlog.Model.Interfaces.Repositories;
 using WebBlog.Model.ViewData;
@@ -31,7 +30,7 @@ namespace WebBlog.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(int postId)
+        public IActionResult PostLike(int postId)
         {
             var currentUser = _userRepository.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
             if (currentUser == null) return NotFound("User not found");

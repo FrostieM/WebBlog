@@ -24,7 +24,7 @@ export class PostFormComponent{
               private serverService: ServerService) {
   }
 
-  setPosts(ngForm: NgForm) {
+  public savePost(ngForm: NgForm) {
     let formData = new FormData();
 
     for(let key of Object.keys(ngForm.value)){
