@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {TagViewData} from "../classes/tagViewData.class";
 import {Observable} from "rxjs";
 import {IUserPostsViewData} from "../interfaces/userPostsViewData.interface";
-import {IPostViewData} from "../interfaces/postViewData.interface";
+import {ILikeViewData} from "../interfaces/likeViewData.interface";
+import {IPost} from "../interfaces/post.interface";
 
 @Injectable()
 export class ServerService {
@@ -15,8 +16,8 @@ export class ServerService {
     return this.getRequest<TagViewData[]>(this.baseUrl + "api/postTags/" + username, params);
   }
 
-  public getPost(params: HttpParams): Observable<IPostViewData>{
-    return this.getRequest<IPostViewData>(this.baseUrl + "api/postLike", params);
+  public getPost(params: HttpParams): Observable<ILikeViewData<IPost>>{
+    return this.getRequest<ILikeViewData<IPost>>(this.baseUrl + "api/postLike", params);
   }
 
   public deletePost(params: HttpParams): Observable<any>{

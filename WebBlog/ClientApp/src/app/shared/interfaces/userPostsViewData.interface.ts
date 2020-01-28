@@ -1,7 +1,8 @@
 ﻿import {IPagingInfo} from "./pagingInfo.interface";
-import {IPostViewData} from "./postViewData.interface";
+import {ILikeViewData} from "./likeViewData.interface";
+import {IPost} from "./post.interface";
 
 export interface IUserPostsViewData {
-  posts: Array<IPostViewData>;
+  posts: Array<ILikeViewData<IPost>>;
   pagingInfo: IPagingInfo;
 }

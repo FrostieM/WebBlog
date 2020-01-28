@@ -1,19 +1,19 @@
 ﻿<div class="col-auto m-0 p-0">
-  <h2 class="title text-uppercase">{{mainPost.post.title}}</h2>
+  <h2 class="title text-uppercase">{{mainPost.item.title}}</h2>
 </div>
 
 <div class="row w-100 mx-0 mt-2 p-0 border bg-dark text-light">
 
-  <img *ngIf="mainPost.post.fileUrl && mainPost.post.type=='image'"
-       class="img-fluid" src="{{createFullSrc(mainPost.post.fileUrl)}}" alt="">
+  <img *ngIf="mainPost.item.fileUrl && mainPost.item.type=='image'"
+       class="img-fluid" src="{{createFullSrc(mainPost.item.fileUrl)}}" alt="">
 
-  <div *ngIf="mainPost.post.fileUrl && mainPost.post.type=='video'"
+  <div *ngIf="mainPost.item.fileUrl && mainPost.item.type=='video'"
        class="embed-responsive embed-responsive-16by9">
-    <video src="{{createFullSrc(mainPost.post.fileUrl)}}" controls="controls"></video>
+    <video src="{{createFullSrc(mainPost.item.fileUrl)}}" controls="controls"></video>
   </div>
 
   <div class="col-auto">
-    <p class="description">{{mainPost.post.description}}</p>
+    <p class="description">{{mainPost.item.description}}</p>
   </div>
 
   <blog-post-info-component

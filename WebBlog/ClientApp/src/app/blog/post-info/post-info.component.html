@@ -1,4 +1,4 @@
-﻿<button type="button" class="btn col-auto ml-auto text-right mx-1 p-0 text-light" (click)="likePost(postViewData.post.id)">
+﻿<button type="button" class="btn col-auto ml-auto text-right mx-1 p-0 text-light" (click)="likePost(postViewData.item.id)">
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 15.03 13">
     <path [attr.fill]="postViewData.isLiked ? 'red' : 'white'" class="cls-1" d="M1052.5,469s-4.53-2.818-6.38-5.681c-0.93-1.438-1.98-4.6.01-6.243a22.269,22.269,0,0,0,12.73,0c2,1.645.95,4.8,0.02,6.243C1057.02,466.177,1052.5,469,1052.5,469Z" transform="translate(-1044.97 -456)"/>
   </svg>
@@ -9,10 +9,10 @@
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 8 8">
     <path fill="white" class="cls-1" d="M872,667a4,4,0,1,1,4-4A4,4,0,0,1,872,667Zm0-7.467A3.467,3.467,0,1,0,875.467,663,3.467,3.467,0,0,0,872,659.533Zm2.933,3.734A0.267,0.267,0,1,1,875.2,663,0.267,0.267,0,0,1,874.933,663.267Zm-0.866,2.066a0.267,0.267,0,1,1,.266-0.266A0.266,0.266,0,0,1,874.067,665.333Zm0-4.133a0.267,0.267,0,1,1,.266-0.267A0.266,0.266,0,0,1,874.067,661.2Zm-1,2.067h-0.8v0.266a0.267,0.267,0,0,1-.534,0v-0.266h-0.266a0.267,0.267,0,0,1,0-.534h0.266V661.4a0.267,0.267,0,1,1,.534,0v1.333h0.8A0.267,0.267,0,0,1,873.067,663.267ZM872,660.333a0.267,0.267,0,1,1,.267-0.266A0.267,0.267,0,0,1,872,660.333Zm-2.067,5a0.267,0.267,0,1,1,.267-0.266A0.266,0.266,0,0,1,869.933,665.333Zm0-4.133a0.267,0.267,0,1,1,.267-0.267A0.266,0.266,0,0,1,869.933,661.2ZM872,665.667a0.267,0.267,0,1,1-.267.266A0.267,0.267,0,0,1,872,665.667Zm-2.933-2.4a0.267,0.267,0,1,1,.266-0.267A0.267,0.267,0,0,1,869.067,663.267Z" transform="translate(-868 -659)"/>
   </svg>
-  <span><small>{{postViewData.post.created | created}}</small></span>
+  <span><small>{{postViewData.item.created | created}}</small></span>
 </div>
 
 <button *ngIf="isCreator" type="button" class="btn col-auto text-right mx-1 p-0 shadow-none text-danger"
-        (click)="deletePost(postViewData.post.id)">
+        (click)="deletePost(postViewData.item.id)">
   <span><small>Delete</small></span>
 </button>

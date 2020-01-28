@@ -1,7 +1,9 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
+import {ILikeViewData} from "../../shared/interfaces/likeViewData.interface";
+import {IPost} from "../../shared/interfaces/post.interface";
+
 
 @Component({
   selector: 'blog-post-card-component',
@@ -13,8 +15,8 @@ import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 })
 export class PostCardComponent implements OnInit{
 
-  @Input() public postViewData: IPostViewData;
-  @Input() public mainPost: IPostViewData;
+  @Input() public postViewData: ILikeViewData<IPost>;
+  @Input() public mainPost: ILikeViewData<IPost>;
 
   @Input() public isCreator: boolean = false;
   @Input() public isViewRow: boolean = false;
@@ -27,7 +29,7 @@ export class PostCardComponent implements OnInit{
   private video_bg: string = "1";
 
   public get SubDescription(){
-    return this.postViewData.post.description.substring(0, 270);
+    return this.postViewData.item.description.substring(0, 270);
   }
 
   constructor(private router: Router,

@@ -1,8 +1,10 @@
 ﻿import {Component, Inject, Input} from '@angular/core';
 import { Router } from "@angular/router";
 import {IUserPostsViewData} from "../../shared/interfaces/userPostsViewData.interface";
-import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
+
 import {ServerService} from "../../shared/services/server.service";
+import {ILikeViewData} from "../../shared/interfaces/likeViewData.interface";
+import {IPost} from "../../shared/interfaces/post.interface";
 
 @Component({
   selector: 'blog-content-component',
@@ -19,7 +21,7 @@ export class ContentComponent{
   public isViewRow: boolean = false;
   public isForm: boolean;
   public userPosts: IUserPostsViewData;
-  public mainPost: IPostViewData;
+  public mainPost: ILikeViewData<IPost>;
 
   private type: string;
   @Input()  public set Type(type: string){
@@ -44,6 +46,7 @@ export class ContentComponent{
     let obj = JSON.stringify({type: this.type, username: this.username, tags: this.tags, currentPage: page});
 
     this.serverService.getPosts(obj).toPromise().then(response => {
+      console.log(response);
      this.userPosts = response;
      this.mainPost = this.userPosts.posts.shift();
     }, err => {

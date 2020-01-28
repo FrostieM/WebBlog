@@ -1,8 +1,9 @@
 ﻿import {HttpParams} from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {IPostViewData} from "../../shared/interfaces/postViewData.interface";
 import {ServerService} from "../../shared/services/server.service";
+import {ILikeViewData} from "../../shared/interfaces/likeViewData.interface";
+import {IPost} from "../../shared/interfaces/post.interface";
 
 @Component({
   selector: 'blog-post-info-component',
@@ -14,7 +15,7 @@ import {ServerService} from "../../shared/services/server.service";
 export class PostInfoComponent {
 
   @Input() public isCreator: boolean;
-  @Input() public postViewData: IPostViewData;
+  @Input() public postViewData: ILikeViewData<IPost>;
   @Output() public messageToUpdate = new EventEmitter();
 
 

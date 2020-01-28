@@ -1,13 +1,13 @@
 ﻿<!-- post card-->
-<div class="{{ postViewData.post.type }} card p-0 mt-5 bg-dark text-light">
-  <div *ngIf="postViewData.post.type=='image' || postViewData.post.type=='video'" class="col-auto card-header border-0 p-0 m-0"
+<div class="{{ postViewData.item.type }} card p-0 mt-5 bg-dark text-light">
+  <div *ngIf="postViewData.item.type=='image' || postViewData.item.type=='video'" class="col-auto card-header border-0 p-0 m-0"
        onclick="">
 
-    <img *ngIf="postViewData.post.type=='image'"
-         src="{{createFullSrc(postViewData.post.fileUrl)}}" class="img-fluid" alt="image name"
+    <img *ngIf="postViewData.item.type=='image'"
+         src="{{createFullSrc(postViewData.item.fileUrl)}}" class="img-fluid" alt="image name"
          (click)="changePost()">
 
-    <div *ngIf="postViewData.post.type=='video'" class="col-auto m-0 p-0"
+    <div *ngIf="postViewData.item.type=='video'" class="col-auto m-0 p-0"
          (click)="changePost()">
       <img class="position-absolute video-icon" src="assets/img/video_icon.png" alt="video icon">
       <img class="position-absolute" [ngClass]="isViewRow? 'video-play-row' : 'video-play-col'"
@@ -22,7 +22,7 @@
   <!-- block card content-->
   <div class="col card-block">
     <div class="card-title">
-      <h2 class="title">{{postViewData.post.title}}</h2>
+      <h2 class="title">{{postViewData.item.title}}</h2>
     </div>
 
     <div class="m-0 p-0" style="border-bottom: 2px solid darkorange;">
@@ -34,15 +34,15 @@
     </div>
 
     <div class="card-text card-text mt-1">
-      <p class="description">{{SubDescription}}<span *ngIf="SubDescription.length < postViewData.post.description.length">...</span></p>
+      <p class="description">{{SubDescription}}<span *ngIf="SubDescription.length < postViewData.item.description.length">...</span></p>
     </div>
 
-    <span class="url d-none">{{postViewData.post.fileUrl}}</span>
+    <span class="url d-none">{{postViewData.item.fileUrl}}</span>
 
   </div>
   <!-- block card content ends-->
 
-  <button *ngIf="postViewData.post.type=='article'" type="button" class="btn btn-secondary rounded-0"
+  <button *ngIf="postViewData.item.type=='article'" type="button" class="btn btn-secondary rounded-0"
           (click)="changePost()">Show</button>
 </div>
 <!-- post card ends-->
