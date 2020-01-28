@@ -33,11 +33,20 @@ namespace WebBlog.Model
                 .WithOne(p => p.Post)
                 .OnDelete(DeleteBehavior.Cascade);
             
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Comments)
+                .WithOne(c => c.Post)
+                .OnDelete(DeleteBehavior.Cascade);
+            
             modelBuilder.Entity<Tag>()
                 .HasMany(t => t.PostTags)
                 .WithOne(p => p.Tag)
                 .OnDelete(DeleteBehavior.Cascade);
             
+            modelBuilder.Entity<Comment>()
+                .HasMany(c => c.SubComments)
+                .WithOne(c => c.ParentComment)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Blog> Blogs { get; set; }

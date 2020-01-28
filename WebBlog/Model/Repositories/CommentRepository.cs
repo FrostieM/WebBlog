@@ -22,7 +22,15 @@ namespace WebBlog.Model.Repositories
 
         public void DeleteComment(Comment comment)
         {
-            _context.Comments.Remove(comment);
+            if (!comment.SubComments.Any())
+            {
+                _context.Comments.Remove(comment);
+            }
+            else
+            {
+                comment.Content = null;
+            }
+            
             _context.SaveChanges();
         }
     }

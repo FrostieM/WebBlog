@@ -13,9 +13,9 @@ namespace WebBlogTests
 {
     public class PostLikeTests
     {
-        private readonly Mock<IPostRepository> _postRepository;
-        private readonly Mock<IPostLikeRepository> _postLikeRepository;
-        private readonly Mock<IUserRepository> _userRepository;
+        private readonly Mock<IPostRepository> _postRepository = new Mock<IPostRepository>();
+        private readonly Mock<IPostLikeRepository> _postLikeRepository = new Mock<IPostLikeRepository>();
+        private readonly Mock<IUserRepository> _userRepository = new Mock<IUserRepository>();
         
         public PostLikeTests()
         {
@@ -24,17 +24,11 @@ namespace WebBlogTests
             var posts = FakeRepositories.GetFakePosts(blogs).ToList();
             var postsLikes = FakeRepositories.GetFakePostLikes(posts, users);
             
-            var usersMock = new Mock<IUserRepository>();
-            usersMock.Setup(c => c.Users).Returns(users.AsQueryable);
-            _userRepository = usersMock;
+            _userRepository.Setup(c => c.Users).Returns(users.AsQueryable);
             
-            var postsMock = new Mock<IPostRepository>();
-            postsMock.Setup(c => c.Posts).Returns(posts.AsQueryable);
-            _postRepository = postsMock;
+            _postRepository.Setup(c => c.Posts).Returns(posts.AsQueryable);
             
-            var postLikeMock = new Mock<IPostLikeRepository>();
-            postLikeMock.Setup(l => l.PostLikes).Returns(postsLikes.AsQueryable);
-            _postLikeRepository = postLikeMock;
+            _postLikeRepository.Setup(l => l.PostLikes).Returns(postsLikes.AsQueryable);
         }
 
         [Fact]

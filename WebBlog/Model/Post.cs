@@ -33,5 +33,8 @@ namespace WebBlog.Model
         
         [JsonIgnore]
         public ICollection<PostTags> PostTags { get; set; }
+        
+        [JsonIgnore]
+        public ICollection<Comment> Comments { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace WebBlog.Model
         
         [Required]
         [StringLength(20)]
+        [JsonIgnore]
         public string Password { get; set; }
         
         [Required]

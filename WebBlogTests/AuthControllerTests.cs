@@ -13,16 +13,12 @@ namespace WebBlogTests
     public class AuthControllerTests
     {
 
-        private readonly Mock<IUserRepository> _repository;
+        private readonly Mock<IUserRepository> _repository = new Mock<IUserRepository>();
         
         public AuthControllerTests()
         {
             var users = FakeRepositories.FakeUsers;
-            
-            var mock = new Mock<IUserRepository>();
-            mock.Setup(c => c.Users).Returns(users.AsQueryable);
-
-            _repository = mock;
+            _repository.Setup(c => c.Users).Returns(users.AsQueryable);
         }
 
         [Fact]
