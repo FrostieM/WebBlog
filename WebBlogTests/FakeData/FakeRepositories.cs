@@ -98,5 +98,17 @@ namespace WebBlogTests.FakeData
                 new Comment {Id = 6, Content = "testComment5", Post = posts[0], User = users[0]}
             };
         }
+        
+        public static IEnumerable<CommentLike> GetFakeCommentLikes(IList<Comment> comments, IList<User> users)
+        {
+            return new[]
+            {
+                new CommentLike {Id = 1, Comment = comments[0], User = users[0]},
+                new CommentLike {Id = 2, Comment = comments[1], User = users[0]},
+                new CommentLike {Id = 3, Comment = comments[0], User = users[1]},
+                new CommentLike {Id = 4, Comment = comments[1], User = users[1]},
+                new CommentLike {Id = 5, Comment = comments[2], User = users[0]}
+            };
+        }
     }
 }

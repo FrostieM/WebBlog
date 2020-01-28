@@ -2,7 +2,7 @@
 
 namespace WebBlog.Model.Interfaces.Repositories
 {
-    public interface ICommentLikeRepository
+    public interface ICommentLikeRepository: ILikeAble
     {
         IQueryable<CommentLike> CommentLikes { get; }
 

@@ -25,5 +25,15 @@ namespace WebBlog.Model.Repositories
             _context.CommentLikes.Remove(commentLike);
             _context.SaveChanges();
         }
+
+        public int GetLikes(int commentId)
+        {
+            return CommentLikes.Count(c => c.Comment.Id == commentId);
+        }
+
+        public bool IsLiked(string username, int commentId)
+        {
+            return CommentLikes.Any(c => c.Comment.Id == commentId && c.User.UserName == username);
+        }
     }
 }

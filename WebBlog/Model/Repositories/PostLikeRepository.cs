@@ -14,13 +14,13 @@ namespace WebBlog.Model.Repositories
 
         public IQueryable<PostLike> PostLikes => _context.PostLikes;
         
-        public void SavePostLikes(PostLike postLike)
+        public void SavePostLike(PostLike postLike)
         {
             _context.PostLikes.Add(postLike);
             _context.SaveChanges();
         }
 
-        public void DeletePostLikes(PostLike postLike)
+        public void DeletePostLike(PostLike postLike)
         {
             _context.PostLikes.Remove(postLike);
             _context.SaveChanges();
@@ -33,9 +33,7 @@ namespace WebBlog.Model.Repositories
 
         public bool IsLiked(string username, int postId)
         {
-            return PostLikes.Any(l => 
-                l.User.UserName.Equals(username) && 
-                l.Post.Id == postId);
+            return PostLikes.Any(l => l.User.UserName.Equals(username) &&  l.Post.Id == postId);
         }
     }
 }

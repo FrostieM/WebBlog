@@ -58,9 +58,9 @@ namespace WebBlog.Controllers
                 Posts = posts
                     .Skip((postsInfo.CurrentPage - 1) * ItemsPerPage)
                     .Take(ItemsPerPage)
-                    .Select(p => new PostViewData
+                    .Select(p => new LikeViewData<Post>
                     {
-                        Post = p,
+                        Item = p,
                         Likes = p.Likes.Count,
                         IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, p.Id)
                     }),

@@ -14,7 +14,8 @@ namespace WebBlog.Model
             context.Database.Migrate();
 
             if (context.Users.Any()) return;
-            
+
+            var tag = new Tag {Name = "test"};
             var user = new User
             {
                 UserName = "admin",
@@ -31,20 +32,22 @@ namespace WebBlog.Model
                 CreatedDate = DateTime.Now
             };
             context.Blogs.Add(blog);
-            
-            var post = new Post
+
+            for (var i = 0; i < 100; i++)
             {
-                Blog = blog,
-                Created = DateTime.Now,
-                Description = "test post's description",
-                Title = "test post's title",
-                Type = "article"
-            };
-            context.Posts.Add(post);
-            
-            var postTags = new PostTags{Post = post, Tag = new Tag{Name = "test"}};
-            context.PostTags.Add(postTags);
-            
+                var post = new Post 
+                {
+                    Blog = blog,
+                    Created = DateTime.Now,
+                    Description = "test post's description",
+                    Title = "test post's title",
+                    Type = "article"
+                };
+                context.Posts.Add(post);
+                            
+                var postTags = new PostTags{Post = post, Tag = tag};
+                context.PostTags.Add(postTags);
+            }
             context.SaveChanges();
         }
     }

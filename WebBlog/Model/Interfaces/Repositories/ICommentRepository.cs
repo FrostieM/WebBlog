@@ -8,5 +8,6 @@ namespace WebBlog.Model.Interfaces.Repositories
 
         void SaveComment(Comment comment);
         void DeleteComment(Comment comment);
+        
     }
 }

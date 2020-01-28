@@ -35,8 +35,7 @@ namespace WebBlog.Controllers
             var currentUser = _userRepository.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
             if (currentUser == null) return NotFound("User not found");
 
-            var userPost = _postRepository.Posts
-                .FirstOrDefault(p => p.Id == postId);
+            var userPost = _postRepository.Posts.FirstOrDefault(p => p.Id == postId);
             
             if (userPost == null) return NotFound("Post not found");
 
@@ -45,7 +44,7 @@ namespace WebBlog.Controllers
             
             if (postLike == null) //like is not exist
             {
-                _postLikeRepository.SavePostLikes(new PostLike 
+                _postLikeRepository.SavePostLike(new PostLike 
                 {
                     Post = userPost, 
                     User = currentUser
@@ -53,10 +52,10 @@ namespace WebBlog.Controllers
             }
             else //unlike post
             {
-                _postLikeRepository.DeletePostLikes(postLike);
+                _postLikeRepository.DeletePostLike(postLike);
             }
 
-            return Ok(new PostViewData
+            return Ok(new LikeViewData<Post>
             {
                 Likes = _postLikeRepository.GetLikes(postId),
                 IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, postId)

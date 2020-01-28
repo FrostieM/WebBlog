@@ -116,8 +116,8 @@ namespace WebBlogTests
 
             var postsList = posts.Posts.ToList();
             Assert.Equal(2, postsList.Count);
-            Assert.Equal(1, postsList[0].Post.Id);
-            Assert.Equal(4, postsList[1].Post.Id);
+            Assert.Equal(1, postsList[0].Item.Id);
+            Assert.Equal(4, postsList[1].Item.Id);
         }
 
         [Fact]
