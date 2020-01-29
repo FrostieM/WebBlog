@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace WebBlog.Model
 {
@@ -16,6 +17,7 @@ namespace WebBlog.Model
         
         public string Content { get; set; }
 
+        [JsonIgnore]
         public Comment ParentComment { get; set; }
         
         public ICollection<Comment> SubComments { get; set; }

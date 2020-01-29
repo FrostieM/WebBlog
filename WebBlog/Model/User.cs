@@ -10,8 +10,10 @@ namespace WebBlog.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [JsonIgnore]
         public string Id { get; set; }
         
+        [JsonIgnore]
         public Blog Blog { get; set; }
         
         [Required]
@@ -34,6 +36,9 @@ namespace WebBlog.Model
         [Required]
         [StringLength(40)]
         public string Email { get; set; }
+        
+        [Required]
+        public string ImageUrl { get; set; }
         
         [JsonIgnore]
         public ICollection<PostLike> Likes { get; set; }

@@ -110,6 +110,7 @@
         <None Include="ClientApp\src\app\shared\interfaces\post.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\postViewData.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\tagViewData.interface.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\user.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\userPostsViewData.interface.ts" />
         <None Include="ClientApp\src\app\shared\pipes\created.pipe.ts" />
         <None Include="ClientApp\src\app\shared\services\auth.service.ts" />
@@ -136,10 +137,6 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\fonts.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\siderbar.css" />
       <_ContentIncludedByDefault Remove="wwwroot\img\logo.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Resources" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

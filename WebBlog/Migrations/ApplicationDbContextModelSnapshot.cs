@@ -51,10 +51,10 @@ namespace WebBlog.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
+                    b.Property<int?>("ParentCommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UpCommentId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -62,9 +62,9 @@ namespace WebBlog.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("ParentCommentId");
 
-                    b.HasIndex("UpCommentId");
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -204,6 +204,10 @@ namespace WebBlog.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(40)")
@@ -237,13 +241,14 @@ namespace WebBlog.Migrations
 
             modelBuilder.Entity("WebBlog.Model.Comment", b =>
                 {
-                    b.HasOne("WebBlog.Model.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId");
+                    b.HasOne("WebBlog.Model.Comment", "ParentComment")
+                        .WithMany("SubComments")
+                        .HasForeignKey("ParentCommentId");
 
-                    b.HasOne("WebBlog.Model.Comment", "UpComment")
-                        .WithMany()
-                        .HasForeignKey("UpCommentId");
+                    b.HasOne("WebBlog.Model.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebBlog.Model.User", "User")
                         .WithMany()

@@ -37,7 +37,7 @@ namespace WebBlog.Controllers
             var post = _postRepository.Posts.FirstOrDefault(p => p.Id == postId);
             if (post == null) return NotFound("Post not found");
 
-            return Ok(_commentRepository.Comments.Where(c => c.Post.Equals(post)));
+            return Ok(_commentRepository.Comments.Where(c => c.Post.Equals(post) && c.ParentComment == null));
         }
 
         [Authorize]

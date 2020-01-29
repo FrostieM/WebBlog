@@ -5,6 +5,7 @@ import {TagViewData} from "../shared/classes/tagViewData.class";
 import {TokenService} from "../shared/services/token.service";
 import {ServerService} from "../shared/services/server.service";
 import {HttpParams} from "@angular/common/http";
+import {IUser} from "../shared/interfaces/user.interface";
 
 
 @Component({
@@ -25,6 +26,8 @@ export class BlogComponent implements OnInit{
   public tags: TagViewData[] = [];
   public activeTags: string[];
 
+  public userInfo: IUser;
+
   private username: string;
 
   constructor(private jwtHelper: JwtHelperService,
@@ -39,9 +42,11 @@ export class BlogComponent implements OnInit{
     this.currentType = "home";
     this.username = this.activateRoute.snapshot.paramMap.get('username');
 
-    if (!this.username) this.router.navigateByUrl("" + this.tokenService.Username).then(() => {});//if url was blank use username in token and go to it
+    //if url was blank use username in token and go to it
+    if (!this.username) this.router.navigateByUrl("" + this.tokenService.Username).then(() => {});
 
     this.isCreator = this.username == this.tokenService.Username;
+    this.getUserInfo();
     this.getTags();
   }
 
@@ -53,6 +58,16 @@ export class BlogComponent implements OnInit{
     this.serverService.getTags(this.username, params).subscribe(response => {
         this.tags = response;
     }, error => console.log(error));
+  }
+
+  public getUserInfo(){
+    this.serverService.getUserInfo(this.username).toPromise().then(response =>{
+      this.userInfo = response;
+    });
+  }
+
+  public createFullSrc(fileUrl){
+    return "https://localhost:5001/" + fileUrl;
   }
 
   public setType(type: string){

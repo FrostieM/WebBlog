@@ -20,6 +20,7 @@ namespace WebBlog.Model.Repositories
             _context.SaveChanges();
         }
 
+        //Delete comment but not a branch
         public void DeleteComment(Comment comment)
         {
             if (!comment.SubComments.Any())

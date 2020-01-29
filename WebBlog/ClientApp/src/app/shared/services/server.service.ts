@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {IUserPostsViewData} from "../interfaces/userPostsViewData.interface";
 import {ILikeViewData} from "../interfaces/likeViewData.interface";
 import {IPost} from "../interfaces/post.interface";
+import {IUser} from "../interfaces/user.interface";
 
 @Injectable()
 export class ServerService {
@@ -13,7 +14,11 @@ export class ServerService {
   }
 
   public getTags(username: string, params: HttpParams): Observable<TagViewData[]>{
-    return this.getRequest<TagViewData[]>(this.baseUrl + "api/postTags/" + username, params);
+    return this.getRequest<TagViewData[]>(this.baseUrl + "api/blogInfo/getTags/" + username, params);
+  }
+
+  public getUserInfo(username: string): Observable<IUser>{
+    return this.getRequest<IUser>(this.baseUrl + "api/blogInfo/getUserInfo/" + username);
   }
 
   public getPost(params: HttpParams): Observable<ILikeViewData<IPost>>{
@@ -33,7 +38,7 @@ export class ServerService {
       {"Content-Type": "application/json"});
   }
 
-  private getRequest<T>(url: string, params: HttpParams, responseType?): Observable<T>{
+  private getRequest<T>(url: string, params?: HttpParams, responseType?): Observable<T>{
     return this.http.get<T>(url, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"

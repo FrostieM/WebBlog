@@ -17,6 +17,7 @@ namespace WebBlog.Model.Repositories
         
         public void SaveUser(User user)
         {
+            user.ImageUrl = "Resources/_shared/image/anonymous.png";
             _context.Blogs.Add(new Blog
             {
                 User = user,

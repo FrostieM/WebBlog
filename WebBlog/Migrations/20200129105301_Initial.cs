@@ -29,7 +29,8 @@ namespace WebBlog.Migrations
                     Password = table.Column<string>(maxLength: 20, nullable: false),
                     FirstName = table.Column<string>(maxLength: 40, nullable: false),
                     LastName = table.Column<string>(maxLength: 40, nullable: false),
-                    Email = table.Column<string>(maxLength: 40, nullable: false)
+                    Email = table.Column<string>(maxLength: 40, nullable: false),
+                    ImageUrl = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,25 +88,25 @@ namespace WebBlog.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(nullable: true),
-                    UpCommentId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true)
+                    Content = table.Column<string>(nullable: true),
+                    ParentCommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Comments_Comments_ParentCommentId",
+                        column: x => x.ParentCommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Comments_UpCommentId",
-                        column: x => x.UpCommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Users_UserId",
                         column: x => x.UserId,
@@ -210,14 +211,14 @@ namespace WebBlog.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_ParentCommentId",
+                table: "Comments",
+                column: "ParentCommentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
                 table: "Comments",
                 column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_UpCommentId",
-                table: "Comments",
-                column: "UpCommentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",

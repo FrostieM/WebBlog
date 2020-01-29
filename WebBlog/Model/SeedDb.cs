@@ -22,7 +22,8 @@ namespace WebBlog.Model
                 Password = "superPassword",
                 Email = "admin@email.com",
                 FirstName = "Max",
-                LastName = "Os"
+                LastName = "Osinov",
+                ImageUrl = "Resources/_shared/image/anonymous.png"
             };
             context.Users.Add(user);
                 
@@ -39,8 +40,8 @@ namespace WebBlog.Model
                 {
                     Blog = blog,
                     Created = DateTime.Now,
-                    Description = "test post's description",
-                    Title = "test post's title",
+                    Description = $"test post's description{i+1}",
+                    Title = $"test post's title{i+1}",
                     Type = "article"
                 };
                 context.Posts.Add(post);
