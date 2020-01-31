@@ -42,6 +42,11 @@ namespace WebBlog.Model
                 .HasMany(t => t.PostTags)
                 .WithOne(p => p.Tag)
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<Comment>()
+                .HasMany(c => c.Likes)
+                .WithOne(l => l.Comment)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Blog> Blogs { get; set; }

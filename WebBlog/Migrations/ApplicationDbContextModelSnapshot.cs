@@ -51,6 +51,9 @@ namespace WebBlog.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("ParentCommentId")
                         .HasColumnType("int");
 
@@ -258,8 +261,9 @@ namespace WebBlog.Migrations
             modelBuilder.Entity("WebBlog.Model.CommentLike", b =>
                 {
                     b.HasOne("WebBlog.Model.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
+                        .WithMany("Likes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebBlog.Model.User", "User")
                         .WithMany()

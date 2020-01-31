@@ -3,8 +3,10 @@ import { Router } from "@angular/router";
 import {IUserPostsViewData} from "../../shared/interfaces/userPostsViewData.interface";
 
 import {ServerService} from "../../shared/services/server.service";
-import {ILikeViewData} from "../../shared/interfaces/likeViewData.interface";
+
 import {IPost} from "../../shared/interfaces/post.interface";
+import {IInfoItem} from "../../shared/interfaces/info-item.interface";
+import {UserPostsViewData} from "../../shared/classes/userPostsViewData.class";
 
 @Component({
   selector: 'blog-content-component',
@@ -21,19 +23,19 @@ export class ContentComponent{
   public isViewRow: boolean = false;
   public isForm: boolean;
   public userPosts: IUserPostsViewData;
-  public mainPost: ILikeViewData<IPost>;
+  public mainPost: IInfoItem<IPost>;
+
+  private tags: string[] = null;
+  @Input() public set Tags(tags: string[]){
+    this.tags = tags;
+    this.getPosts(1)
+  };
 
   private type: string;
   @Input()  public set Type(type: string){
     this.type = type == "home" ? null : type;
     this.tags = null;
     this.getPosts(1);
-  };
-
-  private tags: string[] = null;
-  @Input() public set Tags(tags: string[]){
-    this.tags = tags;
-    this.getPosts(1)
   };
 
   constructor(private router: Router,
@@ -43,14 +45,13 @@ export class ContentComponent{
 
   public getPosts(page: number = 1) {
     this.isForm = false;
-    let obj = JSON.stringify({type: this.type, username: this.username, tags: this.tags, currentPage: page});
 
-    this.serverService.getPosts(obj).toPromise().then(response => {
-      console.log(response);
-     this.userPosts = response;
-     this.mainPost = this.userPosts.posts.shift();
-    }, err => {
-      console.log(err)
-    });
+    this.serverService.getPosts(this.type, this.username,this.tags, page)
+      .toPromise().then(response => {
+        this.userPosts = new UserPostsViewData(response);
+        this.mainPost = this.userPosts.posts.shift();
+        }, err => {
+        console.log(err)
+      });
   }
 }

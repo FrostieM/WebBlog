@@ -5,6 +5,7 @@ using Moq;
 using WebBlog.Controllers;
 using WebBlog.Model;
 using WebBlog.Model.Interfaces.Repositories;
+using WebBlog.Model.ViewData;
 using WebBlogTests.FakeData;
 using Xunit;
 
@@ -15,19 +16,23 @@ namespace WebBlogTests
         private readonly Mock<IUserRepository> _userRepository = new Mock<IUserRepository>();
         private readonly Mock<IPostRepository> _postRepository = new Mock<IPostRepository>();
         private readonly Mock<ICommentRepository> _commentRepository = new Mock<ICommentRepository>();
+        private readonly Mock<ICommentLikeRepository> _commentLikeRepository = new Mock<ICommentLikeRepository>();
 
         public CommentControllerTests()
         {
             var users = FakeRepositories.FakeUsers.ToList();
             var blogs = FakeRepositories.GetFakeBlogs(users).ToList();
             var posts = FakeRepositories.GetFakePosts(blogs).ToList();
-            var comments = FakeRepositories.GetFakeComments(posts, users);
+            var comments = FakeRepositories.GetFakeComments(posts, users).ToList();
+            var commentLikes = FakeRepositories.GetFakeCommentLikes(comments, users);
             
             _userRepository.Setup(u => u.Users).Returns(users.AsQueryable());
 
             _postRepository.Setup(p => p.Posts).Returns(posts.AsQueryable());
             
             _commentRepository.Setup(c => c.Comments).Returns(comments.AsQueryable());
+
+            _commentLikeRepository.Setup(c => c.CommentLikes).Returns(commentLikes.AsQueryable());
         }
 
         [Fact]
@@ -36,7 +41,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("testFail", "User")
             };
@@ -56,7 +62,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -71,12 +78,13 @@ namespace WebBlogTests
         }
 
         [Fact]
-        public void CanGetComments()
+        public void CanGetComments_WithoutParentComments()
         {
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -88,10 +96,35 @@ namespace WebBlogTests
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
 
-            var comments = result.Value as IEnumerable<Comment>;
+            var comments = result.Value as IEnumerable<ItemViewData<Comment>>;
             
             Assert.NotNull(comments);
-            Assert.Equal(5, comments.Count());
+            Assert.Equal(3, comments.Count());
+        }
+        
+        [Fact]
+        public void CanGetComments_WithParentComment()
+        {
+            var controller = new CommentController(
+                _userRepository.Object, 
+                _postRepository.Object, 
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
+            {
+                ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
+            };
+            
+            var result = controller.GetComments(1, 1) as ObjectResult;
+            
+            Assert.NotNull(result);
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(200, result.StatusCode);
+            Assert.NotNull(result.Value);
+
+            var comments = result.Value as IEnumerable<ItemViewData<Comment>>;
+            
+            Assert.NotNull(comments);
+            Assert.Equal(2, comments.Count());
         }
         
         [Fact]
@@ -100,7 +133,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("testFail", "User")
             };
@@ -120,7 +154,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -141,7 +176,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -162,7 +198,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -175,12 +212,12 @@ namespace WebBlogTests
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
 
-            var comment = result.Value as Comment;
-            Assert.IsType<Comment>(comment);
-            Assert.Equal("test1", comment.User.UserName);
-            Assert.Equal(1, comment.Post.Id);
-            Assert.Equal("testContent", comment.Content);
-            Assert.Null(comment.ParentComment);
+            var comment = result.Value as ItemViewData<Comment>;
+            Assert.IsType<ItemViewData<Comment>>(comment);
+            Assert.Equal("test1", comment.Item.User.UserName);
+            Assert.Equal(1, comment.Item.Post.Id);
+            Assert.Equal("testContent", comment.Item.Content);
+            Assert.Null(comment.Item.ParentComment);
         }
         
         [Fact]
@@ -189,7 +226,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
@@ -202,12 +240,12 @@ namespace WebBlogTests
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
 
-            var comment = result.Value as Comment;
-            Assert.IsType<Comment>(comment);
-            Assert.Equal("test1", comment.User.UserName);
-            Assert.Equal(1, comment.Post.Id);
-            Assert.Equal("testContent", comment.Content);
-            Assert.NotNull(comment.ParentComment);
+            var comment = result.Value as ItemViewData<Comment>;
+            Assert.IsType<ItemViewData<Comment>>(comment);
+            Assert.Equal("test1", comment.Item.User.UserName);
+            Assert.Equal(1, comment.Item.Post.Id);
+            Assert.Equal("testContent", comment.Item.Content);
+            Assert.NotNull(comment.Item.ParentComment);
         }
         
         [Fact]
@@ -216,7 +254,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("testFail", "User")
             };
@@ -237,7 +276,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test2", "User")
             };
@@ -258,7 +298,8 @@ namespace WebBlogTests
             var controller = new CommentController(
                 _userRepository.Object, 
                 _postRepository.Object, 
-                _commentRepository.Object)
+                _commentRepository.Object,
+                _commentLikeRepository.Object)
             {
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };

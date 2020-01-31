@@ -5,7 +5,6 @@ import {FormsModule} from "@angular/forms";
 
 import {BlogComponent} from "./blog.component";
 import {MenuButtonComponent} from "./menu-button/menu-button.component";
-import {PostInfoComponent} from "./post-info/post-info.component";
 import {ContentComponent} from "./content/content.component";
 import {PostCardComponent} from "./post-card/post-card.component";
 import {MainPostComponent} from "./main-post/main-post.component";
@@ -14,17 +13,20 @@ import {PostPaginationComponent} from "./post-pagination/post-pagination.compone
 import {ServerService} from "../shared/services/server.service";
 import {AuthGuard} from "../shared/guards/auth.guard";
 import {CreatedPipe} from "../shared/pipes/created.pipe";
+import {CommentComponent} from "./comment/comment.component";
+import {ItemInfoComponent} from "./item-info/item-info.component";
 
 @NgModule({
   declarations: [
     BlogComponent,
     MenuButtonComponent,
-    PostInfoComponent,
+    ItemInfoComponent,
     ContentComponent,
     MainPostComponent,
     PostCardComponent,
     PostFormComponent,
     PostPaginationComponent,
+    CommentComponent,
     CreatedPipe
   ],
   imports: [

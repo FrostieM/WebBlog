@@ -58,11 +58,12 @@ namespace WebBlog.Controllers
                 Posts = posts
                     .Skip((postsInfo.CurrentPage - 1) * ItemsPerPage)
                     .Take(ItemsPerPage)
-                    .Select(p => new LikeViewData<Post>
+                    .Select(p => new ItemViewData<Post>
                     {
                         Item = p,
                         Likes = p.Likes.Count,
-                        IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, p.Id)
+                        IsLiked = _postLikeRepository.IsLiked(User.Identity.Name, p.Id),
+                        Comments = p.Comments.Count
                     }),
                 
                 PagingInfo = new PagingInfo
@@ -110,8 +111,9 @@ namespace WebBlog.Controllers
         [HttpGet, Route("deletePost")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeletePost(int id)
+        public IActionResult DeletePost(int postId)
         {
+        
             var blog = _blogRepository.Blogs
                 .Include(b => b.Posts)
                 .FirstOrDefault(b => b.User.UserName == User.Identity.Name);
@@ -119,7 +121,7 @@ namespace WebBlog.Controllers
             if (blog == null) 
                 return NotFound("User not found");
 
-            var post = blog.Posts.FirstOrDefault(p=> p.Id == id);
+            var post = blog.Posts.FirstOrDefault(p=> p.Id == postId);
             
             if (post == null) return NotFound("Post not found");
             

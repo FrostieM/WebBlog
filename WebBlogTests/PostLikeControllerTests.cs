@@ -91,7 +91,7 @@ namespace WebBlogTests
             _postLikeRepository.Verify(m => 
                 m.DeletePostLike(It.IsAny<PostLike>()), Times.Once);
             
-            var post = result.Value as LikeViewData<Post>;
+            var post = result.Value as ItemViewData<Post>;
             Assert.NotNull(post);
         }
         
@@ -116,7 +116,7 @@ namespace WebBlogTests
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
             
-            var post = result.Value as LikeViewData<Post>;
+            var post = result.Value as ItemViewData<Post>;
             Assert.NotNull(post);
         }
     }

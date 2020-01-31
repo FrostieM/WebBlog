@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0-preview1.19508.20" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
@@ -65,6 +66,7 @@
         <Content Include="ClientApp\src\assets\img\tape.svg" />
         <Content Include="ClientApp\src\assets\img\twitter.svg" />
         <Content Include="ClientApp\src\assets\img\twitter.svg" />
+        <Content Include="ClientApp\src\assets\img\users-comments-svgrepo-com.svg" />
         <Content Include="ClientApp\src\assets\img\video.svg" />
         <Content Include="ClientApp\src\assets\img\video_bg1.jpg" />
         <Content Include="ClientApp\src\assets\img\video_bg\458169.jpg" />
@@ -91,6 +93,7 @@
         <None Include="ClientApp\src\app\authentication\registration\login.component.ts" />
         <None Include="ClientApp\src\app\blog\add-post-form\content.component.html" />
         <None Include="ClientApp\src\app\blog\auth.module.ts" />
+        <None Include="ClientApp\src\app\blog\comment\content.component.html" />
         <None Include="ClientApp\src\app\blog\content\menu-button.component.html" />
         <None Include="ClientApp\src\app\blog\main-post\post-card.component.ts" />
         <None Include="ClientApp\src\app\blog\menu-button\login.component.html" />
@@ -101,11 +104,16 @@
         <None Include="ClientApp\src\app\customers\customers.component.ts" />
         <None Include="ClientApp\src\app\login\login.component.ts" />
         <None Include="ClientApp\src\app\post\customers.component.html" />
+        <None Include="ClientApp\src\app\shared\classes\commentViewData.class.ts" />
+        <None Include="ClientApp\src\app\shared\classes\post.class.ts" />
         <None Include="ClientApp\src\app\shared\classes\tagViewData.interface.ts" />
+        <None Include="ClientApp\src\app\shared\classes\userPostsViewData.class.ts" />
         <None Include="ClientApp\src\app\shared\forms\login.form.ts" />
         <None Include="ClientApp\src\app\shared\guards\auth.guard.ts" />
         <None Include="ClientApp\src\app\shared\guards\role.guard.ts" />
         <None Include="ClientApp\src\app\shared\helpers\token.helpers.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\comment.interface.ts" />
+        <None Include="ClientApp\src\app\shared\interfaces\IInfoItem.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\pagingInfo.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\post.interface.ts" />
         <None Include="ClientApp\src\app\shared\interfaces\postViewData.interface.ts" />
@@ -137,6 +145,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\fonts.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\siderbar.css" />
       <_ContentIncludedByDefault Remove="wwwroot\img\logo.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\admin\image" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

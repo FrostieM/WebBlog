@@ -90,6 +90,7 @@ namespace WebBlog.Migrations
                     PostId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
                     ParentCommentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -184,7 +185,7 @@ namespace WebBlog.Migrations
                         column: x => x.CommentId,
                         principalTable: "Comments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentLikes_Users_UserId",
                         column: x => x.UserId,

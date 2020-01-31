@@ -30,7 +30,7 @@ namespace WebBlog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => { options.EnableEndpointRouting = false; });
-            
+           
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration["Data:WebBlog:ConnectionString"]));
@@ -71,9 +71,11 @@ namespace WebBlog
                         .AllowAnyMethod(); 
                 }); 
             });
-            
-            services.AddControllersWithViews();
-            
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options => 
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }

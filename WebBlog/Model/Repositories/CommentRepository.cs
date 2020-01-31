@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using WebBlog.Model.Interfaces.Repositories;
 
 namespace WebBlog.Model.Repositories
@@ -16,6 +17,8 @@ namespace WebBlog.Model.Repositories
         
         public void SaveComment(Comment comment)
         {
+            comment.Created = DateTime.Now;
+            
             _context.Comments.Add(comment);
             _context.SaveChanges();
         }
@@ -23,7 +26,7 @@ namespace WebBlog.Model.Repositories
         //Delete comment but not a branch
         public void DeleteComment(Comment comment)
         {
-            if (!comment.SubComments.Any())
+            if (!Comments.Any(c => c.ParentComment.Equals(comment)))
             {
                 _context.Comments.Remove(comment);
             }

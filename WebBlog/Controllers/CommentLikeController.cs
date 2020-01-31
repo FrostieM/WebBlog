@@ -57,7 +57,7 @@ namespace WebBlog.Controllers
                 _commentLikeRepository.DeleteCommentLike(commentLike);
             }
 
-            return Ok(new LikeViewData<Comment>
+            return Ok(new ItemViewData<Comment>
             {
                 Likes = _commentLikeRepository.GetLikes(commentId),
                 IsLiked = _commentLikeRepository.IsLiked(User.Identity.Name, commentId)

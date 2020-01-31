@@ -45,24 +45,29 @@ namespace WebBlogTests.FakeData
             {
                 new Post
                 {
-                    Id = 1, Blog = blogs[0], Title = "title2", Description = "description2", Type = "testType", Likes = new []
-                    { new PostLike { User = blogs[0].User} }
+                    Id = 1, Blog = blogs[0], Title = "title2", Description = "description2", Type = "testType", 
+                    Likes = new [] { new PostLike { User = blogs[0].User} },
+                    Comments = new [] {new Comment()}
                 },
                 new Post{
-                    Id = 2, Blog = blogs[1], Title = "title3", Description = "description3", Type = "testType", Likes = new []
-                        { new PostLike { User = blogs[1].User} }
+                    Id = 2, Blog = blogs[1], Title = "title3", Description = "description3", Type = "testType", 
+                    Likes = new [] { new PostLike { User = blogs[1].User} },
+                    Comments = new [] {new Comment()}
                 },
                 new Post{
-                    Id = 3, Blog = blogs[1], Title = "title1", Description = "description1", Type = "testType", Likes = new []
-                        { new PostLike { User = blogs[1].User} }
+                    Id = 3, Blog = blogs[1], Title = "title1", Description = "description1", Type = "testType", 
+                    Likes = new [] { new PostLike { User = blogs[1].User} },
+                    Comments = new [] {new Comment()}
                 },
                 new Post{
-                    Id = 4, Blog = blogs[0], Title = "title4", Description = "description4", Type = "testType", Likes = new []
-                        { new PostLike { User = blogs[0].User} }
+                    Id = 4, Blog = blogs[0], Title = "title4", Description = "description4", Type = "testType", 
+                    Likes = new [] { new PostLike { User = blogs[0].User} },
+                    Comments = new [] {new Comment()}
                 },
                 new Post{
-                    Id = 5, Blog = blogs[0], Title = "title5", Description = "description5", Type = "testType", Likes = new []
-                        { new PostLike { User = blogs[0].User} }
+                    Id = 5, Blog = blogs[0], Title = "title5", Description = "description5", Type = "testType",
+                    Likes = new [] { new PostLike { User = blogs[0].User} },
+                    Comments = new [] {new Comment()}
                 
                 },
                 new Post{
@@ -87,15 +92,39 @@ namespace WebBlogTests.FakeData
 
         public static IEnumerable<Comment> GetFakeComments(IList<Post> posts, IList<User> users)
         {
-            var parentComment = new Comment { Id = 1, Content = "testComment0", Post = posts[0], User = users[0]};
+            var parentComment = new Comment { 
+                Id = 1, Content = "testComment0", Post = posts[0], User = users[0], 
+                Likes = new[]{new CommentLike()}, 
+                SubComments = new[] {new Comment()}
+            };
             return new[]
             {
                 parentComment,
-                new Comment {Id = 2, Content = "testComment1", Post = posts[0], User = users[0], ParentComment = parentComment},
-                new Comment {Id = 3, Content = "testComment2", Post = posts[1], User = users[0]},
-                new Comment {Id = 4, Content = "testComment3", Post = posts[0], User = users[1], ParentComment = parentComment},
-                new Comment {Id = 5, Content = "testComment4", Post = posts[0], User = users[0]},
-                new Comment {Id = 6, Content = "testComment5", Post = posts[0], User = users[0]}
+                new Comment {
+                    Id = 2, Content = "testComment1", Post = posts[0], User = users[0], ParentComment = parentComment, 
+                    Likes = new[]{new CommentLike()}, 
+                    SubComments = new[] {new Comment()}
+                },
+                new Comment {
+                    Id = 3, Content = "testComment2", Post = posts[1], User = users[0], 
+                    Likes = new[]{new CommentLike()}, 
+                    SubComments = new[] {new Comment()}
+                },
+                new Comment {
+                    Id = 4, Content = "testComment3", Post = posts[0], User = users[1], ParentComment = parentComment, 
+                    Likes = new[]{new CommentLike()}, 
+                    SubComments = new[] {new Comment()}
+                },
+                new Comment {
+                    Id = 5, Content = "testComment4", Post = posts[0], User = users[0], 
+                    Likes = new[]{new CommentLike()}, 
+                    SubComments = new[] {new Comment()}
+                },
+                new Comment {
+                    Id = 6, Content = "testComment5", Post = posts[0], User = users[0], 
+                    Likes = new[]{new CommentLike()}, 
+                    SubComments = new[] {new Comment()}
+                }
             };
         }
         

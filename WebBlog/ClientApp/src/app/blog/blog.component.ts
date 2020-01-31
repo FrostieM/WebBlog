@@ -1,10 +1,8 @@
-﻿import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+﻿import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {JwtHelperService} from "@auth0/angular-jwt";
 import {TagViewData} from "../shared/classes/tagViewData.class";
 import {TokenService} from "../shared/services/token.service";
 import {ServerService} from "../shared/services/server.service";
-import {HttpParams} from "@angular/common/http";
 import {IUser} from "../shared/interfaces/user.interface";
 
 
@@ -30,10 +28,8 @@ export class BlogComponent implements OnInit{
 
   private username: string;
 
-  constructor(private jwtHelper: JwtHelperService,
-              private router: Router,
+  constructor(private router: Router,
               private activateRoute: ActivatedRoute,
-              @Inject("BASE_URL") private baseUrl: string,
               private tokenService: TokenService,
               private serverService: ServerService
               ) {}
@@ -51,11 +47,8 @@ export class BlogComponent implements OnInit{
   }
 
   public getTags(){
-    let params = new HttpParams();
-    if (this.currentType != "home")
-      params = params.set("type", this.currentType);
 
-    this.serverService.getTags(this.username, params).subscribe(response => {
+    this.serverService.getTags(this.username, this.currentType).subscribe(response => {
         this.tags = response;
     }, error => console.log(error));
   }

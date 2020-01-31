@@ -1,8 +1,9 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import { Router } from "@angular/router";
-import {ILikeViewData} from "../../shared/interfaces/likeViewData.interface";
+
 import {IPost} from "../../shared/interfaces/post.interface";
+import {IInfoItem} from "../../shared/interfaces/info-item.interface";
 
 
 @Component({
@@ -15,21 +16,21 @@ import {IPost} from "../../shared/interfaces/post.interface";
 })
 export class PostCardComponent implements OnInit{
 
-  @Input() public postViewData: ILikeViewData<IPost>;
-  @Input() public mainPost: ILikeViewData<IPost>;
+  @Input() public post: IInfoItem<IPost>;
+  @Input() public mainPost: IInfoItem<IPost>;
 
   @Input() public isCreator: boolean = false;
   @Input() public isViewRow: boolean = false;
 
   @Output() public messageToUpdate = new EventEmitter();
 
-  @Output() public postViewDataChange = new EventEmitter();
+  @Output() public postChange = new EventEmitter();
   @Output() public mainPostChange = new EventEmitter();
 
   private video_bg: string = "1";
 
   public get SubDescription(){
-    return this.postViewData.item.description.substring(0, 270);
+    return this.post.item.description.substring(0, 270);
   }
 
   constructor(private router: Router,
@@ -53,8 +54,8 @@ export class PostCardComponent implements OnInit{
   }
 
   public changePost(){
-    [this.postViewData, this.mainPost] = [this.mainPost, this.postViewData];
-    this.postViewDataChange.emit(this.postViewData);
+    [this.post, this.mainPost] = [this.mainPost, this.post];
+    this.postChange.emit(this.post);
     this.mainPostChange.emit(this.mainPost);
   }
 }

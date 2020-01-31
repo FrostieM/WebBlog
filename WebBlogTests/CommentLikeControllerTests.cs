@@ -92,7 +92,7 @@ namespace WebBlogTests
             _commentLikeRepository.Verify(m => 
                 m.DeleteCommentLike(It.IsAny<CommentLike>()), Times.Once);
             
-            var comment = result.Value as LikeViewData<Comment>;
+            var comment = result.Value as ItemViewData<Comment>;
             Assert.NotNull(comment);
         }
         
@@ -117,7 +117,7 @@ namespace WebBlogTests
             Assert.Equal(200, result.StatusCode);
             Assert.NotNull(result.Value);
             
-            var comment = result.Value as LikeViewData<Comment>;
+            var comment = result.Value as ItemViewData<Comment>;
             Assert.NotNull(comment);
         }
     }
