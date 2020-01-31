@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WebBlog.Controllers;
 using WebBlog.Model;
+using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
 using WebBlog.Model.ViewData;
 using WebBlogTests.FakeData;
@@ -139,7 +140,10 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("testFail", "User")
             };
             
-            var result = controller.SaveComment(1, "testContent") as ObjectResult;
+            var result = controller.SaveComment(new CommentForm{
+                PostId = 1, 
+                Content = "testContent"
+            }) as ObjectResult;
             
             Assert.NotNull(result);
             Assert.IsType<NotFoundObjectResult>(result);
@@ -160,7 +164,10 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.SaveComment(0, "testContent") as ObjectResult;
+            var result = controller.SaveComment(new CommentForm{
+                PostId = 0, 
+                Content = "testContent"
+            }) as ObjectResult;
             
             _commentRepository.Verify(c => c.SaveComment(It.IsAny<Comment>()), Times.Never);
             Assert.NotNull(result);
@@ -182,7 +189,11 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.SaveComment(1, "testContent", 0) as ObjectResult;
+            var result = controller.SaveComment(new CommentForm{
+                PostId = 1, 
+                Content = "testContent",
+                CommentId = 0
+            }) as ObjectResult;
             
             _commentRepository.Verify(c => c.SaveComment(It.IsAny<Comment>()), Times.Never);
             Assert.NotNull(result);
@@ -204,7 +215,10 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.SaveComment(1, "testContent") as ObjectResult;
+            var result = controller.SaveComment(new CommentForm{
+                PostId = 1, 
+                Content = "testContent"
+            }) as ObjectResult;
             
             _commentRepository.Verify(c => c.SaveComment(It.IsAny<Comment>()), Times.Once);
             Assert.NotNull(result);
@@ -232,7 +246,11 @@ namespace WebBlogTests
                 ControllerContext = FakeController.GetContextWithIdentity("test1", "User")
             };
             
-            var result = controller.SaveComment(1, "testContent", 1) as ObjectResult;
+            var result = controller.SaveComment(new CommentForm{
+                PostId = 1, 
+                Content = "testContent",
+                CommentId = 1
+            }) as ObjectResult;
             
             _commentRepository.Verify(c => c.SaveComment(It.IsAny<Comment>()), Times.Once);
             Assert.NotNull(result);
