@@ -5,10 +5,11 @@
   </figure>
   <div class="col-11">
     <span *ngIf="comment.item.content; else deleted">{{comment.item.content}}</span>
-    <ng-template #deleted><span>[Comment is delete]</span></ng-template>
+    <ng-template #deleted><span>[Comment is deleted]</span></ng-template>
   </div>
   <blog-item-info-component
-    [isCreator]="isCreator"
+    [isAvailable]="token.Username == comment.item.user.userName"
+    [isDeleted]="comment.item.content == null"
     [ItemInfo]="comment"
     [(isOpenComments)]="IsCommentOpen"
     [isComment]="true"
@@ -21,7 +22,6 @@
     <div *ngFor="let subComment of comment.item.subComments" class="col-12 m-0 p-0">
       <blog-comment-component
         [comment]="subComment"
-        [isCreator]="isCreator"
         [postId]="postId"
         (messageToUpdate)="getComments()"
         (messageToAnswer)="answerComment($event)">

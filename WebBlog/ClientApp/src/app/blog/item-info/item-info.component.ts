@@ -14,7 +14,8 @@ import {IPost} from "../../shared/interfaces/post.interface";
 })
 export class ItemInfoComponent {
 
-  @Input() public isCreator: boolean;
+  @Input() public isAvailable: boolean = false;
+  @Input() public isDeleted: boolean = false;
   @Input() public isComment: boolean = false;
 
   private _itemInfo: IInfoItem<IComment | IPost> = null;

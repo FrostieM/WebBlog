@@ -1,4 +1,4 @@
-﻿<button type="button" class="btn col-auto ml-auto text-right mx-1 p-0 text-light" (click)="likeItem()">
+﻿<button *ngIf="!isDeleted"  type="button" class="btn col-auto ml-auto text-right mx-1 p-0 text-light" (click)="likeItem()">
   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15.03 13">
     <path [attr.fill]="_itemInfo.isLiked ? 'red' : 'white'" class="cls-1" d="M1052.5,469s-4.53-2.818-6.38-5.681c-0.93-1.438-1.98-4.6.01-6.243a22.269,22.269,0,0,0,12.73,0c2,1.645.95,4.8,0.02,6.243C1057.02,466.177,1052.5,469,1052.5,469Z" transform="translate(-1044.97 -456)"/>
   </svg>
@@ -35,7 +35,7 @@
   <span class="ml-1"><small>{{_itemInfo.item.created | created}}</small></span>
 </div>
 
-<button *ngIf="isCreator" type="button" class="btn col-auto text-right mx-1 p-0 shadow-none text-danger"
+<button *ngIf="isAvailable && !isDeleted" type="button" class="btn col-auto text-right mx-1 p-0 shadow-none text-danger"
         (click)="deleteItem()">
   <span><small>Delete</small></span>
 </button>

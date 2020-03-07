@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebBlog.Model;
 using WebBlog.Model.Forms;
 using WebBlog.Model.Interfaces.Repositories;
@@ -49,7 +50,7 @@ namespace WebBlog.Controllers
                 if (parentComment == null) return NotFound("Parent comment not found");
             }
             
-            return Ok(_commentRepository.Comments
+            return Ok(_commentRepository.Comments.Include(c => c.User)
                 .Where(c => c.Post.Equals(post) && c.ParentComment == parentComment)
                 .Select(c => new ItemViewData<Comment>
                 {

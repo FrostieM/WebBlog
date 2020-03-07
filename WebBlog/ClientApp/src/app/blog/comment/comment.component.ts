@@ -4,6 +4,7 @@ import {ServerService} from "../../shared/services/server.service";
 import {IComment} from "../../shared/interfaces/comment.interface";
 import {IInfoItem} from "../../shared/interfaces/info-item.interface";
 import {CommentViewData} from "../../shared/classes/commentViewData.class";
+import {TokenService} from "../../shared/services/token.service";
 
 @Component({
   selector: 'blog-comment-component',
@@ -13,7 +14,6 @@ import {CommentViewData} from "../../shared/classes/commentViewData.class";
   templateUrl: './comment.component.html'
 })
 export class CommentComponent{
-  @Input() isCreator: boolean;
   @Input() comment: IInfoItem<IComment>;
   @Input() continueBranch: boolean = false;
   @Input() postId: number;
@@ -40,7 +40,8 @@ export class CommentComponent{
   }
 
   constructor(private router: Router,
-              private serverService: ServerService) {
+              private serverService: ServerService,
+              private token: TokenService) {
   }
 
   public getFullSrc(url: string){

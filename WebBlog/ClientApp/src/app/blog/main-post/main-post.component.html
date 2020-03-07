@@ -18,7 +18,7 @@
 
   <blog-item-info-component
     [ItemInfo]="mainPost"
-    [isCreator]="isCreator"
+    [isAvailable]="isCreator"
     (messageToUpdate)="updatePosts()"
     [(isOpenComments)]="IsCommentOpen">
   </blog-item-info-component>
@@ -29,7 +29,6 @@
   <div *ngFor="let comment of comments">
     <blog-comment-component
       [comment]="comment"
-      [isCreator]="isCreator"
       [postId]="mainPost.item.id"
       (messageToUpdate)="IsCommentOpen=true"
       (messageToAnswer)="answerComment($event)">
